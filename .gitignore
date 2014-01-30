@@ -13,3 +13,4 @@
 *.a
 
 *Debug//*
+/Advanced Graphics/external/*

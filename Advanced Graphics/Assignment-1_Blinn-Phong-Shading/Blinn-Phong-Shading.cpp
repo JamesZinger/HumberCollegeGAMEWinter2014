@@ -116,8 +116,8 @@ int main( void )
 	glm::mat4 ProjectionMatrix = glm::perspective( 40.0f, 4.0f / 3.0f, 0.1f, 1000.0f );
 	glm::mat4 ViewMatrix = glm::lookAt( vec3( 0, 0, 10 ), vec3( 0, 0, 0 ), vec3( 0, 1, 0 ) );
 
-	glUniform1f( SpecularHardnessID, 10.0f );
-	glUniform1f( LightPowerID, 30.0f );
+	glUniform1f( SpecularHardnessID, 2.0f );
+	glUniform1f( LightPowerID, 20.0f );
 	glUniform3f( LightColorID, 1.0f, 1.0f, 1.0f );
 
 	do
@@ -163,7 +163,7 @@ int main( void )
 			glUniformMatrix4fv( NormalMatrixID, 1, GL_FALSE, &MV[ 0 ][ 0 ] );
 		}
 
-		glm::vec3 lightPos = glm::vec3(4,4,4);
+		glm::vec3 lightPos = glm::vec3(0,2,2);
 		glUniform3f(LightID, lightPos.x, lightPos.y, lightPos.z);
 
 	

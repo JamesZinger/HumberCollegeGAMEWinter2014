@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NumberGuessingGame", "NumberGuessingGame\NumberGuessingGame.vcxproj", "{E69304AA-932F-46D8-8B96-E0AA65ED8134}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client-GuessingGame", "Client-GuessingGame\Client-GuessingGame.vcxproj", "{B468A7C1-CC89-4031-95A3-4BA9BF7F12D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E69304AA-932F-46D8-8B96-E0AA65ED8134}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E69304AA-932F-46D8-8B96-E0AA65ED8134}.Debug|Win32.Build.0 = Debug|Win32
+		{E69304AA-932F-46D8-8B96-E0AA65ED8134}.Release|Win32.ActiveCfg = Release|Win32
+		{E69304AA-932F-46D8-8B96-E0AA65ED8134}.Release|Win32.Build.0 = Release|Win32
+		{B468A7C1-CC89-4031-95A3-4BA9BF7F12D9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B468A7C1-CC89-4031-95A3-4BA9BF7F12D9}.Debug|Win32.Build.0 = Debug|Win32
+		{B468A7C1-CC89-4031-95A3-4BA9BF7F12D9}.Release|Win32.ActiveCfg = Release|Win32
+		{B468A7C1-CC89-4031-95A3-4BA9BF7F12D9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

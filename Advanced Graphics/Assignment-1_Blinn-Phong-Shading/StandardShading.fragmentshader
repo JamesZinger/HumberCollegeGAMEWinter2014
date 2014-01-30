@@ -52,14 +52,14 @@ void main(){
 
 
 	// Eye vector (towards the camera)
-	// vec3 E = normalize(EyeDirection_cameraspace);
+	 vec3 E = normalize(EyeDirection_cameraspace);
 	// Direction in which the triangle reflects the light
-	// vec3 R = reflect(-l,n);
+	 vec3 R = reflect(-l,n);
 	// Cosine of the angle between the Eye vector and the Reflect vector,
 	// clamped to 0
 	//  - Looking into the reflection -> 1
 	//  - Looking elsewhere -> < 1
-	// float cosAlpha = clamp( dot( E,R ), 0,1 );
+	 float cosAlpha = clamp( dot( E,R ), 0,1 );
 	
 	color = 
 		// Ambient : simulates indirect lighting
@@ -67,6 +67,6 @@ void main(){
 		// Diffuse : "color" of the object
 		MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) +
 		// Specular : reflective highlight, like a mirror
-		MaterialSpecularColor * LightColor * LightPower * intensity / (distance*distance);
+		MaterialSpecularColor * LightColor * LightPower * cosAlpha /*intensity*/ / (distance*distance);
 
 }

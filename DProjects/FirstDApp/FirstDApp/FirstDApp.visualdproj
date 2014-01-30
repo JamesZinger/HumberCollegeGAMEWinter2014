@@ -1,0 +1,11 @@
+<DProject>
+ <ProjectGuid>e2d7bbfa-cbcb-4436-a5e7-f6bbac946776</ProjectGuid>
+ <Config name="Debug">
+  <!-- default to defaults -->
+ </Config>
+ <Config name="Release">
+  </Config>
+ <Folder name="FirstDApp">
+  <File path="main.d" />
+ </Folder>
+</DProject>

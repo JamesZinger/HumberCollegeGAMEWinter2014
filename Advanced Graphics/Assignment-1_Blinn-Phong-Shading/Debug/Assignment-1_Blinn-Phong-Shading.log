@@ -1,4 +1,4 @@
-﻿Build started 1/16/2014 11:19:10 AM.
+﻿Build started 1/20/2014 11:33:51 AM.
      1>Project "C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\Assignment-1_Blinn-Phong-Shading\Assignment-1_Blinn-Phong-Shading.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\\common\\" /I"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\\external\glew-1.9.0\include" /I"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\\external\glfw-2.7.6\include" /I"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\\external\glm-0.9.4.0" /Zi /nologo /W3 /WX- /sdl /MP /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D TW_STATIC /D TW_NO_LIB_PRAGMA /D TW_NO_DIRECT3D /D GLEW_STATIC /D _CRT_SECURE_NO_WARNINGS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "Blinn-Phong-Shading.cpp"
@@ -15,4 +15,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.76
+Time Elapsed 00:00:00.80
