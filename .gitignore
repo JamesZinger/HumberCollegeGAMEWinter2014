@@ -2,6 +2,11 @@
 *.slo
 *.lo
 *.o
+*.exe
+*.pdb
+*.obj
+*.suo
+*.sdf
 
 # Compiled Dynamic libraries
 *.so
@@ -12,5 +17,5 @@
 *.la
 *.a
 
-*Debug//*
-/Advanced Graphics/external/*
+Debug/
+external/

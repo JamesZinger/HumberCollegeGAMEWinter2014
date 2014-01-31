@@ -20,7 +20,7 @@ int __cdecl main( void )
 {
 	// Get Server Location
 	cout << "Enter the server location (hostname/ip:port):\n";
-	
+
 	string hostName;
 
 	int port = -1;
@@ -70,16 +70,86 @@ int __cdecl main( void )
 			continue;
 		}
 
+		if ( port == -1 )
+		{
+			continue;
+		}
+
 		break;
 
 	} while ( true );
 
 	cout << "Port: " << port << "\n";
 
-
 	cout << "Host Name: " << hostName << "\n";
-	
-	char s [20];
+
+	SOCKET ListenSocket = INVALID_SOCKET,
+		ClientSocket = INVALID_SOCKET;
+
+	WSADATA wsaData;
+
+	struct addrinfo *result = NULL,
+		hints;
+
+	char recvbuf[ DEFAULT_BUFLEN ];
+
+	int iResult, iSendResult;
+
+	iResult = WSAStartup( MAKEWORD( 2, 2 ), &wsaData );
+
+	if ( iResult != 0 )
+	{
+		printf( "WSAStartup Failed: %d\n", iResult );
+		return 1;
+	}
+
+	ZeroMemory( &hints, sizeof( hints ) );
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = IPPROTO_TCP;
+	hints.ai_flags = AI_PASSIVE;
+
+	iResult = getaddrinfo( NULL, DEFAULT_PORT, &hints, &result );
+
+	if ( iResult != 0 )
+	{
+		printf( "getaddrinfo failed: %d\n", iResult );
+		WSACleanup();
+		return 1;
+	}
+
+	ListenSocket = socket( result->ai_family, result->ai_socktype, result->ai_protocol );
+
+	if ( ListenSocket == INVALID_SOCKET )
+	{
+		printf( "socket failed: %ld\n", WSAGetLastError() );
+		freeaddrinfo( result );
+		WSACleanup();
+		return 1;
+	}
+
+	iResult = bind( ListenSocket, result->ai_addr, (int)result->ai_addrlen );
+	if ( iResult == SOCKET_ERROR )
+	{
+		printf( "bind failed: %d\n", WSAGetLastError() );
+		freeaddrinfo( result );
+		closesocket( ListenSocket );
+		WSACleanup();
+		return 1;
+	}
+
+	freeaddrinfo( result );
+
+	iResult = listen( ListenSocket, SOMAXCONN );
+	if ( iResult == SOCKET_ERROR )
+	{
+		printf( "listen failed: %d\n", WSAGetLastError() );
+		closesocket( ListenSocket );
+		WSACleanup();
+		return 1;
+	}
+
+	char s[ 20 ];
 
 	cin >> s;
 
