@@ -90,17 +90,19 @@ int __cdecl main( void )
 	bool running = true;
 	char* msg;
 
+	// Accept a client socket
+	ClientSocket = accept( ListenSocket, NULL, NULL );
+	if ( ClientSocket == INVALID_SOCKET )
+	{
+		printf( "accept failed: %d\n", WSAGetLastError() );
+		closesocket( ListenSocket );
+		WSACleanup();
+		return 1;
+	}
+
 	do
 	{
-		// Accept a client socket
-		ClientSocket = accept( ListenSocket, NULL, NULL );
-		if ( ClientSocket == INVALID_SOCKET )
-		{
-			printf( "accept failed: %d\n", WSAGetLastError() );
-			closesocket( ListenSocket );
-			WSACleanup();
-			return 1;
-		}
+		
 
 		iResult = recv( ClientSocket, recvbuf, recvbuflen, 0 );
 		if ( iResult > 0 )
