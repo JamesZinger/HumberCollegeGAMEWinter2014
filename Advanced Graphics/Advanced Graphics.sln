@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment-1_Blinn-Phong-Shading", "Assignment-1_Blinn-Phong-Shading\Assignment-1_Blinn-Phong-Shading.vcxproj", "{87377B88-46B0-4079-9F48-5798C8E5701C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment-2_Skybox", "Assignment-2_Skybox\Assignment-2_Skybox.vcxproj", "{6369B674-FDBD-45F6-AAD6-8DCBE1426814}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{87377B88-46B0-4079-9F48-5798C8E5701C}.Debug|Win32.Build.0 = Debug|Win32
 		{87377B88-46B0-4079-9F48-5798C8E5701C}.Release|Win32.ActiveCfg = Release|Win32
 		{87377B88-46B0-4079-9F48-5798C8E5701C}.Release|Win32.Build.0 = Release|Win32
+		{6369B674-FDBD-45F6-AAD6-8DCBE1426814}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6369B674-FDBD-45F6-AAD6-8DCBE1426814}.Debug|Win32.Build.0 = Debug|Win32
+		{6369B674-FDBD-45F6-AAD6-8DCBE1426814}.Release|Win32.ActiveCfg = Release|Win32
+		{6369B674-FDBD-45F6-AAD6-8DCBE1426814}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
