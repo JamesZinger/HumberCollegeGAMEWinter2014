@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <time.h>
+#include <stdint.h>
 #pragma comment(lib,"ws2_32.lib")
 
 using std::string;
@@ -17,62 +18,110 @@ const int CLIENT_PORT = 50001; /*the client port number*/
 int main( int argc, char* argv[] )
 {
 
-	struct sockaddr_in serverAddr;	//server address
-	struct sockaddr_in clientAddr;	//client address
-	int clientSock;					//client sock
-	char buf[ BUFFER_SIZE ];		//buffer the message send and receive
-	int serverPort;					//protcol port
-	WSADATA wsaData;				//windows socket data
-	SOCKET sd;						//socket descriptor
-	string hostname;				//the name of the host
-	int serv_port;					//the port on the server to connect to
-	int len = sizeof( struct sockaddr );
+	struct sockaddr_in serverAddr;				//server address
+	struct sockaddr_in clientAddr;				//client address
+	char buf[ BUFFER_SIZE ];					//buffer the message send and receive
+	WSADATA wsaData;							//windows socket data
+	SOCKET sd;									//socket descriptor
+	struct hostent;								//the name of the host
+	unsigned short serv_port;					//the port on the server to connect to
+	int clientSock;
+	const int len = sizeof( struct sockaddr );	
+	// Clear the Structs for the client and server addresses
+	memset( (void *)&serverAddr, '\0', sizeof( struct sockaddr_in ) );
+	memset( (char*)&clientAddr, '\0', sizeof( struct sockaddr_in ) );
 
-	WSAStartup( 0x0202, &wsaData ); /*windows socket startup */
+#pragma region Argument Verification
 
-	memset( (char*)&clientAddr, 0, sizeof( clientAddr ) );
-	clientAddr.sin_family = AF_INET; /*set client address protocol family*/
-	clientAddr.sin_addr.s_addr = INADDR_ANY;
-	clientAddr.sin_port = htons( (u_short)CLIENT_PORT ); /*set client port*/
-
-	serverAddr.sin_family = AF_INET;
-
-	if ( argc > 2 )
+	if ( argc != 3 )
 	{
-		serverAddr.sin_addr.s_addr = inet_addr( hostname.c_str() );/*get the ip address*/
-		if ( serverAddr.sin_addr.s_addr == INADDR_NONE )
+		fprintf( stderr, "Incorrect amount of inputs. Actual: %i Expected: %i", argc, 3 );
+		exit( 1 );
+	}
+
+	bool isLocalHost = false;
+
+	if ( inet_addr( argv[ 1 ] ) == INADDR_NONE )
+	{
+
+		if ( strcmp( argv[ 1 ], "localhost" ) != 0 )
 		{
-			fprintf( stderr, "bad ip address %s\n", hostname.c_str() );
+			fprintf( stderr, "bad ip address %s\n", argv[ 1 ] );
+			exit( 1 ); /* error */
+		}
+
+		isLocalHost = true;
+	}
+
+
+	if ( sscanf( argv[ 2 ], "%u", &serv_port ) != 1 )
+	{
+		fprintf( stderr, "bad port number %s\n", argv[ 2 ] );
+		exit( 1 );
+	}
+
+#pragma endregion
+
+#pragma region Windows Connection
+
+	if ( WSAStartup( 0x0202, &wsaData ) != 0 )
+	{
+		if ( WSAStartup( 0x0101, &wsaData ) != 0 )
+		{
+
+			fprintf( stderr, "Could not open Windows connection.\n" );
+			exit( 1 );
+		}
+	}
+
+#pragma endregion
+
+#pragma region Socket Creation
+
+
+	// Server Connection Establishment
+	{
+		// Attempt to make the socket
+		sd = socket( AF_INET, SOCK_DGRAM, 0 );
+		if ( sd == INVALID_SOCKET )
+		{
+			fprintf( stderr, "socket creating failed\n" );
+			WSACleanup();
 			exit( 1 );
 		}
 
-		serverPort = atoi( port.c_str() );
-		if ( serverPort > 0 )
-			serverAddr.sin_port = htons( (u_short)serverPort );/*get the port*/
-		else
+		// Setup Server Struct
+		serverAddr.sin_family = AF_INET;
+		serverAddr.sin_port = htons( serv_port );
+
 		{
-			fprintf( stderr, "bad port number %s\n", port.c_str() );
+			addrinfo hints = { sizeof( addrinfo ) };
+			hints.ai_flags = AI_ALL;
+			hints.ai_family = PF_INET;
+			hints.ai_protocol = 4; //IPPROTO_IPV4
+
+			addrinfo* pResult = NULL;
+			int errcode = getaddrinfo( argv[ 1 ], NULL, &hints, &pResult );
+			if ( errcode != 0 )
+				return ERROR;
+
+			serverAddr.sin_addr.s_addr = *( (uint32_t*)& ( ( (sockaddr_in*)pResult->ai_addr )->sin_addr ) );
+		}
+	}
+
+	// Client Info Fetching and Port Binding
+	{
+		clientAddr.sin_family = AF_INET;
+		clientAddr.sin_addr.s_addr = INADDR_ANY;
+		clientAddr.sin_port = htons( (u_short)CLIENT_PORT );
+
+		if ( bind( clientSock, (LPSOCKADDR)&clientAddr, sizeof( struct sockaddr ) ) < 0 )
+		{/*bind a client address and port*/
+			fprintf( stderr, "bind failed\n" );
 			exit( 1 );
 		}
 	}
-	else
-	{
-		fprintf( stderr, "input the ip address and port number" );
-		exit( 1 );
-	}
-
-	clientSock = socket( PF_INET, SOCK_DGRAM, 0 );/*create a socket*/
-	if ( clientSock < 0 )
-	{
-		fprintf( stderr, "socket creating failed\n" );
-		exit( 1 );
-	}
-
-	if ( bind( clientSock, (LPSOCKADDR)&clientAddr, len ) < 0 )
-	{/*bind a client address and port*/
-		fprintf( stderr, "bind failed\n" );
-		exit( 1 );
-	}
+#pragma endregion
 
 	while ( 1 )
 	{
