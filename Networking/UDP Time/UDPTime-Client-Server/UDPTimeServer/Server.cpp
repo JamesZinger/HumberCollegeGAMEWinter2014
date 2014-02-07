@@ -1,9 +1,16 @@
 #include <winsock2.h>
 #include <stdio.h>
+#include <string>
+#include <time.h>
+#include <iostream>
+
 #pragma comment(lib,"ws2_32.lib")
 
+using std::string;
+using std::cout;
+
 const int SERVER_PORT = 10001; /*the default serverport number*/
-int visits = 0; /*the number client connect*/
+int requests = 0; /*the number client connect*/
 
 int main( int argc, char* argv[] )
 {
@@ -15,6 +22,8 @@ int main( int argc, char* argv[] )
 	int len = sizeof( struct sockaddr );
 	char ip[ 15 ]; /*client address*/
 	int serverPort, clientPort; /*client and server ports*/
+
+#pragma region Server Socket Setup
 
 	WSADATA wsaData;
 	WSAStartup( 0x0202, &wsaData ); /*windows socket startup */
@@ -52,6 +61,8 @@ int main( int argc, char* argv[] )
 		fprintf( stderr, "bind failed\n" );
 		exit( 1 );
 	}
+
+#pragma endregion
 
 	printf( "\nServer is set for nonblocking mode.\n" );
 
@@ -98,34 +109,39 @@ int main( int argc, char* argv[] )
 			exit( 1 );
 		}
 
+		result = 0;
 
 		memset( buf, 0, sizeof( buf ) );
 		recvfrom( serverSock, buf, sizeof( buf ), 0, (LPSOCKADDR)&clientAddr, &len );
 
-		visits++;
+		requests++;
 		strcpy( ip, inet_ntoa( clientAddr.sin_addr ) );
 		clientPort = ntohs( (u_short)clientAddr.sin_port );
 
-		fprintf( stdout, "\nA client come from ip:%s port:%d .\nThis server has been contacted %d time%s\n", ip, clientPort, visits, visits == 1 ? "." : "s." );
+		fprintf( stdout, "\nA client come from ip:%s port:%d .\nThis server has been contacted %d time%s\n", ip, clientPort, requests, requests == 1 ? "." : "s." );
 
-		while ( 1 )
+		printf( "Command Recieved: %s", buf );
+		printf( "\n" );
+
+		string sReturn;
+
+		if ( strcmp( buf, "GET TIME" ) == 0 )
 		{
-			printf( "\n--->From the client: " );
-			printf( "%s", buf );
-
-			memset( buf, 0, sizeof( buf ) );
-			printf( "\nServer--->: " );
-			gets( buf );
-			sendto( serverSock, buf, sizeof( buf ), 0, (LPSOCKADDR)&clientAddr, len );
-			if ( strcmp( buf, "end" ) == 0 ) break; /* send "end" to close client and exit loop*/
-			if ( strcmp( buf, "close" ) == 0 ) return 1; /* send "close" to close both */
-
-			memset( buf, 0, sizeof( buf ) );
-			recvfrom( serverSock, buf, sizeof( buf ), 0, (LPSOCKADDR)&clientAddr, &len );
-
-			// moderator note: This code is a buffer overflow attack waiting to happen
-
-			if ( strcmp( buf, "end" ) == 0 ) break; /* receive "end" to exit loop */
+			time_t current = time( NULL );
+			sReturn = (char *)current;
 		}
+		else
+		{
+			printf( "Invaild Request\n" );
+			sReturn = "Invaild Request";
+		}
+
+		memset( buf, 0, sizeof( buf ) );
+		cout << "Returning: " << sReturn << "\n";
+		memcpy( buf, sReturn.c_str(), sReturn.length() );
+		sendto( serverSock, buf, sizeof( buf ), 0, (LPSOCKADDR)&clientAddr, len );
+
+		memset( buf, 0, sizeof( buf ) );
+
 	}
 }

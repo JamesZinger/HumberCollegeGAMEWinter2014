@@ -23,13 +23,13 @@ int main( int argc, char* argv[] )
 	char buf[ BUFFER_SIZE ];					//buffer the message send and receive
 	WSADATA wsaData;							//windows socket data
 	SOCKET sd;									//socket descriptor
+	SOCKET cs;									//client socket decriptor
 	struct hostent;								//the name of the host
 	unsigned short serv_port;					//the port on the server to connect to
-	int clientSock;
-	const int len = sizeof( struct sockaddr );	
+	int len = sizeof( struct sockaddr );
 	// Clear the Structs for the client and server addresses
 	memset( (void *)&serverAddr, '\0', sizeof( struct sockaddr_in ) );
-	memset( (char*)&clientAddr, '\0', sizeof( struct sockaddr_in ) );
+	memset( (void *)&clientAddr, '\0', sizeof( struct sockaddr_in ) );
 
 #pragma region Argument Verification
 
@@ -115,7 +115,14 @@ int main( int argc, char* argv[] )
 		clientAddr.sin_addr.s_addr = INADDR_ANY;
 		clientAddr.sin_port = htons( (u_short)CLIENT_PORT );
 
-		if ( bind( clientSock, (LPSOCKADDR)&clientAddr, sizeof( struct sockaddr ) ) < 0 )
+		cs = socket( PF_INET, SOCK_DGRAM, 0 );/*create a socket*/
+		if ( cs < 0 )
+		{
+			fprintf( stderr, "socket creating failed\n" );
+			exit( 1 );
+		}
+
+		if ( bind( cs, (LPSOCKADDR)&clientAddr, sizeof( struct sockaddr ) ) < 0 )
 		{/*bind a client address and port*/
 			fprintf( stderr, "bind failed\n" );
 			exit( 1 );
@@ -123,31 +130,29 @@ int main( int argc, char* argv[] )
 	}
 #pragma endregion
 
-	while ( 1 )
 	{
+		bool isEnding = false;
+
 		memset( buf, 0, sizeof( buf ) );
-		printf( "\nClient--->: " );
+
+		cout << "Sending: " << buf << "\n";
+
 		gets( buf );
-		sendto( clientSock, buf, strlen( buf ), 0, (LPSOCKADDR)&serverAddr, len );
-		if ( strcmp( buf, "end" ) == 0 ) break; /* send "end" to exit loop */
+		sendto( cs, buf, strlen( buf ), 0, (LPSOCKADDR)&serverAddr, len );
 
 		memset( buf, 0, sizeof( buf ) );
-		recvfrom( clientSock, buf, sizeof( buf ), 0, (LPSOCKADDR)&serverAddr, &len );
+		recvfrom( cs, buf, sizeof( buf ), 0, (LPSOCKADDR)&serverAddr, &len );
 
-		// moderator note: This code is a buffer overflow attack waiting to happen
+		cout << "Recieving: " << buf << "\n";
 
-		if ( strcmp( buf, "end" ) == 0 ) break; /* receive "end" to exit loop */
-		if ( strcmp( buf, "close" ) == 0 ) return 1; /* receive "close" to close both */
-		printf( "\n--->From the server: " );
-		printf( "%s", buf );
 	}
 
-	closesocket( clientSock );
+	freeaddrinfo( serverAddr );
+
+	closesocket( cs );
 	WSACleanup();
 
-	string s;
-
-	cin >> s;
+	system( "pause" );
 
 	return 0;
 }
