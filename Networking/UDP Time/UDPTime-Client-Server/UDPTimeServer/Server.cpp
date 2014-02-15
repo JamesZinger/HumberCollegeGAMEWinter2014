@@ -128,7 +128,7 @@ int main( int argc, char* argv[] )
 		if ( strcmp( buf, "GET TIME" ) == 0 )
 		{
 			time_t current = time( NULL );
-			sReturn = (char *)current;
+			sReturn = asctime( localtime( &current ) );
 		}
 		else
 		{

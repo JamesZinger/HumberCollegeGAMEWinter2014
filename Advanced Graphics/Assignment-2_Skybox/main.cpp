@@ -24,6 +24,12 @@ using namespace glm;
 #define __SKYBOX_SHADER_VERT_PATH__ ""
 #define __SKYBOX_SHADER_FRAG_PATH__ ""
 
+struct skyboxVars
+{
+	GLuint ShaderProgramID;
+
+};
+
 int main( void )
 {
 	// Initialise GLFW

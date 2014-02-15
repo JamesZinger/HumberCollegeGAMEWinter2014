@@ -106,6 +106,8 @@ int main( int argc, char* argv[] )
 				return ERROR;
 
 			serverAddr.sin_addr.s_addr = *( (uint32_t*)& ( ( (sockaddr_in*)pResult->ai_addr )->sin_addr ) );
+
+			freeaddrinfo( pResult );
 		}
 	}
 
@@ -135,9 +137,10 @@ int main( int argc, char* argv[] )
 
 		memset( buf, 0, sizeof( buf ) );
 
-		cout << "Sending: " << buf << "\n";
+		string s = "GET TIME";
 
-		gets( buf );
+		memcpy( buf, s.c_str(), s.length() );
+
 		sendto( cs, buf, strlen( buf ), 0, (LPSOCKADDR)&serverAddr, len );
 
 		memset( buf, 0, sizeof( buf ) );
@@ -147,12 +150,10 @@ int main( int argc, char* argv[] )
 
 	}
 
-	freeaddrinfo( serverAddr );
-
 	closesocket( cs );
 	WSACleanup();
 
 	system( "pause" );
 
-	return 0;
+	exit( 0 );
 }
