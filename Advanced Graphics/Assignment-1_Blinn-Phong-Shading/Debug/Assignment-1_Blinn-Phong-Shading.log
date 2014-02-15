@@ -1,18 +1,19 @@
-﻿Build started 1/20/2014 11:33:51 AM.
-     1>Project "C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\Assignment-1_Blinn-Phong-Shading\Assignment-1_Blinn-Phong-Shading.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\\common\\" /I"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\\external\glew-1.9.0\include" /I"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\\external\glfw-2.7.6\include" /I"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\\external\glm-0.9.4.0" /Zi /nologo /W3 /WX- /sdl /MP /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D TW_STATIC /D TW_NO_LIB_PRAGMA /D TW_NO_DIRECT3D /D GLEW_STATIC /D _CRT_SECURE_NO_WARNINGS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt "Blinn-Phong-Shading.cpp"
-         Blinn-Phong-Shading.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\Debug\Assignment-1_Blinn-Phong-Shading.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\\external\lib" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib glu32.lib opengl32.lib GLFW_276.lib GLEW_190.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\Debug\Assignment-1_Blinn-Phong-Shading.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\Debug\Assignment-1_Blinn-Phong-Shading.lib" /MACHINE:X86 Debug\controls.obj
-         Debug\objloader.obj
-         Debug\shader.obj
-         Debug\texture.obj
-         Debug\vboindexer.obj
-         "Debug\Blinn-Phong-Shading.obj"
-         Assignment-1_Blinn-Phong-Shading.vcxproj -> C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\Debug\Assignment-1_Blinn-Phong-Shading.exe
-     1>Done Building Project "C:\Users\James\documents\visual studio 2013\Projects\Advanced Graphics\Assignment-1_Blinn-Phong-Shading\Assignment-1_Blinn-Phong-Shading.vcxproj" (Build target(s)).
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB8020: The builds tools for v120 (Platform Toolset = 'v120') cannot be found. To build using the v120 build tools, either click the Project menu or right-click the solution, and then select "Update VC++ Projects...". Install v120 to build using the v120 build tools.
 
-Build succeeded.
+Project Performance Summary:
+        6 ms  C:\Users\James\Git\HumberCollegeGAMEWinter2014\Advanced Graphics\Assignment-1_Blinn-Phong-Shading\Assignment-1_Blinn-Phong-Shading.vcxproj   1 calls
+                  6 ms  Build                                      1 calls
 
-Time Elapsed 00:00:00.80
+Target Performance Summary:
+        0 ms  GetResolvedWinMD                           1 calls
+        0 ms  _PrepareForBuild                           1 calls
+        0 ms  _SplitProjectReferencesByFileExistence     1 calls
+        0 ms  GetReferenceAssemblyPaths                  1 calls
+        0 ms  _PrepareForReferenceResolution             1 calls
+        0 ms  ResolveProjectReferences                   1 calls
+        0 ms  BeforeResolveReferences                    1 calls
+        0 ms  PlatformPrepareForBuild                    1 calls
+        1 ms  SetBuildDefaultEnvironmentVariables        1 calls
+        1 ms  AssignProjectConfiguration                 1 calls
+        1 ms  GetFrameworkPaths                          1 calls
+        3 ms  _CheckForInvalidConfigurationAndPlatform   1 calls

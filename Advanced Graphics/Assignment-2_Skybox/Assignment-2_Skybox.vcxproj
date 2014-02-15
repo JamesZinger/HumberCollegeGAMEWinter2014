@@ -83,6 +83,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="SkyboxFragShader.fragmentshader" />
+    <None Include="SkyboxVertShader.vertexshader" />
     <None Include="StandardShading.fragmentshader" />
     <None Include="StandardShading.vertexshader" />
   </ItemGroup>
