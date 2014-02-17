@@ -19,6 +19,10 @@ int __cdecl main(int argc, char **argv)
 	strcpy(sendbuf, "GET / HTTP/1.1\n");
 	strcat(sendbuf, "Host: localhost\n\n");
 
+	string s = "";
+
+	
+
 	GenTCPClientSocket *clientSocket = new GenTCPClientSocket(argv[1], PORT);
 
 	clientSocket->SendData(sendbuf, strlen(sendbuf), &sentLength);

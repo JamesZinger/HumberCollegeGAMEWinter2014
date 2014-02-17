@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="maintest.cpp">
+    <ClCompile Include="AdvServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ClassServer.cpp">
+    <ClCompile Include="NumberGuessingGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClassServer.h">
+    <ClInclude Include="NumberGuessingGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
