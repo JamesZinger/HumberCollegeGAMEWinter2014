@@ -1,3 +1,23 @@
+#pragma region Defines
+
+#define __APP_TITLE__ "Skybox Test -James Zinger"
+#define __LIGHTING_SHADER_VERT_PATH__ "StandardShading.vertexshader"
+#define __LIGHTING_SHADER_FRAG_PATH__ "StandardShading.fragmentshader"
+#define __SKYBOX_SHADER_VERT_PATH__ "SkyboxVertShader.vertexshader"
+#define __SKYBOX_SHADER_FRAG_PATH__ "SkyboxFragShader.fragmentshader"
+
+#define WIN32
+#define _WINDOWS
+#define TW_STATIC 
+#define TW_NO_LIB_PRAGMA
+#define TW_NO_DIRECT3D 
+#define GLEW_STATIC
+
+#pragma endregion
+
+
+#pragma region Includes
+
 // Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,17 +33,37 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+
+
 #include <shader.hpp>
 #include <texture.hpp>
 #include <objloader.hpp>
 #include <vboindexer.hpp>
 #include <controls.hpp>
 
-#define __APP_TITLE__ "Skybox Test -James Zinger"
-#define __LIGHTING_SHADER_VERT_PATH__ "StandardShading.vertexshader"
-#define __LIGHTING_SHADER_FRAG_PATH__ "StandardShading.fragmentshader"
-#define __SKYBOX_SHADER_VERT_PATH__ "SkyboxVertShader.vertexshader"
-#define __SKYBOX_SHADER_FRAG_PATH__ "SkyboxFragShader.fragmentshader"
+#pragma endregion
+
+
+#pragma region Libs
+
+#pragma comment (lib, "kernel32.lib")
+#pragma comment (lib, "user32.lib")
+#pragma comment (lib, "gdi32.lib")
+#pragma comment (lib, "winspool.lib")
+#pragma comment (lib, "shell32.lib")
+#pragma comment (lib, "ole32.lib")
+#pragma comment (lib, "oleaut32.lib")
+#pragma comment (lib, "uuid.lib")
+#pragma comment (lib, "comdlg32.lib")
+#pragma comment (lib, "advapi32.lib")
+#pragma comment (lib, "glu32.lib")
+#pragma comment (lib, "opengl32.lib")
+
+#pragma comment (lib, "../external/lib/GLFW_276.lib")
+#pragma comment (lib, "../external/lib/GLEW_190.lib")
+
+#pragma endregion
+
 
 using namespace glm;
 using std::vector;
@@ -36,6 +76,8 @@ int main( void )
 {
 
 	glfwInitalization();
+
+	glInitalization();
 
 	GLuint VertexArrayID;
 	glGenVertexArrays( 1, &VertexArrayID );
@@ -86,7 +128,7 @@ int main( void )
 		mat4 ProjectionMatrix = getProjectionMatrix();
 		mat4 ViewMatrix = getViewMatrix();
 		mat4 ModelMatrix = mat4( 1.0 );
-		mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+		mat4 MVP = ProjectionMatrix * ViewMatrix;
 
 		glActiveTexture( GL_TEXTURE0 );
 		glBindTexture( GL_TEXTURE_CUBE_MAP, Texture );
@@ -183,9 +225,10 @@ void glInitalization()
 
 	// Enable depth test
 	glEnable( GL_DEPTH_TEST );
+
 	// Accept fragment if it closer to the camera than the former one
 	glDepthFunc( GL_LESS );
 
 	// Cull triangles which normal is not towards the camera
-	//glEnable( GL_CULL_FACE );
+	glEnable( GL_CULL_FACE );
 }

@@ -10,10 +10,13 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="common">
-      <UniqueIdentifier>{4872d68e-aadf-47f0-afce-8137b6a262dc}</UniqueIdentifier>
+      <UniqueIdentifier>{7272d875-a1c0-444a-a03d-08f17e10c321}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\common\controls.cpp">
       <Filter>common</Filter>
     </ClCompile>
@@ -28,9 +31,6 @@
     </ClCompile>
     <ClCompile Include="..\common\vboindexer.cpp">
       <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

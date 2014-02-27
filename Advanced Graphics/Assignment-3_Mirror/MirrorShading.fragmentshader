@@ -1,0 +1,28 @@
+#version 330 core
+
+// The Normal of the vertex in cameraspace
+in vec3 			c_Normal;
+
+// The Direction of the camera 
+in vec3 			c_VertPos;
+
+// Ouput data
+out vec3 			color;
+
+// Values that stay constant for the whole mesh.
+uniform samplerCube cubeTextureSampler;
+uniform mat4 		M;
+uniform mat4 		V;
+
+void main()
+{
+	vec3 lookdir = (c_VertPos) - vec3(0,0,0);
+	lookdir = normalize(lookdir);
+	vec3 reflectedDirection = reflect(lookdir, normalize(c_Normal));
+	
+	mat4 inveView = inverse(V * M);
+
+
+	color = texture(cubeTextureSampler, (inveView * vec4(reflectedDirection,0)).xyz).rgb;
+
+}

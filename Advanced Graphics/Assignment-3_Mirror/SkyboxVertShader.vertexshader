@@ -1,0 +1,18 @@
+#version 330 core
+
+layout(location = 0) in vec3 vertexPosition_modelspace;
+
+out vec3 c_vertPos;
+
+uniform mat4 M;
+uniform mat4 V;
+
+void main()
+{
+	vec4 pos = (V * M) * vec4(vertexPosition_modelspace,1);
+
+	gl_Position = vec4(vertexPosition_modelspace,1);
+
+	c_vertPos = pos.xyz;
+}
+

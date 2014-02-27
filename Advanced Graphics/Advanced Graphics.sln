@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment-1_Blinn-Phong-Sh
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment-2_Skybox", "Assignment-2_Skybox\Assignment-2_Skybox.vcxproj", "{6369B674-FDBD-45F6-AAD6-8DCBE1426814}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment-3_Mirror", "Assignment-3_Mirror\Assignment-3_Mirror.vcxproj", "{3E4A68E2-2FB6-4CB8-A0EE-A3B2110AF067}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -21,6 +23,10 @@ Global
 		{6369B674-FDBD-45F6-AAD6-8DCBE1426814}.Debug|Win32.Build.0 = Debug|Win32
 		{6369B674-FDBD-45F6-AAD6-8DCBE1426814}.Release|Win32.ActiveCfg = Release|Win32
 		{6369B674-FDBD-45F6-AAD6-8DCBE1426814}.Release|Win32.Build.0 = Release|Win32
+		{3E4A68E2-2FB6-4CB8-A0EE-A3B2110AF067}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3E4A68E2-2FB6-4CB8-A0EE-A3B2110AF067}.Debug|Win32.Build.0 = Debug|Win32
+		{3E4A68E2-2FB6-4CB8-A0EE-A3B2110AF067}.Release|Win32.ActiveCfg = Release|Win32
+		{3E4A68E2-2FB6-4CB8-A0EE-A3B2110AF067}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

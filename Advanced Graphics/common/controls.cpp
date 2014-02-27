@@ -10,6 +10,7 @@ using namespace glm;
 
 glm::mat4 ViewMatrix;
 glm::mat4 ProjectionMatrix;
+glm::mat4 ModelMatrix;
 
 glm::mat4 getViewMatrix(){
 	return ViewMatrix;
@@ -53,27 +54,32 @@ void computeMatricesFromInputs(){
 	horizontalAngle += mouseSpeed * float(1024/2 - xpos );
 	verticalAngle   += mouseSpeed * float( 768/2 - ypos );
 
-	direction.y = verticalAngle;
-	direction.x = cos( verticalAngle ) * sin( horizontalAngle );
-	direction.z = cos( verticalAngle ) * cos( horizontalAngle );
+	//direction.y = verticalAngle;
+	//direction.x = cos( verticalAngle ) * sin( horizontalAngle );
+	//direction.z = cos( verticalAngle ) * cos( horizontalAngle );
 
-	direction = glm::normalize( direction );
+	//direction = glm::normalize( direction );
+
+
 	// Direction : Spherical coordinates to Cartesian coordinates conversion
-	//glm::vec3 direction(
-	//	cos(verticalAngle) * sin(horizontalAngle), 
-	//	sin(verticalAngle),
-	//	cos(verticalAngle) * cos(horizontalAngle)
-	//);
+	glm::vec3 direction(
+		cos(verticalAngle) * sin(horizontalAngle), 
+		sin(verticalAngle),
+		cos(verticalAngle) * cos(horizontalAngle)
+	);
+
+
+	direction = normalize( direction );
 	
 	//// Right vector
-	//glm::vec3 right = glm::vec3(
-	//	sin(horizontalAngle - 3.14f/2.0f), 
-	//	0,
-	//	cos(horizontalAngle - 3.14f/2.0f)
-	//);
+	glm::vec3 right = glm::vec3(
+		sin(horizontalAngle - 3.14f/2.0f), 
+		0,
+		cos(horizontalAngle - 3.14f/2.0f)
+	);
 	//
 	//// Up vector
-	//glm::vec3 up = glm::cross( right, direction );
+	glm::vec3 up = glm::cross( right, direction );
 
 	//// Move forward
 	//if (glfwGetKey( GLFW_KEY_UP ) == GLFW_PRESS){
@@ -87,7 +93,7 @@ void computeMatricesFromInputs(){
 	//if (glfwGetKey( GLFW_KEY_RIGHT ) == GLFW_PRESS){
 	//	position += right * deltaTime * speed;
 	//}
-	//// Strafe left
+	 //// Strafe left
 	//if (glfwGetKey( GLFW_KEY_LEFT ) == GLFW_PRESS){
 	//	position -= right * deltaTime * speed;
 	//}
@@ -100,7 +106,7 @@ void computeMatricesFromInputs(){
 	ViewMatrix       = glm::lookAt(
 								position,           // Camera is here
 								position+direction, // and looks here : at the same position, plus "direction"
-								vec3(0,1,0)                  // Head is up (set to 0,-1,0 to look upside-down)
+								up                  // Head is up (set to 0,-1,0 to look upside-down)
 						   );
 
 	// For the next frame, the "last time" will be "now"

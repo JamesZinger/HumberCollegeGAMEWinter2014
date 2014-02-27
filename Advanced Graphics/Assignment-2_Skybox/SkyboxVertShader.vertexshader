@@ -15,7 +15,7 @@ uniform mat4 MVP;
 void main(){
 
 	// Output position of the vertex, in clip space : MVP * position
-	vec4 pos = (MVP) * vec4(vertexPosition_modelspace,1);
+	vec4 pos = (V) * vec4(vertexPosition_modelspace,1);
 
 	gl_Position = vec4(vertexPosition_modelspace,1);
 

@@ -1,0 +1,12 @@
+#version 330 core
+
+in vec3 c_vertPos;
+
+out vec3 color;
+
+uniform samplerCube cubeTextureSampler;
+
+void main()
+{
+	color = texture( cubeTextureSampler, c_vertPos ).rgb;
+}

@@ -7,7 +7,6 @@
 
 #include <GL/glfw.h>
 
-
 GLuint loadBMP_custom( const char * imagepath )
 {
 
@@ -207,6 +206,8 @@ GLuint loadRAW_Cube( const char* posxPath, const char* posyPath, const char* pos
 	{
 		free( data[ i ] );
 	}
+
+	glGenerateMipmap( GL_TEXTURE_CUBE_MAP );
 
 	return textureID;
 }
