@@ -39,9 +39,7 @@ void HttpTCPGuessingGame::Run()
 			continue;
 		}
 
-
-
-		while ( GameCycle() ){}
+		GameCycle();
 
 	}
 }
@@ -53,21 +51,19 @@ void HttpTCPGuessingGame::Run()
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 bool HttpTCPGuessingGame::GameCycle()
 {
-	string RCString = string();
-	stringstream RXSS = stringstream();
+	string RXString = string();
+	stringstream TXSS = stringstream();
 
 	bool shouldContinue = true;
 
 	int recvLength = 0;
-	if ( !server->RecieveData( &RCString, &recvLength ) )
+	if ( !server->RecieveData( RXString, &recvLength ) )
 	{
 		cout << "RecieveData failed, RC length: " << recvLength << '\n';
-		system( "Pause" );
-		exit( 1 );
 	}
 
 	int guess;
-	HttpCommand request = DetermineCommand( RCString, guess );
+	HttpCommand request = DetermineCommand( RXString, guess );
 
 	switch ( request )
 	{
@@ -75,11 +71,11 @@ bool HttpTCPGuessingGame::GameCycle()
 			if ( game == NULL )
 			{
 				game = new NumberGuessingGame();
-				RXSS << "Game successfully created. You may now guess a number with n=?\n";
+				TXSS << "Game successfully created. You may now guess a number with n=?\n";
 			}
 			else
 			{
-				RXSS << "Game is already running. Please either terminate or guess a number with c=t or n=?\n";
+				TXSS << "Game is already running. Please either terminate or guess a number with c=t or n=?\n";
 			}
 			break;
 
@@ -87,13 +83,13 @@ bool HttpTCPGuessingGame::GameCycle()
 		case HttpTCPGuessingGame::terminate:
 			if ( game != NULL )
 			{
-				RXSS << "Game successfully terminated. Thanks for Playing!\n";
+				TXSS << "Game successfully terminated. Thanks for Playing!\n";
 				shouldContinue = false;
 				delete game;
 				game = NULL;
 			}
 			else
-				RXSS << "Cannot terminate a game that is not in progress. please start a new game with c=s\n";
+				TXSS << "Cannot terminate a game that is not in progress. please start a new game with c=s\n";
 
 			break;
 
@@ -103,11 +99,11 @@ bool HttpTCPGuessingGame::GameCycle()
 			{
 				string s;
 				game->GuessNumber( guess, s);
-				RXSS << s;
+				TXSS << s;
 			}
 			else
 			{
-				RXSS << "No game is currently running please start a new game with c=s\n";
+				TXSS << "No game is currently running please start a new game with c=s\n";
 			}
 			break;
 
@@ -116,20 +112,20 @@ bool HttpTCPGuessingGame::GameCycle()
 			if ( game != NULL )
 			{
 				game->RestartGame();
-				RXSS << "Game Successfully Restarted\n";
+				TXSS << "Game Successfully Restarted\n";
 			}
 			else
 			{
-				RXSS << "No game is currently in progress, please start a new game with c=s\n";
+				TXSS << "No game is currently in progress, please start a new game with c=s\n";
 			}
 			break;
 
 		case HttpCommand::none:
-			RXSS << "Command not recognized. Please use one of the following:\n";
-			RXSS << "c=s\t\t\tStart a New Game\n";
-			RXSS << "c=t\t\t\tEnd a running game\n";
-			RXSS << "c=r\t\t\tRestart a running game\n";
-			RXSS << "n=?\t\t\tGuess a number for a running game\n";
+			TXSS << "Command not recognized. Please use one of the following:\n";
+			TXSS << "c=s\t\t\tStart a New Game\n";
+			TXSS << "c=t\t\t\tEnd a running game\n";
+			TXSS << "c=r\t\t\tRestart a running game\n";
+			TXSS << "n=?\t\t\tGuess a number for a running game\n";
 			break;
 
 
@@ -140,13 +136,11 @@ bool HttpTCPGuessingGame::GameCycle()
 			break;
 	}
 
-	string RXString = RXSS.str();
+	string TXString = TXSS.str();
 	int sentLength = 0;
-	if (!server->SendHttpMsg( &RXString, &sentLength))
+	if (!server->SendHttpMsg( &TXString, &sentLength))
 	{
 		cout << "Failed to send Message, RX Length: " << sentLength << '\n';
-		system( "Pause" );
-		exit( 1 );
 	}
 
 	return shouldContinue;
@@ -166,20 +160,20 @@ HttpTCPGuessingGame::HttpCommand HttpTCPGuessingGame::DetermineCommand( string& 
 {
 	numberGuessed = -1;
 
-	char *context = '\0';
-	char *context2 = '\0';
+	char context = '\0';
+	char context2 = '\0';
 
 	HttpCommand httpcom = HttpCommand::none;
 
-	sscanf_s( msg.c_str(), "GET /NumberGuessing/%c=%c", context );
+	sscanf_s( msg.c_str(), "GET /NumberGuessing/%c", &context );
 
-	switch ( context[ 0 ] )
+	switch ( context )
 	{
 		case 'c':
 
-			sscanf_s( msg.c_str(), "GET /NumberGuessing/c=%c", context2 );
+			sscanf_s( msg.c_str(), "GET /NumberGuessing/c=%c", &context2 );
 
-			switch ( context2[ 0 ] )
+			switch ( context2 )
 			{
 				case 's':
 					httpcom = HttpCommand::start;
@@ -204,7 +198,7 @@ HttpTCPGuessingGame::HttpCommand HttpTCPGuessingGame::DetermineCommand( string& 
 			break;
 
 		default:
-			cout << "Context not recognized, Context: " << context[ 0 ] << '\n';
+			cout << "Context not recognized, Context: " << context << '\n';
 			break;
 	}
 

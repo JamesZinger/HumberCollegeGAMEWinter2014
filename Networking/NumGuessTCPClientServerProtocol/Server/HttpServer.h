@@ -31,7 +31,7 @@ public:
 	bool AcceptConnection();
 
 	bool SendHttpMsg( string* msg, int *sentLength );
-	bool RecieveData( string* result, int *receivedLength );
+	bool RecieveData( string& result, int *receivedLength );
 
 	void ClientDisconnect();
 	void ServerDisconnect();

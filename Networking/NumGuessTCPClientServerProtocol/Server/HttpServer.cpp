@@ -127,7 +127,7 @@ bool HttpServer::SendHttpMsg( string* msg, int *sentLength )
 
 }
 
-bool HttpServer::RecieveData( string* result, int *receivedLength )
+bool HttpServer::RecieveData( string& result, int *receivedLength )
 {
 	if ( ClientSocket == INVALID_SOCKET )
 	{
@@ -149,7 +149,7 @@ bool HttpServer::RecieveData( string* result, int *receivedLength )
 		return false;
 	}
 
-	result = new string( RCBuffer );
+	result = RCBuffer;
 
 	return true;
 }
@@ -175,7 +175,7 @@ void HttpServer::BuiltHttpResponse(string* msg)
 	ss << "Content-Length: " << msg->length() << "\n\n";
 	ss << ( *msg );
 
-	msg->empty();
+	msg->clear();
 	msg->append( ss.str() );
 
 	return;
