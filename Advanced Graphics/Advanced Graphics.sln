@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment-2_Skybox", "Assi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment-3_Mirror", "Assignment-3_Mirror\Assignment-3_Mirror.vcxproj", "{3E4A68E2-2FB6-4CB8-A0EE-A3B2110AF067}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment-4_Tetrahedron", "Assignment-4_Tetrahedron\Assignment-4_Tetrahedron.vcxproj", "{B9ACBEEF-569C-4F88-AA1E-93290B289A72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -27,6 +29,10 @@ Global
 		{3E4A68E2-2FB6-4CB8-A0EE-A3B2110AF067}.Debug|Win32.Build.0 = Debug|Win32
 		{3E4A68E2-2FB6-4CB8-A0EE-A3B2110AF067}.Release|Win32.ActiveCfg = Release|Win32
 		{3E4A68E2-2FB6-4CB8-A0EE-A3B2110AF067}.Release|Win32.Build.0 = Release|Win32
+		{B9ACBEEF-569C-4F88-AA1E-93290B289A72}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B9ACBEEF-569C-4F88-AA1E-93290B289A72}.Debug|Win32.Build.0 = Debug|Win32
+		{B9ACBEEF-569C-4F88-AA1E-93290B289A72}.Release|Win32.ActiveCfg = Release|Win32
+		{B9ACBEEF-569C-4F88-AA1E-93290B289A72}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

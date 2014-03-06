@@ -110,7 +110,7 @@ GLuint loadRAW_Cube( const char* posxPath, const char* posyPath, const char* pos
 
 	for ( int i = 0; i < 6; i++ )
 	{
-		data[ i ] = (GLubyte*) malloc( sizeof( GLubyte ) * imageSize );
+		data[ i ] = (GLubyte*)malloc( sizeof(GLubyte)* imageSize );
 	}
 
 
