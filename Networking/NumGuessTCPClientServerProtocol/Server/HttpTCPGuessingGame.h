@@ -2,28 +2,30 @@
 #include "NumberGuessingGame.h"
 #include "HttpServer.h"
 
-class HttpTCPGuessingGame :
-	public NumberGuessingGame
+class HttpTCPGuessingGame
 {
 
 private:
 
 	HttpServer* server;
+	NumberGuessingGame* game;
 	static const int DEFAULT_PORT = 8282;
 
 protected:
 
 	enum HttpCommand
 	{
-		start = 1,
+		none = 0,
+		start,
 		terminate,
-		guessnumber
+		guessnumber,
+		restart
 	};
 
 	HttpCommand DetermineCommand( string& s, int& numberGuessed );
 
 
-	void GameCycle();
+	bool GameCycle();
 
 	
 
