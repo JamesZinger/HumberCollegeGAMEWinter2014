@@ -25,6 +25,7 @@ int main( void )
 	if( !glfwInit() )
 	{
 		fprintf( stderr, "Failed to initialize GLFW\n" );
+		system( "pause" );
 		return -1;
 	}
 
@@ -38,6 +39,7 @@ int main( void )
 	{
 		fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
 		glfwTerminate();
+		system( "pause" );
 		return -1;
 	}
 
@@ -45,6 +47,7 @@ int main( void )
 	glewExperimental = true; // Needed for core profile
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "Failed to initialize GLEW\n");
+		system( "Pause" );
 		return -1;
 	}
 
@@ -114,11 +117,14 @@ int main( void )
 	float theta = 0.0f;
 
 	glm::mat4 ProjectionMatrix = glm::perspective( 40.0f, 4.0f / 3.0f, 0.1f, 1000.0f );
-	glm::mat4 ViewMatrix = glm::lookAt( vec3( 0, 0, 10 ), vec3( 0, 0, 0 ), vec3( 0, 1, 0 ) );
+	
 
 	glUniform1f( SpecularHardnessID, 2.0f );
 	glUniform1f( LightPowerID, 20.0f );
 	glUniform3f( LightColorID, 1.0f, 1.0f, 1.0f );
+
+	int posx = 0;
+	int posz = 0;
 
 	do
 	{
@@ -132,11 +138,14 @@ int main( void )
 		// Compute the MVP matrix from keyboard and mouse input
 		//computeMatricesFromInputs();
 
+		glm::mat4 ViewMatrix = glm::lookAt( vec3( 0, 0, 10), vec3( posx, 0, posz), vec3( 0, 1, 0 ) );
+
 		glm::mat4 ModelMatrix = glm::mat4( 1.0 );
 		ModelMatrix = glm::rotate( ModelMatrix, theta, vec3( 0, 1, 0 ) );
 		ModelMatrix = glm::translate( ModelMatrix, vec3( 4, 0, 0 ) );
 		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
+		
 		// Send our transformation to the currently bound shader, 
 		// in the "MVP" uniform
 		glUniformMatrix4fv( MatrixID, 1, GL_FALSE, &MVP[ 0 ][ 0 ] );
@@ -152,9 +161,11 @@ int main( void )
 
 		mat4 MV = ModelMatrix*ViewMatrix;
 		
+		mat4 Norm;
+
 		if (!isUniformScaling)
 		{
-			mat4 Norm = glm::transpose( MV );
+			Norm = glm::transpose( MV );
 			Norm = glm::inverse( Norm );
 			glUniformMatrix4fv( NormalMatrixID, 1, GL_FALSE, &Norm[ 0 ][ 0 ] );
 		} 
@@ -210,6 +221,67 @@ int main( void )
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
 
+		ModelMatrix = glm::mat4( 1.0 );
+		MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
+
+
+		glUniformMatrix4fv( MatrixID, 1, GL_FALSE, &MVP[ 0 ][ 0 ] );
+		glUniformMatrix4fv( ModelMatrixID, 1, GL_FALSE, &ModelMatrix[ 0 ][ 0 ] );
+		glUniformMatrix4fv( ViewMatrixID, 1, GL_FALSE, &ViewMatrix[ 0 ][ 0 ] );
+
+		
+		Norm = glm::transpose( MV );
+		Norm = glm::inverse( Norm );
+		glUniformMatrix4fv( NormalMatrixID, 1, GL_FALSE, &Norm[ 0 ][ 0 ] );
+
+
+		lightPos = glm::vec3( 0, 2, 2 );
+		glUniform3f( LightID, lightPos.x, lightPos.y, lightPos.z );
+
+
+		// 1rst attribute buffer : vertices
+		glEnableVertexAttribArray( 0 );
+		glBindBuffer( GL_ARRAY_BUFFER, vertexbuffer );
+		glVertexAttribPointer(
+			0,                  // attribute
+			3,                  // size
+			GL_FLOAT,           // type
+			GL_FALSE,           // normalized?
+			0,                  // stride
+			(void*)0            // array buffer offset
+			);
+
+		// 2nd attribute buffer : UVs
+		glEnableVertexAttribArray( 1 );
+		glBindBuffer( GL_ARRAY_BUFFER, uvbuffer );
+		glVertexAttribPointer(
+			1,                                // attribute
+			2,                                // size
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+			);
+
+		// 3rd attribute buffer : normals
+		glEnableVertexAttribArray( 2 );
+		glBindBuffer( GL_ARRAY_BUFFER, normalbuffer );
+		glVertexAttribPointer(
+			2,                                // attribute
+			3,                                // size
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+			);
+
+		// Draw the triangles !
+		glDrawArrays( GL_TRIANGLES, 0, vertices.size() );
+
+		glDisableVertexAttribArray( 0 );
+		glDisableVertexAttribArray( 1 );
+		glDisableVertexAttribArray( 2 );
+
 		// Swap buffers
 		glfwSwapBuffers();
 
@@ -217,6 +289,25 @@ int main( void )
 
 		if (theta >= 360)
 			theta -= 360;
+
+		if (glfwGetKey( GLFW_KEY_UP) == GLFW_PRESS)
+		{
+			posx += 1;
+		}
+		else if (glfwGetKey(GLFW_KEY_DOWN) == GLFW_PRESS)
+		{
+			posx -= 1;
+		}
+
+		if (glfwGetKey(GLFW_KEY_RIGHT))
+		{
+			posz += 1;
+		}
+		else if (glfwGetKey(GLFW_KEY_LEFT))
+		{
+			posz -= 1;
+		}
+
 
 	} // Check if the ESC key was pressed or the window was closed
 	while( glfwGetKey( GLFW_KEY_ESC ) != GLFW_PRESS &&
