@@ -5,22 +5,37 @@
 //  Original author: James
 ///////////////////////////////////////////////////////////
 
-#if !defined(__BLACK_JACK_PLAYER_H__)
-#define __BLACK_JACK_PLAYER_H__
+#pragma once
 
 #include "Player.h"
+#include "GenericPlayer.h"
 
-class BlackjackPlayer : public Player
+#include <string>
+#include <iostream>
+
+using std::string;
+using std::cin;
+
+namespace Blackjack
 {
+	class BlackjackPlayer : public GenericPlayer
+	{
 
-public:
-	BlackjackPlayer();
-	virtual ~BlackjackPlayer();
-	std::string getName();
-	void setName(std::string newVal);
+	public:
+		BlackjackPlayer( const string& name = "" );
+		virtual ~BlackjackPlayer();
 
-private:
-	std::string m_name;
+		//returns whether or not the player wants another hit       
+		virtual bool IsHitting() const;
 
-};
-#endif // !defined(__BLACK_JACK_PLAYER_H__)
+		//announces that the player wins
+		void Win() const;
+
+		//announces that the player loses
+		void Lose() const;
+
+		//announces that the player pushes
+		void Push() const;
+
+	};
+}

@@ -84,11 +84,16 @@
     <ClCompile Include="Assignment2-ConcurrentBlackJack.cpp" />
     <ClCompile Include="BlackjackGame.cpp" />
     <ClCompile Include="BlackjackPlayer.cpp" />
+    <ClCompile Include="BlackjackProtocol.cpp" />
+    <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GenericPlayer.cpp" />
+    <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="House.cpp" />
     <ClCompile Include="MessageInput.cpp" />
     <ClCompile Include="MessageOutput.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Protocol.cpp" />
     <ClCompile Include="Router.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="TCPGameServer.cpp" />
@@ -97,7 +102,13 @@
   <ItemGroup>
     <ClInclude Include="BlackjackGame.h" />
     <ClInclude Include="BlackjackPlayer.h" />
+    <ClInclude Include="BlackjackProtocol.h" />
+    <ClInclude Include="Card.h" />
+    <ClInclude Include="Deck.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GenericPlayer.h" />
+    <ClInclude Include="Hand.h" />
+    <ClInclude Include="House.h" />
     <ClInclude Include="MessageInput.h" />
     <ClInclude Include="MessageOutput.h" />
     <ClInclude Include="Player.h" />

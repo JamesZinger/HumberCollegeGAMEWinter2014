@@ -8,28 +8,38 @@
 #include "BlackjackPlayer.h"
 
 
-
-
-BlackjackPlayer::BlackjackPlayer()
+namespace Blackjack
 {
+	BlackjackPlayer::BlackjackPlayer( const string& name ) : GenericPlayer( name )
+	{
+	}
 
+	BlackjackPlayer::~BlackjackPlayer()
+	{
+	}
+
+	bool BlackjackPlayer::IsHitting() const
+	{
+		cout << m_Name << ", do you want a hit? (Y/N): ";
+		char response;
+		cin >> response;
+		return ( response == 'y' || response == 'Y' );
+	}
+
+	void BlackjackPlayer::Win() const
+	{
+		cout << m_Name << " wins.\n";
+	}
+
+	void BlackjackPlayer::Lose() const
+	{
+		cout << m_Name << " loses.\n";
+	}
+
+	void BlackjackPlayer::Push() const
+	{
+		cout << m_Name << " pushes.\n";
+	}
 }
 
 
-BlackjackPlayer::~BlackjackPlayer()
-{
-
-}
-
-
-std::string BlackjackPlayer::getName()
-{
-
-	return  nullptr;
-}
-
-
-void BlackjackPlayer::setName(std::string newVal)
-{
-
-}

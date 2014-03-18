@@ -20,16 +20,3 @@ Game::~Game()
 {
 
 }
-
-
-int Game::GetthreadID()
-{
-
-	return  m_threadID;
-}
-
-
-void Game::SetthreadID(int newVal)
-{
-
-}

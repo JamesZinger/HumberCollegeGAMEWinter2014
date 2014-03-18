@@ -5,17 +5,43 @@
 //  Original author: James
 ///////////////////////////////////////////////////////////
 
-#if !defined(__BLACK_JACK_GAME_H__)
-#define __BLACK_JACK_GAME_H__
+#pragma once
 
 #include "Game.h"
+#include "Deck.h"
+#include "House.h"
+#include "BlackjackPlayer.h"
+#include "BlackjackProtocol.h"
 
-class BlackjackGame : public Game
+#include <vector>
+#include <iostream>
+#include <ctime>
+
+using std::vector;
+using std::cout;
+using std::endl;
+using std::ostream;
+using std::time;
+
+namespace Blackjack
 {
 
-public:
-	BlackjackGame();
-	virtual ~BlackjackGame();
+	class BlackjackGame : public Game, BlackjackProtocol
+	{
+	public:
+		BlackjackGame( const vector<string>& names );
 
-};
-#endif // !defined(__BLACK_JACK_GAME_H__)
+		virtual ~BlackjackGame();
+
+		//plays the game of blackjack    
+		void Play();
+
+
+
+	private:
+		Deck m_Deck;
+		House m_House;
+		vector<BlackjackPlayer> m_Players;
+
+	};
+}

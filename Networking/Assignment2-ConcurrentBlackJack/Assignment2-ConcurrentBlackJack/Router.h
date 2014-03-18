@@ -5,22 +5,44 @@
 //  Original author: James
 ///////////////////////////////////////////////////////////
 
-#if !defined(__ROUTER_H__)
-#define __ROUTER_H__
+#pragma once
 
 #include <WinSock2.h>
+#include <string>
+
+#include "Protocol.h"
+
+class TCPGameServer;
+
+using std::string;
 
 class Router
 {
-
 public:
 	Router();
 	virtual ~Router();
-	void RoutingThreadFunc(SOCKET Request);
-	int threadID();
+
+	void RoutingThreadFunc( SOCKET Request, TCPGameServer* parentServer );
+
+#pragma region Getters
+
+	unsigned long	ThreadID()		const { return m_threadID; }
+	TCPGameServer*	GameServer()	const { return m_gameServer; }
+
+#pragma endregion 
+
+protected:
+
+#pragma region Setters
+	
+	void ThreadID	( unsigned long val )	{ m_threadID = val; }
+	void GameServer	( TCPGameServer* val )	{ m_gameServer = val; }
+
+#pragma endregion 
 
 private:
-	int m_threadID;
+
+	unsigned long m_threadID;
+	TCPGameServer* m_gameServer;
 
 };
-#endif // !defined(__ROUTER_H__)

@@ -5,8 +5,7 @@
 //  Original author: James
 ///////////////////////////////////////////////////////////
 
-#if !defined(__GAME_H__)
-#define __GAME_H__
+#pragma once
 
 #include "MessageInput.h"
 #include "Player.h"
@@ -16,7 +15,6 @@
 
 class Game
 {
-
 public:
 	Player* m_Player;
 
@@ -25,12 +23,11 @@ public:
 	int GetthreadID();
 
 protected:
-	void SetthreadID(int newVal);
+	void threadID(int newVal);
 
 private:
 	Concurrency::concurrent_queue<MessageInput*> m_inputQueue;
 	std::vector<Player*> m_playersvector;
-	int m_threadID;
+	unsigned long m_threadID;
 
 };
-#endif // !defined(__GAME_H__)

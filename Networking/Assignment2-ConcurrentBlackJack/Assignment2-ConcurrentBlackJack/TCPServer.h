@@ -9,17 +9,21 @@
 #define __TCP_SERVER_H__
 
 #include "Server.h"
+#include <WS2tcpip.h>
 
 class TCPServer : public Server
 {
 
 public:
-	TCPServer();
+	
+	TCPServer(int port = 8282);
 	virtual ~TCPServer();
-	void CreateRoutingThread(SOCKET connection);
+	virtual void Run() = 0;
+	virtual std::string* RecieveMessage	( SOCKET MessageSocket, char* Buffer, int BufferLength );
+	virtual void SendMessage			( SOCKET MessageSocket, std::string& Message );
 
-private:
-	bool AcceptConnection();
+protected:
 
+	SOCKET AcceptConnection();
 };
 #endif // !defined(__TCP_SERVER_H__)

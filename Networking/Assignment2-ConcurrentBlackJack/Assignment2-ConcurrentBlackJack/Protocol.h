@@ -5,19 +5,15 @@
 //  Original author: James
 ///////////////////////////////////////////////////////////
 
-#if !defined(__PROTOCOL_H__)
-#define __PROTOCOL_H__
+#pragma once
 
 #include <string>
+#include <WinSock2.h>
+
+using std::string;
 
 class Protocol
 {
-
 public:
-	Protocol();
-	virtual ~Protocol();
-	virtual bool DeserializeMessage(Protocol protocol, std::string* message);
-	virtual bool SerializeMessage(std::string Message, Protocol protocol);
-
+	virtual void HandleRequest( const SOCKET client, string& recieveString ) = 0;
 };
-#endif // !defined(__PROTOCOL_H__)

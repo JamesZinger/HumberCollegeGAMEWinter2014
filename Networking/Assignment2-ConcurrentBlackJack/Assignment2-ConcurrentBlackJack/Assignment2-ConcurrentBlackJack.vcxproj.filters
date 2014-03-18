@@ -13,18 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="BlackJack">
+      <UniqueIdentifier>{fdff0836-b6d5-4f83-85aa-bec706ab7a51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BlackJack\BlackJack Source">
+      <UniqueIdentifier>{11c622d3-3a06-4b8f-91ff-1139ff3b074e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BlackJack\BlackJack Headers">
+      <UniqueIdentifier>{344d5d0a-5f5d-4124-b28a-b34deddb6526}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assignment2-ConcurrentBlackJack.cpp" />
-    <ClCompile Include="BlackjackGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BlackjackPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -37,29 +40,44 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Protocol.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Router.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TCPGameServer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TCPServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TCPGameServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="House.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackjackGame.cpp">
+      <Filter>BlackJack\BlackJack Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackjackPlayer.cpp">
+      <Filter>BlackJack\BlackJack Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>BlackJack\BlackJack Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>BlackJack\BlackJack Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericPlayer.cpp">
+      <Filter>BlackJack\BlackJack Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Hand.cpp">
+      <Filter>BlackJack\BlackJack Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackjackProtocol.cpp">
+      <Filter>BlackJack\BlackJack Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BlackjackGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BlackjackPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -70,9 +88,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Protocol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Router.h">
@@ -86,6 +101,33 @@
     </ClInclude>
     <ClInclude Include="TCPServer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="House.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackjackGame.h">
+      <Filter>BlackJack\BlackJack Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackjackPlayer.h">
+      <Filter>BlackJack\BlackJack Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>BlackJack\BlackJack Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Deck.h">
+      <Filter>BlackJack\BlackJack Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericPlayer.h">
+      <Filter>BlackJack\BlackJack Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Hand.h">
+      <Filter>BlackJack\BlackJack Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackjackProtocol.h">
+      <Filter>BlackJack\BlackJack Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

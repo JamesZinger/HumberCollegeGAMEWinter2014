@@ -5,8 +5,7 @@
 //  Original author: James
 ///////////////////////////////////////////////////////////
 
-#if !defined(__MESSAGE_OUTPUT_H__)
-#define __MESSAGE_OUTPUT_H__
+#pragma once
 
 #include <string>
 
@@ -16,7 +15,12 @@ class MessageOutput
 public:
 	MessageOutput();
 	virtual ~MessageOutput();
-	std::string *m_message;
 
+	std::string * Message() { return m_message; }
+	void Message( std::string * val ) { m_message = val; }
+
+private:
+	std::string *m_message;
+	
+	
 };
-#endif // !defined(__MESSAGE_OUTPUT_H__)
