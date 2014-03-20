@@ -13,7 +13,7 @@
 #include "BlackjackPlayer.h"
 #include "BlackjackProtocol.h"
 
-#include <vector>
+#include <concurrent_vector.h>
 #include <iostream>
 #include <ctime>
 
@@ -22,14 +22,15 @@ using std::cout;
 using std::endl;
 using std::ostream;
 using std::time;
+using Concurrency::concurrent_vector;
 
 namespace Blackjack
 {
 
-	class BlackjackGame : public Game, BlackjackProtocol
+	class BlackjackGame : public Game
 	{
 	public:
-		BlackjackGame( const vector<string>& names );
+		BlackjackGame();
 
 		virtual ~BlackjackGame();
 
@@ -41,7 +42,8 @@ namespace Blackjack
 	private:
 		Deck m_Deck;
 		House m_House;
-		vector<BlackjackPlayer> m_Players;
+
+		concurrent_vector<BlackjackPlayer> m_Players;
 
 	};
 }

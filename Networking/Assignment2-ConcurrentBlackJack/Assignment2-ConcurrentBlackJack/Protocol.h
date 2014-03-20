@@ -12,8 +12,10 @@
 
 using std::string;
 
+class Server;
+
 class Protocol
 {
 public:
-	virtual void HandleRequest( const SOCKET client, string& recieveString ) = 0;
+	virtual void HandleRequest( const SOCKET client, string& recieveString, const Server* server ) = 0;
 };

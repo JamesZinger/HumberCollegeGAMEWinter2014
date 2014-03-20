@@ -30,10 +30,11 @@ using Concurrency::concurrent_vector;
 class TCPGameServer : public TCPServer
 {
 public:
-	TCPGameServer( Game* game, int port = 8282 ) : TCPServer(port)
+	TCPGameServer( Game* game, Protocol* proto, int port = 8282 ) : TCPServer(proto, port)
 	{
 		m_gameTemplate = game;
 		m_games = concurrent_vector<Game*>();
+		m_players = concurrent_unordered_map<SOCKET, Player*>();
 	}
 
 	virtual ~TCPGameServer()
@@ -43,14 +44,15 @@ public:
 
 	virtual void Run();
 
-	concurrent_vector<Game*> Games()	const { return m_games; }
-	Game* GameTemplate()							const { return m_gameTemplate; }
+	concurrent_vector<Game*> Games()						const { return m_games; }
+	Game* GameTemplate()									const { return m_gameTemplate; }
+	concurrent_unordered_map<SOCKET, Player*> Players()		const { return m_players; }
 
 	void			AddPlayer	( SOCKET clientSocket );
 	const Player*	GetPlayer	( SOCKET clientSocket );
+
 protected:
 	void Games( concurrent_vector<Game*> val ) { m_games = val; }
-	concurrent_unordered_map<SOCKET, Player*> Players() const { return m_players; }
 	void Players( concurrent_unordered_map<SOCKET, Player*> val ) { m_players = val; }	
 
 private:

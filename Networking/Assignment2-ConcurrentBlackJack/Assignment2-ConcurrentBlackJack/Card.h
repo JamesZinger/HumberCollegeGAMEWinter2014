@@ -1,11 +1,14 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 
 using std::ostream;
+using std::string;
 
 namespace Blackjack
 {
+	
 	class Card
 	{
 	public:
@@ -32,4 +35,7 @@ namespace Blackjack
 		suit m_Suit;
 		bool m_IsFaceUp;
 	};
+
+	//ostream& operator<<( ostream& os, const Card& aCard );
+
 }

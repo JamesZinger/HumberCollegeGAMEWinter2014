@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "TCPGameServer.h"
+#include "BlackjackProtocol.h"
 #include "BlackjackGame.h"
 
 using std::cout;
@@ -17,11 +18,9 @@ using std::vector;
 
 int main(int argc, char* argv[])
 {
-	vector<string> names;
-	names.push_back( "test" );
-	Blackjack::BlackjackGame *game = new Blackjack::BlackjackGame(names);
-	TCPGameServer *server = new TCPGameServer(game);
-
+	Blackjack::BlackjackProtocol* proto = new Blackjack::BlackjackProtocol();
+	TCPGameServer* server = new TCPGameServer( proto->BlackJackGame(), proto );
+	
 	server->Debugging( true );
 
 	server->Run();

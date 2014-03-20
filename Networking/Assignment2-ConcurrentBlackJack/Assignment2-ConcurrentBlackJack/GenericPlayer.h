@@ -10,6 +10,7 @@ using std::cout;
 
 namespace Blackjack
 {
+	
 	class GenericPlayer : public Hand
 	{
 		friend ostream& operator<<( ostream& os, const GenericPlayer& aGenericPlayer );
@@ -31,4 +32,7 @@ namespace Blackjack
 	protected:
 		string m_Name;
 	};
+
+	//ostream& operator<<( ostream& os, const GenericPlayer& aGenericPlayer );
+
 }

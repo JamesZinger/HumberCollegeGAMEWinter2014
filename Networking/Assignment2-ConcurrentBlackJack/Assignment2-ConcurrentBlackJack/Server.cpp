@@ -13,10 +13,10 @@
 using std::cout;
 using std::endl;
 
-Server::Server( const int port )
+Server::Server( Protocol* proto, const int port )
 {
 	ListenPort( port );
-
+	SetProtocol( proto );
 	m_wsaData = new WSADATA();
 	int iResult = WSAStartup( 0x0202, m_wsaData );
 	if ( iResult != 0 )

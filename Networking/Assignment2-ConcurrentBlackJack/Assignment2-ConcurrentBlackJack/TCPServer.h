@@ -16,11 +16,11 @@ class TCPServer : public Server
 
 public:
 	
-	TCPServer(int port = 8282);
+	TCPServer(Protocol* proto, int port = 8282);
 	virtual ~TCPServer();
 	virtual void Run() = 0;
 	virtual std::string* RecieveMessage	( SOCKET MessageSocket, char* Buffer, int BufferLength );
-	virtual void SendMessage			( SOCKET MessageSocket, std::string& Message );
+	virtual void SendMessageOverNetwork	( SOCKET MessageSocket, std::string& Message );
 
 protected:
 

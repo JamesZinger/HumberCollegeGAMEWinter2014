@@ -14,7 +14,7 @@ using std::stringstream;
 using std::cout;
 using std::endl;
 
-TCPServer::TCPServer( int port ) : Server( port )
+TCPServer::TCPServer(Protocol* proto, int port ) : Server( proto, port )
 {
 	SOCKET listenSocket = INVALID_SOCKET;
 
@@ -129,7 +129,7 @@ SOCKET TCPServer::AcceptConnection()
 	return client;
 }
 
-void TCPServer::SendMessage( SOCKET MessageSocket, std::string& Message )
+void TCPServer::SendMessageOverNetwork( SOCKET MessageSocket, std::string& Message )
 {
 	if (MessageSocket == INVALID_SOCKET)
 	{
@@ -137,6 +137,13 @@ void TCPServer::SendMessage( SOCKET MessageSocket, std::string& Message )
 		return;
 	}
 	int iResult = send( MessageSocket, Message.c_str(), Message.length(), 0 );
+	
+	if (Debugging())
+	{
+		cout << "Sending Message: " << endl;
+		cout << Message << endl << endl;
+	}
+
 	if (iResult == SOCKET_ERROR)
 	{
 		cout << "Failed to send message, Error code: " << WSAGetLastError() << endl;
