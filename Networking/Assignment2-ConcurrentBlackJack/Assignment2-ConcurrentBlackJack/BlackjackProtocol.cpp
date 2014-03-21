@@ -99,17 +99,21 @@ namespace Blackjack
 
 	void BlackjackProtocol::HandleHttpRequest( SOCKET client, string request, TCPGameServer* server, stringstream& ss )
 	{
-		ss << "Admin Command Received" << endl;
-
-		ss << "Listing Players: " << endl;
+		ss << "Listing Players: " << "<br />";
 		{
 			//concurrent_unordered_map<SOCKET, Player*>::iterator it;
-			auto it = server->Players().begin();
-			it != server->Players().end();
-			it++;
-			for ( auto it = server->Players().begin(); it != server->Players().end(); it++ )
+			
+			if (server->Players().empty())
 			{
-				ss << (*it).second->Name() << endl;
+				ss << "No players are currently connected" << "<br />";
+			}
+
+			else
+			{
+				for ( auto it = server->Players().begin(); it != server->Players().end(); ++it )
+				{
+					ss << ( *it ).second->Name() << "<br />";
+				}
 			}
 		}
 		ss << endl;
