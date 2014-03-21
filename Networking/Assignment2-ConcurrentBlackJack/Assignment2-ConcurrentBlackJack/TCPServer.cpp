@@ -152,21 +152,30 @@ void TCPServer::SendMessageOverNetwork( SOCKET MessageSocket, std::string& Messa
 	}
 }
 
-std::string* TCPServer::RecieveMessage( SOCKET MessageSocket, char* Buffer, int BufferLength )
+int TCPServer::RecieveMessage( SOCKET MessageSocket, char* Buffer, int BufferLength, std::string* out )
 {
+	if ( out == nullptr )
+		return -2;
+
 	if (MessageSocket == INVALID_SOCKET)
 	{
 		cout << "Socket is not valid" << endl;
-		return nullptr;
+		return -1;
 	}
 	int iResult = recv( MessageSocket, Buffer, BufferLength, 0 );
 	if (iResult < 0)
 	{
+		int errorCode = WSAGetLastError();
+		if (errorCode == WSAEWOULDBLOCK)
+		{
+			return 0;
+		}
 		cout << "Failed to receive message, Error code: " << WSAGetLastError() << endl;
 		closesocket( MessageSocket );
+		return -1;
 	}
 
-	std::string* results = new std::string(Buffer);
+	*out = std::string(Buffer);
 
-	return results;	
+	return 1;	
 }

@@ -20,7 +20,7 @@ public:
 	~BlackjackClient();
 
 	bool SendData		( string& message, int* sentLength = NULL );
-	bool RecieveData	( string* message );
+	int	 RecieveData	( string* message );
 	void SendShutdown	();
 	void Disconnect		();
 	void Run			();
@@ -35,6 +35,7 @@ public:
 	int			Port()			const { return m_port; }
 	string		Hostname()		const { return m_hostname; }
 	WSADATA		WsaData()		const { return m_wsaData; }
+	bool		ShuttingDown()	const { return m_isShuttingDown; }
 
 protected:
 
@@ -44,9 +45,11 @@ protected:
 	void Hostname		( string val )	{ m_hostname = val; }
 	void Port			( int val )		{ m_port = val; }
 	void WsaData		( WSADATA val )	{ m_wsaData = val; }
+	void ShuttingDown	( bool val )	{ m_isShuttingDown = val; }
 
 	void HandleMessage	( string& message );
 	void Update			();
+
 private:
 
 	string						m_name;
@@ -59,5 +62,6 @@ private:
 	concurrent_queue<string*>	m_inputQueue;
 	concurrent_queue<string*>	m_outputQueue;
 	thread*						m_networkingThread;
+	bool						m_isShuttingDown;
 };
 

@@ -46,7 +46,7 @@ public:
 
 	virtual void			Run						() = 0;
 	virtual void			SendMessageOverNetwork	( SOCKET MessageSocket, std::string& Message ) = 0;
-	virtual std::string*	RecieveMessage			( SOCKET MessageSocket, char* Buffer, int BufferLength ) = 0;
+	virtual int				RecieveMessage			( SOCKET MessageSocket, char* Buffer, int BufferLength, std::string* out ) = 0;
 
 	unsigned short			ListenPort()	const { return m_listenPort; }
 	SOCKET					ListenSocket()	const { return m_listenSocket; }

@@ -15,6 +15,7 @@ BlackjackClient::BlackjackClient( string name, string hostname, int port, int bu
 	m_inputBuffer = (char*)malloc( bufferLength );
 	Hostname( hostname );
 	Port( port );
+	ShuttingDown( false );
 
 	addrinfo	*result = nullptr,
 		*ptr = nullptr,
@@ -62,8 +63,6 @@ BlackjackClient::BlackjackClient( string name, string hostname, int port, int bu
 			exit( -2 );
 		}
 
-		u_long iMode = 1;
-		ioctlsocket( m_clientSocket, FIONBIO, &iMode );
 
 		iResult = connect( m_clientSocket, ptr->ai_addr, (int)ptr->ai_addrlen );
 		if ( iResult == SOCKET_ERROR )
@@ -80,6 +79,9 @@ BlackjackClient::BlackjackClient( string name, string hostname, int port, int bu
 		}
 		break;
 	}
+
+	u_long iMode = 1;
+	ioctlsocket( m_clientSocket, FIONBIO, &iMode );
 
 	freeaddrinfo( result );
 
@@ -112,7 +114,7 @@ bool BlackjackClient::SendData( string& message, int* sentLength /*= NULL */ )
 	if ( sentLength != nullptr )
 		*sentLength = i;
 
-	if ( *sentLength == SOCKET_ERROR )
+	if ( i == SOCKET_ERROR )
 	{
 		int errorCode = WSAGetLastError();
 		if ( errorCode == WSAEWOULDBLOCK )
@@ -127,36 +129,36 @@ bool BlackjackClient::SendData( string& message, int* sentLength /*= NULL */ )
 	return true;
 }
 
-bool BlackjackClient::RecieveData( string* message )
+int BlackjackClient::RecieveData( string* message )
 {
 	if ( ClientSocket() == INVALID_SOCKET )
 	{
 		cout << "No client is attached." << endl;
-		return false;
+		return -1;
 	}
-
+	memset( InputBuffer(), '\0', m_bufferLength );
 	int receivedLength = recv( ClientSocket(), InputBuffer(), m_bufferLength, 0 );
 	if ( receivedLength == 0 )
 	{
 		cout << "Connection closing..." << endl;
 		Disconnect();
-		return false;
+		return -1;
 	}
 	else  if ( receivedLength < 0 )
 	{
 		int errorCode = WSAGetLastError();
 		if ( errorCode == WSAEWOULDBLOCK )
 		{
-			return false;
+			return 0;
 		}
-		cout << "recv failed, WSA Error code: " << WSAGetLastError() << endl;
+		cout << "recv failed, WSA Error code: " << errorCode << endl;
 		Disconnect();
-		return false;
+		return - 1;
 	}
 
-	message = new string( InputBuffer() );
+	*message = string( InputBuffer() );
 
-	return true;
+	return 1;
 }
 
 void BlackjackClient::SendShutdown()
@@ -173,14 +175,22 @@ void BlackjackClient::Disconnect()
 {
 	closesocket( ClientSocket() );
 	WSACleanup();
+	system( "pause" );
 }
 
 void BlackjackClient::Run()
 {
 	m_networkingThread = new thread( &BlackjackClient::NetworkThreadFunc, this );
-
+	{
+		stringstream ss;
+		ss << "BlackJackClient Protocol 1.0" << endl;
+		ss << "Command = Connect" << endl;
+		ss << "Name = " << Name() << endl;
+		ss << endl;
+		m_outputQueue.push( new string( ss.str() ) );
+	}
 	// Game loop
-	while ( true )
+	while ( !ShuttingDown() )
 	{
 		if ( !m_inputQueue.empty() )
 		{
@@ -204,21 +214,38 @@ void BlackjackClient::NetworkThreadFunc()
 		// Send messages
 		if ( !m_outputQueue.empty() )
 		{
-			string* msg = new string();
+			string* msg;
 			if ( m_outputQueue.try_pop( msg ) )
 			{
-				SendData( *msg );
+				if ( msg->compare( "SHUTDOWN" ) == 0 )
+					SendShutdown();
+
+				else
+					SendData( *msg );
+
 				delete msg;
 			}
 		}
 
 		// Receive messages
 		{
-			string* msg = nullptr;
-			if ( RecieveData( msg ) )
+			string msg = string();
+			int retCode = RecieveData( &msg );
+			if ( retCode == 1 )
 			{
-				m_inputQueue.push( msg );
+				string* msg2 = new string( msg.c_str() );
+				m_inputQueue.push( msg2 );
 			}
+			else if (retCode == 0)
+			{
+				
+			}
+			else if (retCode == -1)
+			{
+				
+				break;
+			}
+
 		}
 	}
 }
@@ -229,9 +256,18 @@ void BlackjackClient::HandleMessage( string& message )
 	cout << message << endl;
 	cout << endl;
 
-	cout << "Sending Message: " << endl;
-	string* retMessage = new string( "Got It!" );
-	m_outputQueue.push( retMessage );
+	if (message == "SHUTDOWN")
+	{
+		ShuttingDown( true );
+	}
+	else
+	{
+		cout << "Sending Message: " << endl;
+		string* retMessage = new string( "Got It!" );
+		m_outputQueue.push( retMessage );
+		string* shutdownMessage = new string( "SHUTDOWN" );
+		m_outputQueue.push( shutdownMessage );
+	}
 }
 
 void BlackjackClient::Update()

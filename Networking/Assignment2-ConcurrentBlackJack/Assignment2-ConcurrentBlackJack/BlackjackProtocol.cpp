@@ -15,7 +15,7 @@ namespace Blackjack
 
 	BlackjackProtocol::BlackjackProtocol()
 	{
-		
+
 		BlackJackGame( new BlackjackGame() );
 	}
 
@@ -64,7 +64,7 @@ namespace Blackjack
 		return;
 	}
 
-	const char BlackjackProtocol::DetermineRequestContext(const string& Message)
+	const char BlackjackProtocol::DetermineRequestContext( const string& Message )
 	{
 		char context = '\0';
 
@@ -75,24 +75,24 @@ namespace Blackjack
 		string firstLine;
 
 		std::getline( ss, firstLine, '\n' );
-
 		const string http = "HTTP";
+		const string BJPFirstLine = "BlackJackClient Protocol 1.0";
 
 		if ( Message.length() < http.length() )
 		{
 			return context;
 		}
-
-		if ( firstLine.compare( firstLine.length() - (http.length() + 5), http.length(), http ) == 0 )
+		if ( firstLine.compare( BJPFirstLine ) == 0 )
+		{
+			context = 'g';
+		}
+		else if ( firstLine.compare( firstLine.length() - ( http.length() + 5 ), http.length(), http ) == 0 )
 		{
 			//Is an Http Command
 			context = 'h';
 		}
 		else
-		{
-			//Likely a game command
-			context = 'g';
-		}
+			context = '\0';
 
 		return context;
 	}
@@ -102,8 +102,8 @@ namespace Blackjack
 		ss << "Listing Players: " << "<br />";
 		{
 			//concurrent_unordered_map<SOCKET, Player*>::iterator it;
-			
-			if (server->Players().empty())
+
+			if ( server->Players().empty() )
 			{
 				ss << "No players are currently connected" << "<br />";
 			}
@@ -121,11 +121,13 @@ namespace Blackjack
 
 	void BlackjackProtocol::HandleGameRequest( SOCKET client, string request, TCPGameServer* server )
 	{
-		string msg = "Not implemented yet";
-		server->SendMessageOverNetwork( client, msg );
-		closesocket( client );
-		return;
-
+		int returnCode = 0;
+		char* buffer = new char[ 300 ];
+		string* retMsg = new string();
+		do
+		{
+			returnCode = server->RecieveMessage( client, buffer, 300, retMsg );
+		} while ( returnCode == 0 );
 
 	}
 

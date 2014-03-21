@@ -67,4 +67,5 @@ private:
 	string*								m_name;
 
 	bool SendMessageOverSocket( std::string& Message, int* SendLength );
+	void HandleMessage( std::string message );
 };

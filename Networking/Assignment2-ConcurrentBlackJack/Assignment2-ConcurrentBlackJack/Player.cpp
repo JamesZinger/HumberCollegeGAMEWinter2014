@@ -29,7 +29,7 @@ Player::~Player()
 	{
 		MessageOutput* msg = NULL;
 		m_messageQueue.try_pop( msg );
-		if (msg != NULL)
+		if ( msg != NULL )
 			delete msg;
 	}
 }
@@ -50,13 +50,19 @@ int Player::RecieveMessage()
 
 	if ( RecvLength == 0 )
 	{
+
 		printf( "Connection closing...\n" );
 		closesocket( Socket() );
-		return 0;
+		return -1;
 	}
 	else  if ( RecvLength < 0 )
 	{
-		printf( "recv failed: %d\n", WSAGetLastError() );
+		int errorCode = WSAGetLastError();
+		if ( errorCode == WSAEWOULDBLOCK )
+		{
+			return 0;
+		}
+		printf( "recv failed: %d\n", errorCode );
 		closesocket( Socket() );
 		return -1;
 	}
@@ -102,10 +108,20 @@ void Player::PlayerThreadFunc( const string& name )
 
 	ThreadID( GetCurrentThreadId() );
 
+
 	while ( true )
 	{
 		SendNetworkMessage();
-		RecieveMessage();
+		int retCode = RecieveMessage();
+		switch ( retCode )
+		{
+			case -1:
+				Socket( INVALID_SOCKET );
+				break;
+			case 1:
+				HandleMessage( string( m_inputArray ) );
+				break;
+		};
 
 		if ( Socket() == INVALID_SOCKET )
 		{
@@ -127,6 +143,7 @@ bool Player::SendMessageOverSocket( std::string& Message, int* SendLength )
 
 	if ( *SendLength == SOCKET_ERROR )
 	{
+		std::cout << "SOCKET ERROR, WSA Error code: " << WSAGetLastError() << std::endl;
 		closesocket( Socket() );
 		Socket( INVALID_SOCKET );
 		return false;
@@ -139,5 +156,10 @@ void Player::EnqueueMessage( MessageOutput* Message )
 {
 	MessageOutput* msg = &( *Message );
 	m_messageQueue.push( msg );
+}
+
+void Player::HandleMessage( std::string message )
+{
+
 }
 

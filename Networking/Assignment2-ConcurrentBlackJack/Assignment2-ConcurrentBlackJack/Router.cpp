@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <boost/thread.hpp>
 
 using std::cout;
 using std::endl;
@@ -37,7 +38,17 @@ void Router::RoutingThreadFunc( SOCKET Request, TCPGameServer* server )
 
 	memset( Buff, '\0', 1024 );
 
-	std::string* recievedMessage = GameServer()->RecieveMessage( Request, Buff, 1024 );
+	// Set SOCKET to non blocking
+	u_long iMode = 1;
+	ioctlsocket( Request, FIONBIO, &iMode );
+	
+	std::string* recievedMessage = new std::string();
+	int returnCode = 0;
+	do 
+	{
+		returnCode = GameServer()->RecieveMessage( Request, Buff, 1024, recievedMessage);
+	} while (returnCode == 0);
+	
 
 	delete Buff;
 
@@ -53,7 +64,8 @@ void Router::RoutingThreadFunc( SOCKET Request, TCPGameServer* server )
 
 		if ( GameServer()->Debugging() )
 		{
-			cout << "Closing connection" << endl;
+			cout << "Router Thread " << m_threadID << " closing" << endl;
+			cout << "Ending connection" << endl;
 		}
 		delete this;
 		return;
