@@ -1,5 +1,5 @@
-#if !defined(__HOUSE_H__)
-#define __HOUSE_H__
+#pragma once
+
 #include "GenericPlayer.h"
 
 #include <iostream>
@@ -23,4 +23,3 @@ namespace Blackjack
 		void FlipFirstCard();
 	};
 }
-#endif // !defined(__HOUSE_H__)

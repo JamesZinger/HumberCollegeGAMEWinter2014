@@ -19,7 +19,8 @@ using std::vector;
 int main(int argc, char* argv[])
 {
 	Blackjack::BlackjackProtocol* proto = new Blackjack::BlackjackProtocol();
-	TCPGameServer* server = new TCPGameServer( proto->BlackJackGame(), proto, 8282 );
+	Blackjack::BlackjackGame* game = new Blackjack::BlackjackGame();
+	TCPGameServer* server = new TCPGameServer( game, proto, 8282 );
 	
 	server->Debugging( true );
 

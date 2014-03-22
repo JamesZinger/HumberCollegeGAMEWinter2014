@@ -103,7 +103,7 @@ TCPServer::~TCPServer()
 }
 
 
-SOCKET TCPServer::AcceptConnection()
+SOCKET TCPServer::AcceptConnection(sockaddr_in* addrPtr /* = nullptr */)
 {
 	if ( ListenSocket() == INVALID_SOCKET )
 	{
@@ -113,10 +113,18 @@ SOCKET TCPServer::AcceptConnection()
 		system( "pause" );
 		exit( 1 );
 	}
+	SOCKET client;
+	if (addrPtr == nullptr)
+	{
+		client = accept( ListenSocket(), NULL, NULL );
+	}
+	else
+	{
+		int i = sizeof( *addrPtr );
+		client = accept( ListenSocket(), (sockaddr*)addrPtr, &i );
+	}
 
-	SOCKET s = ListenSocket();
-
-	SOCKET client = accept( s, NULL, NULL );
+	
 
 	if ( client == INVALID_SOCKET )
 	{

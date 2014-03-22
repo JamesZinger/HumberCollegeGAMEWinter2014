@@ -1,14 +1,11 @@
 #include "BlackjackProtocol.h"
 #include "BlackjackGame.h"
-#include <sstream>
-#include "Server.h"
-#include "TCPGameServer.h"
-
-#include <concurrent_unordered_map.h>
+#include <vector>
+#include <iterator>
 #include <boost/thread.hpp>
+#include <boost/algorithm/string.hpp>
 
-using std::stringstream;
-using Concurrency::concurrent_unordered_map;
+using std::vector;
 
 namespace Blackjack
 {
@@ -16,7 +13,45 @@ namespace Blackjack
 	BlackjackProtocol::BlackjackProtocol()
 	{
 
-		BlackJackGame( new BlackjackGame() );
+#pragma region Player Command Setup
+
+		std::pair<string, PlayerCommands> s;
+
+		s = std::make_pair( "Connect", PlayerCommands::Connect );
+		m_commandMap.insert( s );
+
+		s = std::make_pair( "Hit", PlayerCommands::Hit );
+		m_commandMap.insert( s );
+
+		s = std::make_pair( "JoinGame", PlayerCommands::JoinGame );
+		m_commandMap.insert( s );
+
+		s = std::make_pair( "LeaveGame", PlayerCommands::LeaveGame );
+		m_commandMap.insert( s );
+
+		s = std::make_pair( "Refresh", PlayerCommands::Refresh );
+		m_commandMap.insert( s );
+
+		s = std::make_pair( "Stay", PlayerCommands::Stay );
+		m_commandMap.insert( s );
+
+		s = std::make_pair( "CreateGame", PlayerCommands::CreateGame );
+		m_commandMap.insert( s );
+
+		s = std::make_pair( "Disconnect", PlayerCommands::Disconnect );
+		m_commandMap.insert( s );
+
+#pragma endregion
+
+#pragma region Admin Command Setup
+
+		std::pair<string, AdminCommands> a;
+
+		a = std::make_pair( "List", AdminCommands::ListConnections );
+		m_adminCommandMap.insert( a );
+
+#pragma endregion
+
 	}
 
 	BlackjackProtocol::~BlackjackProtocol()
@@ -88,7 +123,7 @@ namespace Blackjack
 		}
 		else if ( firstLine.compare( firstLine.length() - ( http.length() + 5 ), http.length(), http ) == 0 )
 		{
-			//Is an Http Command
+			//Is an HTTP Command
 			context = 'h';
 		}
 		else
@@ -99,10 +134,8 @@ namespace Blackjack
 
 	void BlackjackProtocol::HandleHttpRequest( SOCKET client, string request, TCPGameServer* server, stringstream& ss )
 	{
-		ss << "Listing Players: " << "<br />";
-		{
-			//concurrent_unordered_map<SOCKET, Player*>::iterator it;
 
+		{
 			if ( server->Players().empty() )
 			{
 				ss << "No players are currently connected" << "<br />";
@@ -110,6 +143,8 @@ namespace Blackjack
 
 			else
 			{
+				ss << "Listing Players: " << "<br />";
+
 				for ( auto it = server->Players().begin(); it != server->Players().end(); ++it )
 				{
 					ss << ( *it ).second->Name() << "<br />";
@@ -121,14 +156,57 @@ namespace Blackjack
 
 	void BlackjackProtocol::HandleGameRequest( SOCKET client, string request, TCPGameServer* server )
 	{
-		int returnCode = 0;
-		char* buffer = new char[ 300 ];
-		string* retMsg = new string();
-		do
-		{
-			returnCode = server->RecieveMessage( client, buffer, 300, retMsg );
-		} while ( returnCode == 0 );
+		vector<string> lines;
+		boost::split( lines, request, boost::is_any_of( "\n" ) );
 
+		if ( lines.size() < 3 )
+		{
+			return;
+		}
+
+
+		vector<string> context;
+		boost::split( context, lines[ 1 ], boost::is_any_of( "=" ) );
+
+
+
+		if ( context.size() < 2 )
+		{
+			return;
+		}
+
+		boost::trim( context[ 0 ] );
+		boost::trim( context[ 1 ] );
+
+		if ( context[ 0 ].compare( "Command" ) != 0 )
+		{
+			return;
+		}
+
+		concurrent_unordered_map<string, PlayerCommands>::const_iterator command = CommandMap()->find( context[ 1 ] );
+		auto something = CommandMap()->end();
+		if ( command == something )
+		{
+			return;
+		}
+		if ( command->second != PlayerCommands::Connect )
+		{
+			return;
+		}
+
+		vector<string> names;
+		boost::split( names, lines[ 2 ], boost::is_any_of( "=" ) );
+
+		if ( names.size() < 2 )
+		{
+			return;
+		}
+
+		boost::trim( names[ 0 ] );
+		boost::trim( names[ 1 ] );
+
+		Player* p = new Player();
+		boost::thread* t = new boost::thread( &Player::PlayerThreadFunc, p, names[ 1 ], client );
 	}
 
 }

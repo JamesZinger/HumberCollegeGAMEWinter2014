@@ -11,14 +11,17 @@
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
 
-Player::Player( const int BufferLength ) : m_inputBufferLength( BufferLength )
+
+Player::Player( int BufferLength /*= 1024*/ ) : m_inputBufferLength( BufferLength )
 {
 	m_inputArray = new char[ BufferLength ];
+	memset(m_inputArray, '\0', BufferLength);
 	SetGame( NULL );
 	Socket( INVALID_SOCKET );
 	ThreadID( -1 );
 	Name( NULL );
 }
+
 
 Player::~Player()
 {
@@ -98,16 +101,17 @@ void Player::SendNetworkMessage()
 	return;
 }
 
-void Player::PlayerThreadFunc( const string& name )
+void Player::PlayerThreadFunc( const string name, SOCKET Client )
 {
-	char* buffer = new char[ name.length() + 1 ];
-	strcpy_s( buffer, name.length() + 1, name.c_str() );
-	Name( new string( buffer ) );
-
-	m_inputArray = new char[ 1024 ];
+	{
+		char* buffer = new char[ name.length() + 1 ];
+		strcpy_s( buffer, name.length() + 1, name.c_str() );
+		Name( new string( buffer ) );
+	}
 
 	ThreadID( GetCurrentThreadId() );
 
+	Socket( Client );
 
 	while ( true )
 	{

@@ -26,10 +26,10 @@ class Player
 {
 
 public:
-	Player(int BufferLength);
+	Player(int BufferLength = 1024);
 	virtual ~Player();
 
-	virtual void PlayerThreadFunc( const string& name );
+	virtual void PlayerThreadFunc( const string name, SOCKET Client );
 	virtual void EnqueueMessage( MessageOutput* Message );
 
 #pragma region Getters

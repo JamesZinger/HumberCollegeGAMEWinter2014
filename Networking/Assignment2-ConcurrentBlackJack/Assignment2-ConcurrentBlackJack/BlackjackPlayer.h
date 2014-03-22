@@ -18,7 +18,7 @@ using std::cin;
 
 namespace Blackjack
 {
-	class BlackjackPlayer : public GenericPlayer
+	class BlackjackPlayer : public GenericPlayer , public Player
 	{
 
 	public:

@@ -2,19 +2,32 @@
 
 #include <sstream>
 #include <boost/thread.hpp>
+#include <boost/date_time.hpp>
 #include <iostream>
 
 void TCPGameServer::Run()
 {
 	while ( true )
 	{
-		SOCKET client = AcceptConnection();
+		connectionStamp stamp;
+		sockaddr_in from;
+
+		SOCKET client = AcceptConnection( &from );
 		if ( client != INVALID_SOCKET )
 		{
+			stamp.addr.b1 = from.sin_addr.S_un.S_un_b.s_b1;
+			stamp.addr.b2 = from.sin_addr.S_un.S_un_b.s_b2;
+			stamp.addr.b3 = from.sin_addr.S_un.S_un_b.s_b3;
+			stamp.addr.b4 = from.sin_addr.S_un.S_un_b.s_b4;
+
+			stamp.initalConnectionTime = boost::posix_time::second_clock::local_time();
+
+			std::pair<SOCKET, connectionStamp> sockStamp( client, stamp );
+			ActiveConnections().insert( sockStamp );
+
 			Router* R = new Router();
 			boost::thread* t = new boost::thread( &Router::RoutingThreadFunc, R, client, this );
-			ThreadGroup()->add_thread( t );
-			
+
 		}
 		else if ( client == INVALID_SOCKET )
 		{
@@ -33,3 +46,4 @@ const Player* TCPGameServer::GetPlayer( SOCKET clientSocket )
 {
 	return Players().at( clientSocket );
 }
+

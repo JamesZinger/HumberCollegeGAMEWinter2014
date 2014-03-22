@@ -10,24 +10,32 @@
 #include "MessageInput.h"
 #include "Player.h"
 
-#include <vector>
-#include <concurrent_queue.h>
-
 class Game
 {
 public:
-	Player* m_Player;
 
 	Game();
 	virtual ~Game();
-	int GetthreadID();
+	
+	void EnqueueMessage(MessageInput *msg);
+
+#pragma region Getters
+
+	unsigned long									ThreadID()		const	{ return m_threadID; }
+	Concurrency::concurrent_queue<MessageInput*>*	InputQueue()			{ return &m_inputQueue; }
+
+#pragma endregion
 
 protected:
-	void threadID(int newVal);
+
+#pragma region Setters
+	
+	void ThreadID( unsigned long val ) { m_threadID = val; }
+
+#pragma endregion
 
 private:
-	Concurrency::concurrent_queue<MessageInput*> m_inputQueue;
-	std::vector<Player*> m_playersvector;
-	unsigned long m_threadID;
-
+	Concurrency::concurrent_queue<MessageInput*>	m_inputQueue;
+	unsigned long									m_threadID;
+	
 };

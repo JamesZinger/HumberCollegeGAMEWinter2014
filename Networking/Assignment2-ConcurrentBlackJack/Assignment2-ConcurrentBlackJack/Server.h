@@ -9,13 +9,12 @@
 
 #include <WinSock2.h>
 #include <string>
+#include <boost/date_time.hpp>
+#include <concurrent_unordered_map.h>
 
 class Protocol;
 
-namespace boost
-{
-	class thread_group;
-}
+using Concurrency::concurrent_unordered_map;
 
 struct ipAddr
 {
@@ -26,6 +25,13 @@ struct ipAddr
 
 };
 
+struct connectionStamp
+{
+	ipAddr addr;
+	boost::posix_time::ptime initalConnectionTime;
+};
+
+
 inline bool operator==( const ipAddr& i1, const ipAddr i2 )
 {
 	if ( i1.b1 == i2.b1 &&
@@ -33,9 +39,10 @@ inline bool operator==( const ipAddr& i1, const ipAddr i2 )
 		 i1.b3 == i2.b3 &&
 		 i1.b4 == i2.b4 )
 		 return true;
-
+	
 	return false;
 }
+
 
 /// <summary>	A generic server class. </summary>
 class Server
@@ -44,36 +51,36 @@ public:
 	Server( Protocol* proto, const int port = 8282 );
 	virtual ~Server();
 
-	virtual void			Run						() = 0;
-	virtual void			SendMessageOverNetwork	( SOCKET MessageSocket, std::string& Message ) = 0;
-	virtual int				RecieveMessage			( SOCKET MessageSocket, char* Buffer, int BufferLength, std::string* out ) = 0;
+	virtual void	Run						() = 0;
+	virtual void	SendMessageOverNetwork	( SOCKET MessageSocket, std::string& Message ) = 0;
+	virtual int		RecieveMessage			( SOCKET MessageSocket, char* Buffer, int BufferLength, std::string* out ) = 0;
 
-	unsigned short			ListenPort()	const { return m_listenPort; }
-	SOCKET					ListenSocket()	const { return m_listenSocket; }
-	bool					isConnected()	const { return ( m_listenSocket != INVALID_SOCKET ); }
-	boolean					Debugging()		const { return m_debugging; }
-	WSAData*				WsaData()		const { return m_wsaData; }
-	boost::thread_group*	ThreadGroup()	const { return m_threadGroup; }
-	Protocol*				GetProtocol()	const { return m_protocol; }
+	unsigned short										ListenPort()		const { return m_listenPort; }
+	SOCKET												ListenSocket()		const { return m_listenSocket; }
+	bool												isConnected()		const { return ( m_listenSocket != INVALID_SOCKET ); }
+	boolean												Debugging()			const { return m_debugging; }
+	WSAData*											WsaData()			const { return m_wsaData; }
+	Protocol*											GetProtocol()		const { return m_protocol; }
+	concurrent_unordered_map<SOCKET, connectionStamp>	ActiveConnections() const { return m_activeConnections; }
 
 	void Debugging( boolean val ) { m_debugging = val; }
 
 
 protected:
 
-	void ListenPort		( unsigned short val )			{ m_listenPort = val; }
-	void ListenSocket	( SOCKET val )					{ m_listenSocket = val; }
-	void WsaData		( WSAData* val )				{ m_wsaData = val; }
-	void ThreadGroup	( boost::thread_group* val )	{ m_threadGroup = val; }
-	void SetProtocol	( Protocol* val )				{ m_protocol = val; }
-
+	void ListenPort			( unsigned short val )										{ m_listenPort = val; }
+	void ListenSocket		( SOCKET val )												{ m_listenSocket = val; }
+	void WsaData			( WSAData* val )											{ m_wsaData = val; }
+	void SetProtocol		( Protocol* val )											{ m_protocol = val; }
+	void ActiveConnections	( concurrent_unordered_map<SOCKET, connectionStamp> val )	{ m_activeConnections = val; }
 private:
-	boolean					m_debugging;
-	unsigned short			m_listenPort;
-	SOCKET					m_listenSocket;
-	WSAData*				m_wsaData;
-	boost::thread_group*	m_threadGroup;
-	Protocol*				m_protocol;
+	boolean												m_debugging;
+	unsigned short										m_listenPort;
+	SOCKET												m_listenSocket;
+	WSAData*											m_wsaData;
+	Protocol*											m_protocol;
+	concurrent_unordered_map<SOCKET, connectionStamp>	m_activeConnections;
 	
 	
+
 };

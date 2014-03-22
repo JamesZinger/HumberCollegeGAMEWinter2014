@@ -5,8 +5,7 @@
 //  Original author: James
 ///////////////////////////////////////////////////////////
 
-#if !defined(__TCP_GAME_SERVER_H__)
-#define __TCP_GAME_SERVER_H__
+#pragma once
 
 #include "TCPServer.h"
 #include "Game.h"
@@ -52,13 +51,16 @@ public:
 	const Player*	GetPlayer	( SOCKET clientSocket );
 
 protected:
-	void Games( concurrent_vector<Game*> val ) { m_games = val; }
-	void Players( concurrent_unordered_map<SOCKET, Player*> val ) { m_players = val; }	
 
-private:
-	concurrent_vector<Game*> m_games;
-	Game* m_gameTemplate;
-	concurrent_unordered_map<SOCKET, Player*> m_players;
+	void Games				( concurrent_vector<Game*> val )					{ m_games = val; }
+	void Players			( concurrent_unordered_map<SOCKET, Player*> val )	{ m_players = val; }	
+
 	
+private:
+	concurrent_vector<Game*>					m_games;
+	Game*										m_gameTemplate;
+	concurrent_unordered_map<SOCKET, Player*>	m_players;
+	
+	
+
 };
-#endif // !defined(__TCP_GAME_SERVER_H__)

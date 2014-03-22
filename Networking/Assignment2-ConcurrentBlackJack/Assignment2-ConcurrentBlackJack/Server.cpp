@@ -29,7 +29,6 @@ Server::Server( Protocol* proto, const int port )
 	Debugging( false );
 	ListenPort( port );
 	ListenSocket( INVALID_SOCKET );
-	ThreadGroup( new boost::thread_group() );
 
 }
 
