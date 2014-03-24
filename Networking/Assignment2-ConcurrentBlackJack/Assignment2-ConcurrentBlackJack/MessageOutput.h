@@ -16,11 +16,11 @@ public:
 	MessageOutput();
 	virtual ~MessageOutput();
 
-	std::string * Message() { return m_message; }
-	void Message( std::string * val ) { m_message = val; }
+	std::string Message() { return m_message; }
+	void Message( std::string val ) { m_message = val; }
 
 private:
-	std::string *m_message;
+	std::string m_message;
 	
 	
 };

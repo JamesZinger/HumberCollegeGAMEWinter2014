@@ -54,16 +54,19 @@ namespace Blackjack
 		virtual void HandleMessage( string Message );
 		virtual void Init();
 
-		virtual void HandleCreateGameRequest	( MessageInput input );
-		virtual void HandleJoinGameRequest		( MessageInput input );
-		virtual void HandleDisconnectRequest	( MessageInput input );
-		virtual void HandleRefreshRequest		( MessageInput input );
+		virtual void HandleCreateGameRequest	( MessageInput*	input );
+		virtual void HandleJoinGameRequest		( MessageInput*	input );
+		virtual void HandleDisconnectRequest	( MessageInput*	input );
+		virtual void HandleRefreshRequest		( MessageInput*	input );
+		virtual void HandleInvaildRequest		( string		error );
 
 		void State( Blackjack::PlayerState val ) { m_state = val; }
 
 	private:
 		PlayerState m_state;
-		
+
+		MessageInput* ConstructMessageInput( vector<string> lines );
+		MessageInput* ConstructGameInput( vector<string> lines);
 
 	};
 }

@@ -186,6 +186,7 @@ namespace Blackjack
 		}
 
 
+
 		vector<string> context;
 		boost::split( context, lines[ 1 ], boost::is_any_of( "=" ) );
 

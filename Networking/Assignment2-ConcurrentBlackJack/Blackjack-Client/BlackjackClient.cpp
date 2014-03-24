@@ -3,10 +3,18 @@
 #include <iostream>
 #include <sstream>
 #include <WS2tcpip.h>
+#include <boost\assign.hpp>
+#include <boost\algorithm\string.hpp>
+#include <boost\foreach.hpp>
+#include <vector>
 
 using std::cout;
 using std::endl;
 using std::stringstream;
+using boost::split;
+using boost::trim;
+using std::vector;
+
 
 BlackjackClient::BlackjackClient( string name, string hostname, int port, int bufferLength ) : m_bufferLength( bufferLength )
 {
@@ -153,7 +161,7 @@ int BlackjackClient::RecieveData( string* message )
 		}
 		cout << "recv failed, WSA Error code: " << errorCode << endl;
 		DisconnectFromServer();
-		return - 1;
+		return -1;
 	}
 
 	*message = string( InputBuffer() );
@@ -182,12 +190,9 @@ void BlackjackClient::Run()
 {
 	m_networkingThread = new thread( &BlackjackClient::NetworkThreadFunc, this );
 	{
-		stringstream ss;
-		ss << "BlackJackClient Protocol 1.0" << endl;
-		ss << "Command = Connect" << endl;
-		ss << "Name = " << Name() << endl;
-		ss << endl;
-		m_outputQueue.push( new string( ss.str() ) );
+		string s = BuildBlackJackRequest(Connect, &Name());
+
+		m_outputQueue.push( new string( s ) );
 	}
 	// Game loop
 	while ( !ShuttingDown() )
@@ -236,13 +241,13 @@ void BlackjackClient::NetworkThreadFunc()
 				string* msg2 = new string( msg.c_str() );
 				m_inputQueue.push( msg2 );
 			}
-			else if (retCode == 0)
+			else if ( retCode == 0 )
 			{
-				
+
 			}
-			else if (retCode == -1)
+			else if ( retCode == -1 )
 			{
-				
+
 				break;
 			}
 
@@ -256,18 +261,35 @@ void BlackjackClient::HandleMessage( string& message )
 	cout << message << endl;
 	cout << endl;
 
-	if (message == "SHUTDOWN")
+	vector<string> lines;
+	split(lines, message, boost::is_any_of("\n"));
+
+	if (lines.size() < 2)
+		return;
+	
+
+	if (lines[0].compare(SERVER_HEADER) != 0)
+		return;
+	
+
+	vector<string> clientStateLine;
+	split(clientStateLine, lines[1], boost::is_any_of("="));
+
+	if (clientStateLine.size() < 2)
+		return;
+
+	BOOST_FOREACH (string s, clientStateLine)
+	{
+		trim(s);
+	}
+
+	PlayerState state = StateMap()->at(clientStateLine[1]);
+
+	if ( state == PlayerState::Shutdown )
 	{
 		ShuttingDown( true );
 	}
-	else
-	{
-		cout << "Sending Message: " << endl;
-		string* retMessage = new string( "Got It!" );
-		m_outputQueue.push( retMessage );
-		string* shutdownMessage = new string( "SHUTDOWN" );
-		m_outputQueue.push( shutdownMessage );
-	}
+	
 }
 
 void BlackjackClient::Update()
@@ -275,7 +297,41 @@ void BlackjackClient::Update()
 
 }
 
-string BlackjackClient::BuildBlackJackRequest()
+string BlackjackClient::BuildBlackJackRequest( PlayerCommands command, void* extraInfo )
 {
-	stringstream stringBuilder
+	stringstream stringBuilder;
+	stringBuilder << CLIENT_HEADER << endl;
+	stringBuilder << "Command = " << CommandMap()->at( command ) << endl;
+	switch ( command )
+	{
+	case Connect:
+		stringBuilder << "Name = " << *((string*)extraInfo) << endl;
+		break;
+	case JoinGame:
+		stringBuilder << "RoomNumber = " << *((int*)extraInfo) << endl;
+		break;
+	default:
+		break;
+	}
+
+	stringBuilder << endl;
+
+	return stringBuilder.str();
 }
+
+concurrent_unordered_map<PlayerCommands, string> BlackjackClient::m_commandMap = boost::assign::map_list_of
+	( PlayerCommands::Connect, string( "Connect" ) )
+	( PlayerCommands::Hit, string( "Hit" ) )
+	( PlayerCommands::JoinGame, string( "JoinGame" ) )
+	( PlayerCommands::LeaveGame, string( "LeaveGame" ) )
+	( PlayerCommands::Refresh, string( "Refresh" ) )
+	( PlayerCommands::Stay, string( "Stay" ) )
+	( PlayerCommands::CreateGame, string( "CreateGame" ) )
+	( PlayerCommands::Disconnect, string( "Disconnect" ) )
+	;
+
+concurrent_unordered_map<string, PlayerState> BlackjackClient::m_stateMap = boost::assign::map_list_of
+	( string( "Game" ), PlayerState::Game )
+	( string( "Lobby" ), PlayerState::Lobby )
+	( string( "Shutdown" ), PlayerState::Shutdown )
+	;

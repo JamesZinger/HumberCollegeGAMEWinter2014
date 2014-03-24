@@ -89,7 +89,7 @@ void Player::SendNetworkMessage()
 		return;
 	}
 
-	std::string msg = *message->Message();
+	std::string msg = message->Message();
 
 	int MessageLength;
 
