@@ -2,7 +2,7 @@
 
 namespace Blackjack
 {
-	House::House( const string& name ) : GenericPlayer( name )
+	House::House() : GenericPlayer(  )
 	{
 	}
 

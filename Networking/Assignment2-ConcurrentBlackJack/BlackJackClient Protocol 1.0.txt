@@ -1,0 +1,66 @@
+BlackJackClient Protocol 1.0
+
+
+| Player Commands | String Syntax |
+|=================|===============|
+| Join Game       | JoinGame      |
+| Leave Game      | LeaveGame     |
+| Create Game     | CreateGame    |
+| Hit             | Hit           |
+| Stay            | Stay          |
+| Inital Connect  | Connect       |
+| Disconnect      | Disconnect    |
+| Refresh         | Refresh       |
+
+
+| Admin Commands |
+|================|
+| List Players   |
+
+
+|        Client Request        |       Server Response        |
+|==============================|==============================|
+| BlackJackClient Protocol 1.0 | BlackJackServer Protocol 1.0 |
+| Command = Connect            | ClientState = Lobby          |
+| Name = (string)              |                              |
+|------------------------------|------------------------------|
+| BlackJackClient Protocol 1.0 | BlackJackServer Protocol 1.0 |
+| Command = CreateGame         | ClientState = Game           |
+|------------------------------|------------------------------|
+| BlackJackClient Protocol 1.0 | BlackJackServer Protocol 1.0 |
+| Command = JoinGame           | ClientState = Game           |
+| RoomNumber = (int)           |                              |
+|------------------------------|------------------------------|
+| BlackJackClient Protocol 1.0 | BlackJackServer Protocol 1.0 |
+| Command = LeaveGame          | ClientState = Lobby          |
+|------------------------------|------------------------------|
+| BlackJackClient Protocol 1.0 | BlackJackServer Protocol 1.0 |
+| Command = Hit                | ClientState = Game           |
+|------------------------------|------------------------------|
+| BlackJackClient Protocol 1.0 | BlackJackServer Protocol 1.0 |
+| Command = Stay               | ClientState = Game           |
+|------------------------------|------------------------------|
+| BlackJackClient Protocol 1.0 | BlackJackServer Protocol 1.0 |
+| Command = Disconnect         | ClientState = Shutdown       |
+|------------------------------|------------------------------|
+| BlackJackClient Protocol 1.0 | BlackJackServer Protocol 1.0 |
+| Command = Refresh            | ClientState = [Game/Lobby]   |
+|------------------------------|------------------------------|
+
+
+BlackJackServer Protocol 1.0
+ClientState = [Lobby | Game | Shutdown]
+
+BlackJackServer Protocol 1.0
+ClientState = Lobby
+NumberGames = (int)
+GameNumber = (int)
+NumberPlayers = (int)
+
+BlackJackServer Protocol 1.0
+ClientState = Game
+ClientPlayerNum = (int)
+NumberPlayers = (int)
+PlayerName = (string)
+PlayerKnownTotal = (int)
+Staying = [true/false]

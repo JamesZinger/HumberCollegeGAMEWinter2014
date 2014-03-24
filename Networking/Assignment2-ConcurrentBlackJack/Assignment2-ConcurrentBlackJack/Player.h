@@ -34,18 +34,21 @@ public:
 
 #pragma region Getters
 
-	Game*			GetGame()			const { return m_game; }
+	Game&			GetGame()			const { return *m_game; }
 	SOCKET			Socket()			const { return m_socket; }
 	unsigned long	ThreadID()			const { return m_threadID; }
-	string*			Name()				const { return m_name; }
+	string&			Name()				const { return *m_name; }
 	int				InputBufferLength()	const { return m_inputBufferLength; }
 
 #pragma endregion
 
 protected:
 
-	virtual int RecieveMessage();
-	virtual void SendNetworkMessage();
+	virtual int RecieveMessage				();
+	virtual void SendNetworkMessage			();
+
+	virtual void HandleMessage( std::string message )	= 0;
+	virtual void Init()									= 0;
 
 #pragma region Setters
 
@@ -67,5 +70,5 @@ private:
 	string*								m_name;
 
 	bool SendMessageOverSocket( std::string& Message, int* SendLength );
-	void HandleMessage( std::string message );
+	
 };

@@ -1,57 +1,78 @@
 #include "BlackjackProtocol.h"
 #include "BlackjackGame.h"
 #include <vector>
-#include <iterator>
 #include <boost/thread.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/assign.hpp>
 
 using std::vector;
 
 namespace Blackjack
 {
 
+	string BlackjackProtocol::BuildServerResponse( BlackjackPlayer* PlayerContext, const TCPGameServer* const server )
+	{
+		stringstream stringBuilder;
+
+		stringBuilder << SERVER_HEADER << endl;
+
+		string s = m_clientStateMap.at( PlayerContext->State() );
+
+		stringBuilder << "ClientState = " << s;
+
+		switch ( PlayerContext->State() )
+		{
+		case PlayerState::Game:
+			{
+				auto game = PlayerContext->GetGame();
+				int number = 0;
+				bool found = false;
+				for (auto it = game.Players()->begin(); it != game.Players()->end(); ++it)
+				{
+					number++;
+					if (PlayerContext == *it)
+					{
+						found = true;
+						stringBuilder << "ClientPlayerNum = " << number << endl;
+						break;
+					}
+				}
+
+				if (!found)
+				{
+					stringBuilder << "ClientPlayerNum = " << "SERVER_ERROR" << endl;
+				}
+
+				stringBuilder << "NumberPlayers = " << game.Players()->size() << endl;
+
+				for ( auto it = game.Players()->begin(); it != game.Players()->end(); ++it )
+				{
+					stringBuilder << "PlayerName = " << (*it)->Name() << endl;
+					stringBuilder << "PlayerKnownTotal = " << 0 << endl;
+					stringBuilder << "Staying = " << "False" << endl;
+				}
+			}
+			break;
+
+		case PlayerState::Lobby:
+			{
+				int NumberOfGames = server->Games().size();
+				stringBuilder << "NumberGame = " << NumberOfGames << endl;
+				auto games = server->Games();
+				for ( int i = 0; i < NumberOfGames; i++ )
+				{
+					stringBuilder << "GameNumber = " << ( i + 1 ) << endl;
+					stringBuilder << "NumberPlayers = " << games[ i ]->Players()->size() << endl;
+				}
+			}
+			break;
+		}
+
+		return stringBuilder.str();
+	}
+
 	BlackjackProtocol::BlackjackProtocol()
 	{
-
-#pragma region Player Command Setup
-
-		std::pair<string, PlayerCommands> s;
-
-		s = std::make_pair( "Connect", PlayerCommands::Connect );
-		m_commandMap.insert( s );
-
-		s = std::make_pair( "Hit", PlayerCommands::Hit );
-		m_commandMap.insert( s );
-
-		s = std::make_pair( "JoinGame", PlayerCommands::JoinGame );
-		m_commandMap.insert( s );
-
-		s = std::make_pair( "LeaveGame", PlayerCommands::LeaveGame );
-		m_commandMap.insert( s );
-
-		s = std::make_pair( "Refresh", PlayerCommands::Refresh );
-		m_commandMap.insert( s );
-
-		s = std::make_pair( "Stay", PlayerCommands::Stay );
-		m_commandMap.insert( s );
-
-		s = std::make_pair( "CreateGame", PlayerCommands::CreateGame );
-		m_commandMap.insert( s );
-
-		s = std::make_pair( "Disconnect", PlayerCommands::Disconnect );
-		m_commandMap.insert( s );
-
-#pragma endregion
-
-#pragma region Admin Command Setup
-
-		std::pair<string, AdminCommands> a;
-
-		a = std::make_pair( "List", AdminCommands::ListConnections );
-		m_adminCommandMap.insert( a );
-
-#pragma endregion
-
 	}
 
 	BlackjackProtocol::~BlackjackProtocol()
@@ -74,22 +95,22 @@ namespace Blackjack
 
 		switch ( context )
 		{
-			case 'g':
+		case 'g':
 
-				HandleGameRequest( client, recieveString, gameServer );
-				return;
+			HandleGameRequest( client, recieveString, gameServer );
+			return;
 
-			case 'h':
-				HandleHttpRequest( client, recieveString, gameServer, ss );
-				break;
+		case 'h':
+			HandleHttpRequest( client, recieveString, gameServer, ss );
+			break;
 
-			case '\0':
-				ss << "Invalid Message" << endl;
-				break;
+		case '\0':
+			ss << "Invalid Message" << endl;
+			break;
 
-			default:
-				ss << "Something has gone very wrong" << endl;
-				break;
+		default:
+			ss << "Something has gone very wrong" << endl;
+			break;
 		}
 
 		gameServer->SendMessageOverNetwork( client, ss.str() );
@@ -183,7 +204,7 @@ namespace Blackjack
 			return;
 		}
 
-		concurrent_unordered_map<string, PlayerCommands>::const_iterator command = CommandMap()->find( context[ 1 ] );
+		auto command = CommandMap()->find( context[ 1 ] );
 		auto something = CommandMap()->end();
 		if ( command == something )
 		{
@@ -205,8 +226,36 @@ namespace Blackjack
 		boost::trim( names[ 0 ] );
 		boost::trim( names[ 1 ] );
 
-		Player* p = new Player();
+		Blackjack::BlackjackPlayer* p = new Blackjack::BlackjackPlayer();
 		boost::thread* t = new boost::thread( &Player::PlayerThreadFunc, p, names[ 1 ], client );
 	}
+
+
+
+#pragma region Static Construction
+
+
+	concurrent_unordered_map<string, PlayerCommands> BlackjackProtocol::m_commandMap = boost::assign::map_list_of
+		( string( "Connect" ), PlayerCommands::Connect )
+		( string( "Hit" ), PlayerCommands::Hit )
+		( string( "JoinGame" ), PlayerCommands::JoinGame )
+		( string( "LeaveGame" ), PlayerCommands::LeaveGame )
+		( string( "Refresh" ), PlayerCommands::Refresh )
+		( string( "Stay" ), PlayerCommands::Stay )
+		( string( "CreateGame" ), PlayerCommands::CreateGame )
+		( string( "Disconnect" ), PlayerCommands::Disconnect )
+		;
+
+	concurrent_unordered_map<string, AdminCommands> BlackjackProtocol::m_adminCommandMap = boost::assign::map_list_of
+		( string( "List" ), AdminCommands::ListConnections )
+		;
+
+	concurrent_unordered_map<PlayerState, string> BlackjackProtocol::m_clientStateMap = boost::assign::map_list_of
+		( PlayerState::Game, "Game" )
+		( PlayerState::Lobby, "Lobby" )
+		( PlayerState::Shutdown, "Shutdown" )
+		;
+
+#pragma endregion
 
 }

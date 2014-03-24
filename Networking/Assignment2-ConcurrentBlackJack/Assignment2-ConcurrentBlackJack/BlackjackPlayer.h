@@ -9,6 +9,7 @@
 
 #include "Player.h"
 #include "GenericPlayer.h"
+#include "MessageInput.h"
 
 #include <string>
 #include <iostream>
@@ -18,11 +19,19 @@ using std::cin;
 
 namespace Blackjack
 {
+
+	enum PlayerState
+	{
+		Game,
+		Lobby,
+		Shutdown
+	};
+
 	class BlackjackPlayer : public GenericPlayer , public Player
 	{
 
 	public:
-		BlackjackPlayer( const string& name = "" );
+		BlackjackPlayer();
 		virtual ~BlackjackPlayer();
 
 		//returns whether or not the player wants another hit       
@@ -36,6 +45,25 @@ namespace Blackjack
 
 		//announces that the player pushes
 		void Push() const;
+
+		Blackjack::PlayerState State() const { return m_state; }
+
+
+	protected:
+
+		virtual void HandleMessage( string Message );
+		virtual void Init();
+
+		virtual void HandleCreateGameRequest	( MessageInput input );
+		virtual void HandleJoinGameRequest		( MessageInput input );
+		virtual void HandleDisconnectRequest	( MessageInput input );
+		virtual void HandleRefreshRequest		( MessageInput input );
+
+		void State( Blackjack::PlayerState val ) { m_state = val; }
+
+	private:
+		PlayerState m_state;
+		
 
 	};
 }

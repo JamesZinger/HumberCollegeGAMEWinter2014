@@ -12,7 +12,7 @@ namespace Blackjack
 		public GenericPlayer
 	{
 	public:
-		House( const string& name = "House" );
+		House();
 
 		virtual ~House();
 

@@ -6,12 +6,13 @@
 ///////////////////////////////////////////////////////////
 
 #include "BlackjackPlayer.h"
-
+#include <boost/algorithm/string.hpp>
 
 namespace Blackjack
 {
-	BlackjackPlayer::BlackjackPlayer( const string& name ) : GenericPlayer( name )
+	BlackjackPlayer::BlackjackPlayer() : GenericPlayer()
 	{
+		m_state = PlayerState::Lobby;
 	}
 
 	BlackjackPlayer::~BlackjackPlayer()
@@ -40,6 +41,39 @@ namespace Blackjack
 	{
 		cout << m_Name << " pushes.\n";
 	}
+
+
+	void BlackjackPlayer::Init()
+	{
+		m_Name = Name();
+	}
+
+	void BlackjackPlayer::HandleMessage( string Message )
+	{
+		int i = 0;
+	}
+
+	void BlackjackPlayer::HandleCreateGameRequest( MessageInput input )
+	{
+
+	}
+
+	void BlackjackPlayer::HandleJoinGameRequest( MessageInput input )
+	{
+
+	}
+
+	void BlackjackPlayer::HandleDisconnectRequest( MessageInput input )
+	{
+
+	}
+
+	void BlackjackPlayer::HandleRefreshRequest( MessageInput input )
+	{
+
+	}
+
+
 }
 
 

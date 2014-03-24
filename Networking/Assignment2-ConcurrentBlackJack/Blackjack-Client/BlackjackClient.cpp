@@ -97,7 +97,7 @@ BlackjackClient::BlackjackClient( string name, string hostname, int port, int bu
 
 BlackjackClient::~BlackjackClient()
 {
-	Disconnect();
+	DisconnectFromServer();
 	delete[] m_inputBuffer;
 }
 
@@ -122,7 +122,7 @@ bool BlackjackClient::SendData( string& message, int* sentLength /*= NULL */ )
 			return false;
 		}
 		cout << "Sending failed, WSA Error code: " << errorCode << endl;
-		Disconnect();
+		DisconnectFromServer();
 		return false;
 	}
 
@@ -141,7 +141,7 @@ int BlackjackClient::RecieveData( string* message )
 	if ( receivedLength == 0 )
 	{
 		cout << "Connection closing..." << endl;
-		Disconnect();
+		DisconnectFromServer();
 		return -1;
 	}
 	else  if ( receivedLength < 0 )
@@ -152,7 +152,7 @@ int BlackjackClient::RecieveData( string* message )
 			return 0;
 		}
 		cout << "recv failed, WSA Error code: " << errorCode << endl;
-		Disconnect();
+		DisconnectFromServer();
 		return - 1;
 	}
 
@@ -167,11 +167,11 @@ void BlackjackClient::SendShutdown()
 	if ( iResult == SOCKET_ERROR )
 	{
 		cout << "Shutdown Failed, WSA Error code: " << WSAGetLastError() << endl;
-		Disconnect();
+		DisconnectFromServer();
 	}
 }
 
-void BlackjackClient::Disconnect()
+void BlackjackClient::DisconnectFromServer()
 {
 	closesocket( ClientSocket() );
 	WSACleanup();
@@ -273,4 +273,9 @@ void BlackjackClient::HandleMessage( string& message )
 void BlackjackClient::Update()
 {
 
+}
+
+string BlackjackClient::BuildBlackJackRequest()
+{
+	stringstream stringBuilder
 }

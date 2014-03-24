@@ -16,7 +16,7 @@ Player::Player( int BufferLength /*= 1024*/ ) : m_inputBufferLength( BufferLengt
 {
 	m_inputArray = new char[ BufferLength ];
 	memset(m_inputArray, '\0', BufferLength);
-	SetGame( NULL );
+	m_game = nullptr;
 	Socket( INVALID_SOCKET );
 	ThreadID( -1 );
 	Name( NULL );
@@ -82,11 +82,10 @@ void Player::SendNetworkMessage()
 		return;
 	}
 
-	MessageOutput* message = new MessageOutput();
+	MessageOutput* message;
 
 	if ( !m_messageQueue.try_pop( message ) )
 	{
-		delete message;
 		return;
 	}
 
@@ -107,6 +106,7 @@ void Player::PlayerThreadFunc( const string name, SOCKET Client )
 		char* buffer = new char[ name.length() + 1 ];
 		strcpy_s( buffer, name.length() + 1, name.c_str() );
 		Name( new string( buffer ) );
+		delete[] buffer;
 	}
 
 	ThreadID( GetCurrentThreadId() );
@@ -161,9 +161,3 @@ void Player::EnqueueMessage( MessageOutput* Message )
 	MessageOutput* msg = &( *Message );
 	m_messageQueue.push( msg );
 }
-
-void Player::HandleMessage( std::string message )
-{
-
-}
-

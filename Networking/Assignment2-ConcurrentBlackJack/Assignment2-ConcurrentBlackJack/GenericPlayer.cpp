@@ -24,7 +24,7 @@ namespace Blackjack
 		return os;
 	}
 
-	GenericPlayer::GenericPlayer( const string& name ) : m_Name( name )
+	GenericPlayer::GenericPlayer(  )
 	{
 	}
 

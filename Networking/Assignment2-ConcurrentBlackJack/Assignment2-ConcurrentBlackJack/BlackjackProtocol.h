@@ -3,11 +3,14 @@
 #include "Protocol.h"
 #include <sstream>
 #include "TCPGameServer.h"
+#include "BlackjackPlayer.h"
+#include <concurrent_unordered_map.h>
+
 
 namespace Blackjack
 {
 	class BlackjackGame;
-
+	
 	using std::string;
 	using std::stringstream;
 	using Concurrency::concurrent_unordered_map;
@@ -29,6 +32,8 @@ namespace Blackjack
 		ListConnections
 	};
 
+	static const string SERVER_HEADER = "BlackJackServer Protocol 1.0";
+
 	class BlackjackProtocol :
 		public Protocol
 	{
@@ -37,11 +42,14 @@ namespace Blackjack
 		~BlackjackProtocol();
 
 		virtual void HandleRequest( const SOCKET client, string& recieveString, const Server* server );
+		static string BuildServerResponse( BlackjackPlayer* PlayerContext, const TCPGameServer* const server );
 
 #pragma region Getters
 
-		concurrent_unordered_map<string, PlayerCommands>*	CommandMap()				{ return &m_commandMap;	}
-		concurrent_unordered_map<string, AdminCommands>*	AdminCommandMap()			{ return &m_adminCommandMap; }
+		static concurrent_unordered_map<string, PlayerCommands>*	CommandMap()			{ return &m_commandMap;	}
+		static concurrent_unordered_map<string, AdminCommands>*		AdminCommandMap()		{ return &m_adminCommandMap; }
+		static concurrent_unordered_map<PlayerState, string>*		ClientStateMap()		{ return &m_clientStateMap; }
+
 
 #pragma endregion
 
@@ -52,18 +60,19 @@ namespace Blackjack
 
 #pragma region Setters
 		
-		void CommandMap			( concurrent_unordered_map<string, PlayerCommands> val )	{ m_commandMap = val; }
-		void AdminCommandMap	( concurrent_unordered_map<string, AdminCommands> val )		{ m_adminCommandMap = val; }
-
+		static void CommandMap			( concurrent_unordered_map<string, PlayerCommands> val )	{ m_commandMap = val; }
+		static void AdminCommandMap		( concurrent_unordered_map<string, AdminCommands> val )		{ m_adminCommandMap = val; }
+		static void ClientStateMap		( concurrent_unordered_map<PlayerState, string> val )		{ m_clientStateMap = val; }
+		
 #pragma endregion
 
 	private:
 
 		const char DetermineRequestContext(const string& Message);
 
-		concurrent_unordered_map<string, PlayerCommands>	m_commandMap;
-		concurrent_unordered_map<string, AdminCommands>		m_adminCommandMap;
-
+		static concurrent_unordered_map<string,PlayerCommands> m_commandMap;
+		static concurrent_unordered_map<string,AdminCommands> m_adminCommandMap;
+		static concurrent_unordered_map<PlayerState,string> m_clientStateMap;
 	};
 
 }

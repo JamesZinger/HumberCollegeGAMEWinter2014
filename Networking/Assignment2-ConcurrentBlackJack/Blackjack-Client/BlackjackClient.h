@@ -12,6 +12,18 @@ using std::string;
 using Concurrency::concurrent_queue;
 using boost::thread;
 
+enum PlayerCommands
+{
+	Connect = 1,
+	JoinGame,
+	LeaveGame,
+	Hit,
+	Stay,
+	Refresh,
+	CreateGame,
+	Disconnect
+};
+
 class BlackjackClient
 {
 public:
@@ -19,13 +31,15 @@ public:
 	BlackjackClient( string name, string hostname, int port, int bufferLength = 1024);
 	~BlackjackClient();
 
-	bool SendData		( string& message, int* sentLength = NULL );
-	int	 RecieveData	( string* message );
-	void SendShutdown	();
-	void Disconnect		();
-	void Run			();
+	bool SendData				( string& message, int* sentLength = NULL );
+	int	 RecieveData			( string* message );
+	void SendShutdown			();
+	void DisconnectFromServer	();
+	void Run					();
 
-	void NetworkThreadFunc();
+	void NetworkThreadFunc		();
+
+	string BuildBlackJackRequest();
 
 	bool		isConnected()	const { return ( m_clientSocket != INVALID_SOCKET ); }
 	string		Name()			const { return m_name; }

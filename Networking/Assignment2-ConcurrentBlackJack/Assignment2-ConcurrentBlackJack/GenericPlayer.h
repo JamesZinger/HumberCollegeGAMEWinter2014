@@ -16,7 +16,7 @@ namespace Blackjack
 		friend ostream& operator<<( ostream& os, const GenericPlayer& aGenericPlayer );
 
 	public:
-		GenericPlayer( const string& name = "" );
+		GenericPlayer();
 
 		virtual ~GenericPlayer();
 
