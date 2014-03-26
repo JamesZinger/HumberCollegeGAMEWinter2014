@@ -23,5 +23,5 @@ Game::~Game()
 
 void Game::EnqueueMessage( MessageInput *msg )
 {
-	//m_inputQueue.push(msg);
+	m_inputQueue.push(msg);
 }

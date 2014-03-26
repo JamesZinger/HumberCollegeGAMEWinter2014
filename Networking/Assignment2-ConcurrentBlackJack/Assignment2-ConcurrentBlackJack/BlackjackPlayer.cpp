@@ -7,6 +7,7 @@
 
 #include "BlackjackPlayer.h"
 #include "BlackjackProtocol.h"
+#include "BlackjackGame.h"
 #include <boost/algorithm/string.hpp>
 
 

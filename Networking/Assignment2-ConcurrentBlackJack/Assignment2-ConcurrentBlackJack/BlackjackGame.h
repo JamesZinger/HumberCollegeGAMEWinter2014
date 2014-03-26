@@ -30,20 +30,26 @@ namespace Blackjack
 	class BlackjackGame : public Game
 	{
 	public:
-		BlackjackGame();
+		BlackjackGame(BlackjackPlayer* InitalPlayer);
 
 		virtual ~BlackjackGame();
 
 		//plays the game of blackjack    
 		void Play();
 
+		concurrent_vector<BlackjackPlayer*>* Players()	{ return &m_players; }
 
+	protected:
+
+		virtual void GameThreadFunc(TCPGameServer* server);
+
+		void Players( concurrent_vector<BlackjackPlayer*> val ) { m_players = val; }
 
 	private:
 		Deck m_Deck;
 		House m_House;
 
-		concurrent_vector<BlackjackPlayer> m_Players;
-
+		concurrent_vector<BlackjackPlayer*> m_players;
+		
 	};
 }

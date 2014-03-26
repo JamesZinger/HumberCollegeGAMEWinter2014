@@ -8,7 +8,6 @@
 #pragma once
 
 #include "TCPServer.h"
-#include "Game.h"
 #include "Router.h"
 
 #include <concurrent_vector.h>
@@ -22,45 +21,40 @@ using std::string;
 using Concurrency::concurrent_unordered_map;
 using Concurrency::concurrent_vector;
 
+class Game;
+class Player;
+
 /// <summary>	A TCP game server that runs a type of game. </summary>
 /// <remarks>	James, 2014-03-15. </remarks>
-
 
 class TCPGameServer : public TCPServer
 {
 public:
-	TCPGameServer( Game* game, Protocol* proto, int port = 8282 ) : TCPServer(proto, port)
+	TCPGameServer( Protocol* proto, int port = 8282 ) : TCPServer( proto, port )
 	{
-		m_gameTemplate = game;
 		m_games = concurrent_vector<Game*>();
 		m_players = concurrent_unordered_map<SOCKET, Player*>();
 	}
 
-	virtual ~TCPGameServer()
-	{
-		delete m_gameTemplate;
-	}
+
 
 	virtual void Run();
 
-	concurrent_vector<Game*> Games()						const { return m_games; }
-	Game* GameTemplate()									const { return m_gameTemplate; }
-	concurrent_unordered_map<SOCKET, Player*> Players()		const { return m_players; }
+	concurrent_vector<Game*>*					Games()		{ return &m_games; }
+	concurrent_unordered_map<SOCKET, Player*>*	Players()	{ return &m_players; }
 
-	void			AddPlayer	( SOCKET clientSocket );
-	const Player*	GetPlayer	( SOCKET clientSocket );
+	void			AddPlayer( SOCKET clientSocket, Player* player );
+
+	const Player*	GetPlayer( SOCKET clientSocket ) { m_players.at( clientSocket ); }
 
 protected:
 
-	void Games				( concurrent_vector<Game*> val )					{ m_games = val; }
-	void Players			( concurrent_unordered_map<SOCKET, Player*> val )	{ m_players = val; }	
+	void Games		( concurrent_vector<Game*> val )					{ m_games = val; }
+	void Players	( concurrent_unordered_map<SOCKET, Player*> val )	{ m_players = val; }
 
-	
+
 private:
 	concurrent_vector<Game*>					m_games;
-	Game*										m_gameTemplate;
 	concurrent_unordered_map<SOCKET, Player*>	m_players;
-	
-	
 
 };
