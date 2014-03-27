@@ -4,6 +4,7 @@
 #include <string>
 #include <winsock2.h>
 #include <stdio.h>
+#include <vector>
 #include <concurrent_queue.h>
 #include <concurrent_unordered_map.h>
 #include <boost/thread.hpp>
@@ -13,6 +14,7 @@ using std::string;
 using Concurrency::concurrent_queue;
 using Concurrency::concurrent_unordered_map;
 using boost::thread;
+using std::vector;
 
 enum PlayerCommands
 {
@@ -80,6 +82,8 @@ protected:
 
 	void HandleMessage( string& message );
 	void Update();
+	void HandleGameMessage( vector<string> lines );
+	void HandleLobbyMessage( vector<string> lines );
 
 	static void StateMap( concurrent_unordered_map<string, PlayerState> val ) { m_stateMap = val; }
 	static void CommandMap( concurrent_unordered_map<PlayerCommands, string> val ) { m_commandMap = val; }

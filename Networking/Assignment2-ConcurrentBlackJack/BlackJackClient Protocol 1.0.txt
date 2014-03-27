@@ -54,13 +54,13 @@ ClientState = [Lobby | Game | Shutdown]
 BlackJackServer Protocol 1.0
 ClientState = Lobby
 NumberGames = (int)
-GameNumber = (int)
-NumberPlayers = (int)
+	GameNumber = (int)
+	NumberPlayers = (int)
 
 BlackJackServer Protocol 1.0
 ClientState = Game
 ClientPlayerNum = (int)
 NumberPlayers = (int)
-PlayerName = (string)
-PlayerKnownTotal = (int)
-Staying = [true/false]
+	PlayerName = (string)
+	PlayerKnownTotal = (int)
+	Staying = [True/False]
