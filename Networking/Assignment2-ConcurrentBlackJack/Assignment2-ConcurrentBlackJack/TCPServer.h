@@ -1,9 +1,6 @@
 #pragma once
 #include "Server.h"
 #include <WS2tcpip.h>
-#include <concurrent_vector.h>
-
-using Concurrency::concurrent_vector;
 
 class TCPServer : public Server
 {

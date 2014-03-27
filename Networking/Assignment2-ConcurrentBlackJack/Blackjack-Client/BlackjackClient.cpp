@@ -261,7 +261,7 @@ void BlackjackClient::HandleMessage( string& message )
 	cout << message << endl;
 	cout << endl;
 
-	vector<string> lines;
+	std::vector<string> lines;
 	split( lines, message, boost::is_any_of( "\n" ) );
 
 	if ( lines.size() < 2 )
@@ -272,7 +272,7 @@ void BlackjackClient::HandleMessage( string& message )
 		return;
 
 
-	vector<string> clientStateLine;
+	std::vector<string> clientStateLine;
 	split( clientStateLine, lines[ 1 ], boost::is_any_of( "=" ) );
 
 	if ( clientStateLine.size() < 2 )
@@ -283,7 +283,7 @@ void BlackjackClient::HandleMessage( string& message )
 		trim( s );
 	}
 
-	PlayerState state = StateMap()->at( clientStateLine[ 1 ] );
+	PlayerState state = StateMap().at( clientStateLine[ 1 ] );
 
 	switch ( state )
 	{
@@ -310,7 +310,7 @@ string BlackjackClient::BuildBlackJackRequest( PlayerCommands command, void* ext
 {
 	stringstream stringBuilder;
 	stringBuilder << CLIENT_HEADER << endl;
-	stringBuilder << "Command = " << CommandMap()->at( command ) << endl;
+	stringBuilder << "Command = " << CommandMap().at( command ) << endl;
 	switch ( command )
 	{
 		case Connect:
@@ -328,7 +328,7 @@ string BlackjackClient::BuildBlackJackRequest( PlayerCommands command, void* ext
 	return stringBuilder.str();
 }
 
-void BlackjackClient::HandleLobbyMessage( vector<string> lines )
+void BlackjackClient::HandleLobbyMessage( std::vector<string> lines )
 {
 
 	if ( lines.size() < 3 )
@@ -338,7 +338,7 @@ void BlackjackClient::HandleLobbyMessage( vector<string> lines )
 
 	int NumberGames;
 	{
-		vector<string> contexts;
+		std::vector<string> contexts;
 		split( contexts, lines[ 2 ], boost::is_any_of( "=" ) );
 		if ( contexts.size() != 2 )
 		{
@@ -369,7 +369,7 @@ void BlackjackClient::HandleLobbyMessage( vector<string> lines )
 		lineindex++;
 
 		{
-			vector<string> vsGameNumber;
+			std::vector<string> vsGameNumber;
 			split( vsGameNumber, lines[ lineindex ], is_any_of( "=" ) );
 
 			if ( vsGameNumber.size() < 2 )
@@ -387,7 +387,7 @@ void BlackjackClient::HandleLobbyMessage( vector<string> lines )
 		lineindex++;
 		{
 
-			vector<string> vsNumberPlayers;
+			std::vector<string> vsNumberPlayers;
 			split( vsNumberPlayers, lines[ lineindex ], is_any_of( "=" ) );
 
 			if ( vsNumberPlayers.size() < 2 )
@@ -407,7 +407,7 @@ void BlackjackClient::HandleLobbyMessage( vector<string> lines )
 	cout << endl;
 }
 
-void BlackjackClient::HandleGameMessage( vector<string> lines )
+void BlackjackClient::HandleGameMessage( std::vector<string> lines )
 {
 	if ( lines.size() < 4 )
 	{
@@ -417,7 +417,7 @@ void BlackjackClient::HandleGameMessage( vector<string> lines )
 	int ClientPlayerNum, NumberPlayers;
 
 	{
-		vector<string> line;
+		std::vector<string> line;
 		split( line, lines[ 2 ], is_any_of( "=" ) );
 
 		if ( line.size() < 2 )
@@ -434,7 +434,7 @@ void BlackjackClient::HandleGameMessage( vector<string> lines )
 	}
 
 	{
-		vector<string> line;
+		std::vector<string> line;
 		split( line, lines[ 3 ], is_any_of( "=" ) );
 
 		if ( line.size() < 2 )
@@ -466,7 +466,7 @@ void BlackjackClient::HandleGameMessage( vector<string> lines )
 		lineindex++;
 
 		{
-			vector<string> line;
+			std::vector<string> line;
 			split( line, lines[ lineindex ], is_any_of( "=" ) );
 
 			if ( line.size() < 2 )
@@ -483,7 +483,7 @@ void BlackjackClient::HandleGameMessage( vector<string> lines )
 		lineindex++;
 
 		{
-			vector<string> line;
+			std::vector<string> line;
 			split( line, lines[ lineindex ], is_any_of( "=" ) );
 
 			if ( line.size() < 2 )
@@ -500,7 +500,7 @@ void BlackjackClient::HandleGameMessage( vector<string> lines )
 		lineindex++;
 
 		{
-			vector<string> line;
+			std::vector<string> line;
 			split( line, lines[ lineindex ], is_any_of( "=" ) );
 
 			if ( line.size() < 2 )

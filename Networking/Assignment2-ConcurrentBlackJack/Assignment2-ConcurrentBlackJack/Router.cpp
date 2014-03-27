@@ -50,7 +50,7 @@ void Router::RoutingThreadFunc( SOCKET Request, TCPGameServer* server )
 	} while (returnCode == 0);
 	
 
-	delete Buff;
+	free(Buff);
 
 	if ( GameServer()->Debugging() )
 	{

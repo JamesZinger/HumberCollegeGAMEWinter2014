@@ -39,5 +39,5 @@ void TCPGameServer::Run()
 void TCPGameServer::AddPlayer( SOCKET sock, Player* player )
 {
 	std::pair<SOCKET, Player*> PlayerSock( sock, player );
-	Players()->insert( PlayerSock );
+	Players().insert( PlayerSock );
 }

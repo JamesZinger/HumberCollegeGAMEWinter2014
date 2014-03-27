@@ -65,8 +65,8 @@ namespace Blackjack
 	private:
 		PlayerState m_state;
 
-		MessageInput* ConstructMessageInput( vector<string> lines );
-		MessageInput* ConstructGameInput( vector<string> lines);
+		MessageInput* ConstructMessageInput( std::vector<string> lines );
+		MessageInput* ConstructGameInput( std::vector<string> lines);
 
 	};
 }

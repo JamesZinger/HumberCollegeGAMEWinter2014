@@ -47,9 +47,9 @@ namespace Blackjack
 
 #pragma region Getters
 
-		static concurrent_unordered_map<string, PlayerCommands>*	CommandMap() { return &m_commandMap; }
-		static concurrent_unordered_map<string, AdminCommands>*		AdminCommandMap() { return &m_adminCommandMap; }
-		static concurrent_unordered_map<PlayerState, string>*		ClientStateMap() { return &m_clientStateMap; }
+		static concurrent_unordered_map<string, PlayerCommands>		CommandMap()		{ return m_commandMap; }
+		static concurrent_unordered_map<string, AdminCommands>		AdminCommandMap()	{ return m_adminCommandMap; }
+		static concurrent_unordered_map<PlayerState, string>		ClientStateMap()		{ return m_clientStateMap; }
 
 
 #pragma endregion
@@ -61,9 +61,9 @@ namespace Blackjack
 
 #pragma region Setters
 
-		static void CommandMap( concurrent_unordered_map<string, PlayerCommands> val ) { m_commandMap = val; }
-		static void AdminCommandMap( concurrent_unordered_map<string, AdminCommands> val ) { m_adminCommandMap = val; }
-		static void ClientStateMap( concurrent_unordered_map<PlayerState, string> val ) { m_clientStateMap = val; }
+		static void CommandMap( concurrent_unordered_map<string, PlayerCommands> val )		{ m_commandMap = val; }
+		static void AdminCommandMap( concurrent_unordered_map<string, AdminCommands> val )	{ m_adminCommandMap = val; }
+		static void ClientStateMap( concurrent_unordered_map<PlayerState, string> val )		{ m_clientStateMap = val; }
 
 #pragma endregion
 
@@ -71,9 +71,9 @@ namespace Blackjack
 
 		const char DetermineRequestContext( const string& Message );
 
-		static concurrent_unordered_map<string, PlayerCommands> m_commandMap;
-		static concurrent_unordered_map<string, AdminCommands> m_adminCommandMap;
-		static concurrent_unordered_map<PlayerState, string> m_clientStateMap;
+		static concurrent_unordered_map<string, PlayerCommands>		m_commandMap;
+		static concurrent_unordered_map<string, AdminCommands>		m_adminCommandMap;
+		static concurrent_unordered_map<PlayerState, string>			m_clientStateMap;
 	};
 
 }

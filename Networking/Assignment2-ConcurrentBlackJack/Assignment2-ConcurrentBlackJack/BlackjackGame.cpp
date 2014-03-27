@@ -15,7 +15,15 @@ namespace Blackjack
 		srand( time( 0 ) );    //seed the random number generator
 		m_Deck.Populate();
 		m_Deck.Shuffle();
-		Players()->push_back( player );
+		
+		m_Deck.Deal( m_House );
+
+		//hide house's first card
+		m_House.FlipFirstCard();
+
+		AddPlayer( player );
+
+	
 	}
 
 	BlackjackGame::~BlackjackGame()
@@ -24,23 +32,26 @@ namespace Blackjack
 
 	void BlackjackGame::Play()
 	{
+		if ( isGameEmpty() )
+			return;
 
-		//deal initial 2 cards to everyone
-		concurrent_vector<BlackjackPlayer*>::iterator pPlayer;
-		for ( int i = 0; i < 2; ++i )
+		while ( true )
 		{
-			for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
-				m_Deck.Deal( **pPlayer );
-			m_Deck.Deal( m_House );
+			if ( isGameEmpty() )
+				return;
+
+			bool isPlayersReady = true;
+			for (auto it = Players().begin(); it != Players().end(); ++it)
+			{
+				
+			}
+			
 		}
 
-		//hide house's first card
-		m_House.FlipFirstCard();
-
 		//display everyone's hand
-		for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
-			cout << *pPlayer << endl;
-		cout << m_House << endl;
+		//for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
+		//	cout << *pPlayer << endl;
+		//cout << m_House << endl;
 
 		//deal additional cards to players
 		for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
@@ -57,43 +68,62 @@ namespace Blackjack
 		{
 			//everyone still playing wins
 			for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
-				if ( !( (*pPlayer)->IsBusted() ) )
-					(*pPlayer)->Win();
+				if ( !( ( *pPlayer )->IsBusted() ) )
+					( *pPlayer )->Win();
 		}
 		else
 		{
 			//compare each player still playing to house
 			for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
-				if ( !( (*pPlayer)->IsBusted() ) )
+				if ( !( ( *pPlayer )->IsBusted() ) )
 				{
-					if ( (*pPlayer)->GetTotal() > m_House.GetTotal() )
-						(*pPlayer)->Win();
-					else if ( (*pPlayer)->GetTotal() < m_House.GetTotal() )
-						(*pPlayer)->Lose();
+					if ( ( *pPlayer )->GetTotal() > m_House.GetTotal() )
+						( *pPlayer )->Win();
+					else if ( ( *pPlayer )->GetTotal() < m_House.GetTotal() )
+						( *pPlayer )->Lose();
 					else
-						(*pPlayer)->Push();
+						( *pPlayer )->Push();
 				}
 		}
 
 		//remove everyone's cards
 		for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
-			(*pPlayer)->Clear();
+			( *pPlayer )->Clear();
 		m_House.Clear();
 	}
 
-	void BlackjackGame::GameThreadFunc(TCPGameServer* server)
+	void BlackjackGame::GameThreadFunc( TCPGameServer* server )
 	{
 		ThreadID( GetCurrentThreadId() );
-		GameServer(server);
+		GameServer( server );
 
-		while ( true )
+
+		Play();
+
+	}
+
+	void BlackjackGame::AddPlayer( BlackjackPlayer* player )
+	{
+		Players().push_back( player );
+
+		Deck().Deal( *player );
+	}
+
+	void BlackjackGame::RemovePlayer( BlackjackPlayer* player )
+	{
+
+		for ( auto it = Players().begin(); it != Players().end(); ++it )
 		{
-			Play();
-			if (Players()->size() == 0)
+			if ( ( *it ) == player )
 			{
-				break;
+				Players().erase( it );
 			}
 		}
+	}
+
+	bool BlackjackGame::isGameEmpty()
+	{
+		return (Players().size() == 0);
 	}
 
 }

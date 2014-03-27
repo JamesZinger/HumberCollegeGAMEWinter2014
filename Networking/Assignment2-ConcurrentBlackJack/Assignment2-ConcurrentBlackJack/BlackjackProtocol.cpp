@@ -1,12 +1,10 @@
 #include "BlackjackProtocol.h"
 #include "BlackjackGame.h"
 #include "TCPGameServer.h"
-#include <vector>
 #include <boost/thread.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/assign.hpp>
 
-using std::vector;
 
 namespace Blackjack
 {
@@ -28,7 +26,7 @@ namespace Blackjack
 			BlackjackGame& game = (BlackjackGame&)PlayerContext->GetGame();
 			int number = 0;
 			bool found = false;
-			for ( auto it = game.Players()->begin(); it != game.Players()->end(); ++it )
+			for ( auto it = game.Players().begin(); it != game.Players().end(); ++it )
 			{
 				number++;
 				if ( PlayerContext == *it )
@@ -44,9 +42,9 @@ namespace Blackjack
 				stringBuilder << "ClientPlayerNum = " << "SERVER_ERROR" << endl;
 			}
 
-			stringBuilder << "NumberPlayers = " << game.Players()->size() << endl;
+			stringBuilder << "NumberPlayers = " << game.Players().size() << endl;
 
-			for ( auto it = game.Players()->begin(); it != game.Players()->end(); ++it )
+			for ( auto it = game.Players().begin(); it != game.Players().end(); ++it )
 			{
 				stringBuilder << "PlayerName = " << ( *it )->Name() << endl;
 				stringBuilder << "PlayerKnownTotal = " << 0 << endl;
@@ -57,14 +55,14 @@ namespace Blackjack
 
 		case PlayerState::Lobby:
 		{
-			server->Games()->size();
-			int NumberOfGames = server->Games()->size();
-			stringBuilder << "NumberGame = " << NumberOfGames << endl;
-			auto games = server->Games();
-			for ( int i = 0; i < NumberOfGames; i++ )
+			server->Games().size();
+			stringBuilder << "NumberGame = " << server->Games().size() << endl;
+			int i = 1;
+			for ( auto it = server->Games().begin(); it != server->Games().end(); ++it )
 			{
 				stringBuilder << "GameNumber = " << ( i + 1 ) << endl;
-				stringBuilder << "NumberPlayers = " << ( (BlackjackGame*)( ( *games )[ i ] ) )->Players()->size() << endl;
+				stringBuilder << "NumberPlayers = " << ((BlackjackGame*)*it)->Players().size() << endl;
+				i++;
 			}
 		}
 			break;
@@ -157,10 +155,7 @@ namespace Blackjack
 
 	void BlackjackProtocol::HandleHttpRequest( SOCKET client, string request, TCPGameServer* server, stringstream& ss )
 	{
-		TCPGameServer* serr;
-		serr->Players();
-
-		if ( server->Players()->empty() )
+		if ( server->Players().empty() )
 		{
 			ss << "No players are currently connected" << "<br />";
 		}
@@ -169,7 +164,7 @@ namespace Blackjack
 		{
 			ss << "Listing Players: " << "<br />";
 
-			for ( auto it = server->Players()->begin(); it != server->Players()->end(); ++it )
+			for ( auto it = server->Players().begin(); it != server->Players().end(); ++it )
 			{
 				ss << ( *it ).second->Name() << "<br />";
 			}
@@ -180,7 +175,7 @@ namespace Blackjack
 
 	void BlackjackProtocol::HandleGameRequest( SOCKET client, string request, TCPGameServer* server )
 	{
-		vector<string> lines;
+		std::vector<string> lines;
 		boost::split( lines, request, boost::is_any_of( "\n" ) );
 
 		if ( lines.size() < 3 )
@@ -190,7 +185,7 @@ namespace Blackjack
 
 
 
-		vector<string> context;
+		std::vector<string> context;
 		boost::split( context, lines[ 1 ], boost::is_any_of( "=" ) );
 
 
@@ -208,8 +203,8 @@ namespace Blackjack
 			return;
 		}
 
-		auto command = CommandMap()->find( context[ 1 ] );
-		auto something = CommandMap()->end();
+		auto command = CommandMap().find( context[ 1 ] );
+		auto something = CommandMap().end();
 		if ( command == something )
 		{
 			return;
@@ -219,7 +214,7 @@ namespace Blackjack
 			return;
 		}
 
-		vector<string> names;
+		std::vector<string> names;
 		boost::split( names, lines[ 2 ], boost::is_any_of( "=" ) );
 
 		if ( names.size() < 2 )

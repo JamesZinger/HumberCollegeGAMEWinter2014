@@ -4,8 +4,6 @@
 
 #include <vector>
 
-using std::vector;
-
 namespace Blackjack
 {
 	class Hand
@@ -25,7 +23,7 @@ namespace Blackjack
 		int GetTotal() const;
 
 	protected:
-		vector<Card*> m_Cards;
+		std::vector<Card*> m_Cards;
 	};
 
 }
