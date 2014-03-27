@@ -1,0 +1,419 @@
+TBrickBreakerTest
+v6
+r1
+cCheck dependencies
+cProcessPCH /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch.pch BrickBreakerTest/BrickBreakerTest-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.o /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.o /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.o /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.o /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest normal i386
+cCopyStringsFile /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/en.lproj/InfoPlist.strings BrickBreakerTest/en.lproj/InfoPlist.strings
+cCpResource BrickBreakerTest/Spaceship.png Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Spaceship.png
+cCompileStoryboard /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Base.lproj/Main.storyboard
+cCompileAssetCatalog /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Images.xcassets
+cProcessInfoPlistFile /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Info.plist /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Info.plist
+cGenerateDSYMFile /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app.dSYM /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest
+cTouch /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk
+c00000000528FAB5C0000000000000176
+t1385147228
+s374
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/SDKSettings.plist
+c00000000524460E100000000000003B5
+t1380212961
+s949
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/CoreServices/SystemVersion.plist
+c00000000528FAB1200000000000001A0
+t1385147154
+s416
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c00000000528FAB130000000000445870
+t1385147155
+s4479088
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c00000000528FAB14000000000088C680
+t1385147156
+s8963712
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/SpriteKit.framework/SpriteKit
+c00000000528FAB140000000000247020
+t1385147156
+s2388000
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c00000000528FAB160000000001DB9910
+t1385147158
+s31168784
+
+N/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.0/include/module.map
+c00000000524460FA0000000000000AC9
+t1380212986
+s2761
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.m
+c00000000531CDC4500000000000007EB
+t1394400325
+s2027
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Base.lproj/Main.storyboard
+c00000000531CDC45000000000000062F
+t1394400325
+s1583
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Info.plist
+c00000000531CDC4500000000000004E8
+t1394400325
+s1256
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Prefix.pch
+c00000000531CDC450000000000000158
+t1394400325
+s344
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Images.xcassets
+c00000000531CDC450000000000000088
+t1394400325
+s136
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.m
+c00000000531CDC450000000000000598
+t1394400325
+s1432
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Spaceship.png
+c00000000521B1C260000000000020E43
+t1377508390
+s134723
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.m
+c00000000531CDC450000000000000445
+t1394400325
+s1093
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/en.lproj/InfoPlist.strings
+c00000000531CDC45000000000000002D
+t1394400325
+s45
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/main.m
+c00000000531CDC450000000000000165
+t1394400325
+s357
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.o
+t1394401059
+s65276
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/BrickBreakerTest.LinkFileList
+c00000000531CDF2300000000000002A4
+t1394401059
+s676
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.o
+t1394401059
+s52832
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.o
+t1394401059
+s47292
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.o
+t1394401059
+s3700
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/assetcatalog_dependencies.txt
+t1394401060
+s440
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/assetcatalog_generated_info.plist
+t1394401060
+s525
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch.pch
+t1394401059
+s114724
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app
+t1394401060
+s340
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app.dSYM
+t2
+s0
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Base.lproj/Main.storyboardc
+t1394401060
+s170
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest
+t1394401059
+s23692
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Info.plist
+t1394401060
+s1063
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/PkgInfo
+t1394401060
+s8
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Spaceship.png
+t1394401059
+s134723
+
+N/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/en.lproj/InfoPlist.strings
+t1394401059
+s42
+
+CBuild AST from /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.m
+r0
+
+CBuild AST from /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.m
+r0
+
+CBuild AST from /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.m
+r0
+
+CBuild AST from /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/main.m
+r0
+
+CCheck dependencies
+r0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependenciesb33fc0a316cdb841^b62fc8a316cdb841^---0#1#1#--18"Check dependencies36"9077AFC4-EB32-4FE2-B24D-18DD620DEA1A-
+
+CCompileAssetCatalog /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Images.xcassets
+s416093859.926498
+e416093860.670339
+r1
+xCompileAssetCatalog
+x/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app
+x/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Images.xcassets
+o/* com.apple.actool.compilation-results */
+o/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/LaunchImage-700-568h@2x.png
+o/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Assets.car
+o/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/assetcatalog_generated_info.plist
+o
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection110"CompileAssetCatalog Build/Products/Debug-iphonesimulator/BrickBreakerTest.app BrickBreakerTest/Images.xcassets110"CompileAssetCatalog Build/Products/Debug-iphonesimulator/BrickBreakerTest.app BrickBreakerTest/Images.xcassets183feda316cdb841^899baba416cdb841^-468"/* com.apple.actool.compilation-results *//Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/LaunchImage-700-568h@2x.png/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Assets.car/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/assetcatalog_generated_info.plist-0#0#1#-19%DVTDocumentLocation2@89"file:///Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Images.xcassets/0000000000000000^1260"CompileAssetCatalog Build/Products/Debug-iphonesimulator/BrickBreakerTest.app BrickBreakerTest/Images.xcassets    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/actool --output-format human-readable-text --notices --warnings --export-dependency-info /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/assetcatalog_dependencies.txt --output-partial-info-plist /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/assetcatalog_generated_info.plist --app-icon AppIcon --launch-image LaunchImage --platform iphonesimulator --minimum-deployment-target 7.0 --target-device iphone --compress-pngs --compile /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Images.xcassets36"E7AB103A-8386-4A79-9CDA-2ED3EFA77603-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CCompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.o /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s416093859.829356
+e416093859.897271
+r1
+xCompileC
+xBuild/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.o
+x/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.m
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection87"Compile /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.m229"CompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.o BrickBreakerTest/AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler6f66d4a316cdb841^abb4e5a316cdb841^---0#0#1#-19%DVTDocumentLocation2@86"file:///Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.m0000000000000000^4041"CompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.o BrickBreakerTest/AppDelegate.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/philippe_belley/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-generated-files.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-own-target-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-all-target-headers.hmap -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-project-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources/i386 -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources -F/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator -include /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch -MMD -MT dependencies -MF /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.d --serialize-diagnostics /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.dia -c /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.m -o /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.o36"5A7353D8-EEB2-41C2-9AE9-FA75DC18B6B3-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CCompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.o /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s416093859.828906
+e416093859.890677
+r1
+xCompileC
+xBuild/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.o
+x/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.m
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection83"Compile /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.m221"CompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.o BrickBreakerTest/MyScene.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler8849d4a316cdb841^8105e4a316cdb841^---0#0#1#-19%DVTDocumentLocation2@82"file:///Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.m0000000000000000^4017"CompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.o BrickBreakerTest/MyScene.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/philippe_belley/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-generated-files.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-own-target-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-all-target-headers.hmap -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-project-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources/i386 -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources -F/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator -include /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch -MMD -MT dependencies -MF /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.d --serialize-diagnostics /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.dia -c /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.m -o /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.o36"9594A251-FC36-4739-9965-F7583CB95536-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CCompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.o /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s416093859.829104
+e416093859.888653
+r1
+xCompileC
+xBuild/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.o
+x/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.m
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.h
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/MyScene.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection90"Compile /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.m235"CompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.o BrickBreakerTest/ViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compilerf453d4a316cdb841^ae7fe3a316cdb841^---0#0#1#-19%DVTDocumentLocation2@89"file:///Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.m0000000000000000^4059"CompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.o BrickBreakerTest/ViewController.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/philippe_belley/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-generated-files.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-own-target-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-all-target-headers.hmap -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-project-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources/i386 -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources -F/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator -include /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch -MMD -MT dependencies -MF /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.d --serialize-diagnostics /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.dia -c /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/ViewController.m -o /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.o36"1955AAE9-9DA9-418E-8E8C-8AB8D8A84CFE-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CCompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.o /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s416093859.829608
+e416093859.858812
+r1
+xCompileC
+xBuild/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.o
+x/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/main.m
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/AppDelegate.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection80"Compile /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/main.m215"CompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.o BrickBreakerTest/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler287ed4a316cdb841^badddba316cdb841^---0#0#1#-19%DVTDocumentLocation2@79"file:///Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/main.m0000000000000000^3999"CompileC Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.o BrickBreakerTest/main.m normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/philippe_belley/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-generated-files.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-own-target-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-all-target-headers.hmap -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-project-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources/i386 -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources -F/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator -include /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch -MMD -MT dependencies -MF /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.d --serialize-diagnostics /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.dia -c /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/main.m -o /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.o36"6F87D2F1-1AF2-4A2A-908E-E30AB8A20F03-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CCompileStoryboard /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Base.lproj/Main.storyboard
+s416093859.926028
+e416093860.673022
+r1
+xCompileStoryboard
+x/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Base.lproj/Main.storyboard
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection61"CompileStoryboard BrickBreakerTest/Base.lproj/Main.storyboard61"CompileStoryboard BrickBreakerTest/Base.lproj/Main.storyboard711feda316cdb841^d34baca416cdb841^---0#0#1#-19%DVTDocumentLocation2@99"file:///Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Base.lproj/Main.storyboard0000000000000000^896"CompileStoryboard BrickBreakerTest/Base.lproj/Main.storyboard    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv IBSC_MINIMUM_COMPATIBILITY_VERSION 7.0    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    setenv XCODE_DEVELOPER_USR_PATH /Applications/Xcode.app/Contents/Developer/usr/bin/..    /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/ibtool --errors --warnings --notices --minimum-deployment-target 7.0 --output-format human-readable-text --compile /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Base.lproj/Main.storyboardc /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Base.lproj/Main.storyboard36"5F9EE073-BCB6-4BEB-9050-A5C82108ACD3-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CCopyStringsFile /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/en.lproj/InfoPlist.strings BrickBreakerTest/en.lproj/InfoPlist.strings
+s416093859.925711
+e416093859.926827
+r1
+xCopyStringsFile
+x/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/en.lproj/InfoPlist.strings
+xBrickBreakerTest/en.lproj/InfoPlist.strings
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection48"Copy BrickBreakerTest/en.lproj/InfoPlist.strings144"CopyStringsFile Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/en.lproj/InfoPlist.strings BrickBreakerTest/en.lproj/InfoPlist.strings7c0deda316cdb841^cc44eda316cdb841^---0#0#1#-19%DVTDocumentLocation2@99"file:///Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/en.lproj/InfoPlist.strings0000000000000000^649"CopyStringsFile Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/en.lproj/InfoPlist.strings BrickBreakerTest/en.lproj/InfoPlist.strings    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copyStrings --validate --inputencoding utf-8 --outputencoding binary --outdir /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/en.lproj -- BrickBreakerTest/en.lproj/InfoPlist.strings36"371B9508-43BA-4BFB-B817-6CD1734D985D-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CCpResource BrickBreakerTest/Spaceship.png Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Spaceship.png
+s416093859.925836
+e416093859.927076
+r1
+xCpResource
+xBrickBreakerTest/Spaceship.png
+xBuild/Products/Debug-iphonesimulator/BrickBreakerTest.app/Spaceship.png
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection76"Copy Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Spaceship.png113"CpResource BrickBreakerTest/Spaceship.png Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Spaceship.png8313eda316cdb841^6155eda316cdb841^---0#0#1#-19%DVTDocumentLocation2@127"file:///Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Spaceship.png0034442bddffdf42^664"CpResource BrickBreakerTest/Spaceship.png Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Spaceship.png    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/Spaceship.png /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app36"18A9C343-F676-4F2C-923F-A4CA4A9A49EF-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CGenerateDSYMFile /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app.dSYM /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest
+s416093860.675552
+e416093860.690935
+r1
+xGenerateDSYMFile
+x/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app.dSYM
+x/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection120"Generate /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app.dSYM154"GenerateDSYMFile Build/Products/Debug-iphonesimulator/BrickBreakerTest.app.dSYM Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest65fbaca416cdb841^93e1b0a416cdb841^---0#0#1#-19%DVTDocumentLocation2@118"file:///Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app.dSYM0034442bddffdf42^745"GenerateDSYMFile Build/Products/Debug-iphonesimulator/BrickBreakerTest.app.dSYM Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest -o /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app.dSYM36"3A808BFD-D8AA-4E82-A773-D2E893077E7F-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CLd /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest normal i386
+s416093859.897981
+e416093859.924997
+r1
+xLd
+x/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest
+xnormal
+xi386
+d/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/BrickBreakerTest.LinkFileList
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/crt1.o
+d/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/MyScene.o
+d/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/ViewController.o
+d/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/AppDelegate.o
+d/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/main.o
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/SpriteKit.framework/SpriteKit
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/libobjc.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/libSystem.dylib
+d/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.0/lib/darwin/libclang_rt.ios.a
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/CoreVideo.framework/CoreVideo
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/CoreImage.framework/CoreImage
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/Security.framework/Security
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/CFNetwork.framework/CFNetwork
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/OpenGLES.framework/OpenGLES
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/Frameworks/CoreText.framework/CoreText
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/PrivateFrameworks/UIFoundation.framework/UIFoundation
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libsystem_override.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libcache_sim.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libcommonCrypto_sim.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libcompiler_rt_sim.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libcopyfile_sim.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libdispatch.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libdyld_sim.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libmacho_sim.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libnotify_sim.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libremovefile_sim.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libsystem_sim_blocks.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libsystem_sim_c.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libsystem_sim_dnssd.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libsystem_sim_info.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libsystem_sim_m.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libsystem_network.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libunwind_sim.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libxpc.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libsystem_sim_configuration.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/libsystem_sim_asl.dylib
+d/usr/lib/libSystem.B.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/system/host/libdyld.dylib
+d/usr/lib/system/libcache.dylib
+d/usr/lib/system/libcommonCrypto.dylib
+d/usr/lib/system/libcompiler_rt.dylib
+d/usr/lib/system/libcopyfile.dylib
+d/usr/lib/system/libcorecrypto.dylib
+d/usr/lib/system/libkeymgr.dylib
+d/usr/lib/system/liblaunch.dylib
+d/usr/lib/system/libmacho.dylib
+d/usr/lib/system/libquarantine.dylib
+d/usr/lib/system/libremovefile.dylib
+d/usr/lib/system/libsystem_asl.dylib
+d/usr/lib/system/libsystem_blocks.dylib
+d/usr/lib/system/libsystem_c.dylib
+d/usr/lib/system/libsystem_configuration.dylib
+d/usr/lib/system/libsystem_dnssd.dylib
+d/usr/lib/system/libsystem_info.dylib
+d/usr/lib/system/libsystem_kernel.dylib
+d/usr/lib/system/libsystem_m.dylib
+d/usr/lib/system/libsystem_malloc.dylib
+d/usr/lib/system/libsystem_notify.dylib
+d/usr/lib/system/libsystem_platform.dylib
+d/usr/lib/system/libsystem_pthread.dylib
+d/usr/lib/system/libsystem_sandbox.dylib
+d/usr/lib/system/libunc.dylib
+d/usr/lib/system/libunwind.dylib
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection128"Link /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest89"Ld Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest normal i3867cf1e5a316cdb841^c8cdeca316cdb841^---0#0#1#--1560"Ld Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest normal i386    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv IPHONEOS_DEPLOYMENT_TARGET 7.0    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -arch i386 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -L/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator -F/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator -filelist /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/BrickBreakerTest.LinkFileList -Xlinker -objc_abi_version -Xlinker 2 -fobjc-arc -fobjc-link-runtime -Xlinker -no_implicit_dylibs -mios-simulator-version-min=7.0 -framework CoreGraphics -framework UIKit -framework SpriteKit -framework Foundation -Xlinker -dependency_info -Xlinker /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/Objects-normal/i386/BrickBreakerTest_dependency_info.dat -o /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/BrickBreakerTest36"2E689F82-0EC9-4500-8B9C-0D88D5A77B09-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CProcessInfoPlistFile /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Info.plist /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Info.plist
+s416093860.673490
+e416093860.675194
+r1
+xProcessInfoPlistFile
+x/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Info.plist
+x/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Info.plist
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection101"Process /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Info.plist134"ProcessInfoPlistFile Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Info.plist BrickBreakerTest/BrickBreakerTest-Info.plist7b82aca416cdb841^4ddaaca416cdb841^---0#0#1#-19%DVTDocumentLocation2@100"file:///Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Info.plist0000000000000000^1013"ProcessInfoPlistFile Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Info.plist BrickBreakerTest/BrickBreakerTest-Info.plist    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Info.plist -genpkginfo /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/assetcatalog_generated_info.plist -o /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app/Info.plist36"FA02BD79-F25C-4347-90BA-2AEF9EC68894-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CProcessPCH /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch.pch BrickBreakerTest/BrickBreakerTest-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s416093859.783779
+e416093859.828280
+r1
+xProcessPCH
+x/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch.pch
+xBrickBreakerTest/BrickBreakerTest-Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Prefix.pch
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection55"Precompile BrickBreakerTest/BrickBreakerTest-Prefix.pch247"ProcessPCH Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch.pch BrickBreakerTest/BrickBreakerTest-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compilerbec0c8a316cdb841^fe0bd4a316cdb841^---0#0#1#-19%DVTDocumentLocation2@100"file:///Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Prefix.pch0000000000000000^3904"ProcessPCH Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch.pch BrickBreakerTest/BrickBreakerTest-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/philippe_belley/GameProj/BrickBreakerTest    setenv LANG en_US.US-ASCII    setenv PATH "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c-header -arch i386 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -fmodules -fmodules-cache-path=/Users/philippe_belley/Library/Developer/Xcode/DerivedData/ModuleCache -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Werror=return-type -Wno-implicit-atomic-properties -Werror=deprecated-objc-isa-usage -Werror=objc-root-class -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wunused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wbool-conversion -Wenum-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wundeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -fobjc-abi-version=2 -fobjc-legacy-dispatch -mios-simulator-version-min=7.0 -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-generated-files.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-own-target-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-all-target-headers.hmap -iquote /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/BrickBreakerTest-project-headers.hmap -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources/i386 -I/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/BrickBreakerTest.build/Debug-iphonesimulator/BrickBreakerTest.build/DerivedSources -F/Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator --serialize-diagnostics /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch.dia -MMD -MT dependencies -MF /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch.d -c /Users/philippe_belley/GameProj/BrickBreakerTest/BrickBreakerTest/BrickBreakerTest-Prefix.pch -o /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Intermediates/PrecompiledHeaders/BrickBreakerTest-Prefix-cupjrscjfsfsfsdnhcfsrqwpklur/BrickBreakerTest-Prefix.pch.pch36"585ABC8F-399D-4C40-AC5F-AD69D054248A-
+bE565D8C0-BDF9-4201-B448-919FF94864B0
+
+CProcessPCH /Users/philippe_belley/Library/Developer/Xcode/DerivedData/BrickBreakerTest-arzdebdjddqypzgziwuckvxytjse/Index/PrecompiledHeaders/BrickBreakerTest-Prefix-cuzfqtgtwynntfaettvfybsjzuzx_ast/BrickBreakerTest-Prefix.pch.pch BrickBreakerTest/BrickBreakerTest-Prefix.pch normal i386 objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
+r0
+
+CTouch /Users/philippe_belley/GameProj/BrickBreakerTest/Build/Products/Debug-iphonesimulator/BrickBreakerTest.app
+r0
+

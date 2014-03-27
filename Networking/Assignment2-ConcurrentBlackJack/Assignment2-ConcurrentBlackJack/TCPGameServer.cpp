@@ -36,14 +36,8 @@ void TCPGameServer::Run()
 	}
 }
 
-void TCPGameServer::AddPlayer( SOCKET clientSocket )
+void TCPGameServer::AddPlayer( SOCKET sock, Player* player )
 {
-	//std::pair<SOCKET, Player*> PlayerSock( clientSocket, new Player( 1024 ) );
-	//Players().insert( PlayerSock );
+	std::pair<SOCKET, Player*> PlayerSock( sock, player );
+	Players()->insert( PlayerSock );
 }
-
-const Player* TCPGameServer::GetPlayer( SOCKET clientSocket )
-{
-	return Players().at( clientSocket );
-}
-

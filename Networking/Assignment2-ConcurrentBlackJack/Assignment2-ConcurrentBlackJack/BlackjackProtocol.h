@@ -2,10 +2,10 @@
 
 #include "Protocol.h"
 #include <sstream>
-#include "TCPGameServer.h"
 #include "BlackjackPlayer.h"
 #include <concurrent_unordered_map.h>
 
+class TCPGameServer;
 
 namespace Blackjack
 {
@@ -43,7 +43,7 @@ namespace Blackjack
 		~BlackjackProtocol();
 
 		virtual void HandleRequest( const SOCKET client, string& recieveString, const Server* server );
-		static string BuildServerResponse( BlackjackPlayer* PlayerContext, const TCPGameServer* const server );
+		static string BuildServerResponse( BlackjackPlayer* PlayerContext, TCPGameServer* server );
 
 #pragma region Getters
 
