@@ -2,12 +2,11 @@
 
 #include "Hand.h"
 
-#include <string>
+#include <boost/interprocess/containers/string.hpp>
 #include <iostream>
 
-using std::string;
 using std::cout;
-
+using boost::interprocess::string;
 namespace Blackjack
 {
 	
@@ -29,10 +28,14 @@ namespace Blackjack
 		//announces that the generic player busts
 		void Bust() const;
 
-	protected:
-		string m_Name;
-	};
+		const string& Name( ) { return m_Name; }
 
-	//ostream& operator<<( ostream& os, const GenericPlayer& aGenericPlayer );
+	protected:
+		void Name( string val ) { m_Name = val; };
+
+	private:
+		string m_Name;
+
+	};
 
 }

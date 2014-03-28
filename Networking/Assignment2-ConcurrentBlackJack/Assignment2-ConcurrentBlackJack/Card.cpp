@@ -1,22 +1,24 @@
 #include "Card.h"
+#include <boost/assign.hpp>
+
+using boost::interprocess::map;
+using boost::assign::map_list_of;
 
 namespace Blackjack
 {
+	using std::string;
 	ostream& operator<<( ostream& os, const Card& aCard )
 	{
-		const string RANKS[] = { "0", "A", "2", "3", "4", "5", "6", "7", "8", "9",
-			"10", "J", "Q", "K" };
-		const string SUITS[] = { "c", "d", "h", "s" };
-
-		if ( aCard.m_IsFaceUp )
-			os << RANKS[ aCard.m_Rank ] << SUITS[ aCard.m_Suit ];
+		
+		if ( aCard.m_isFaceUp )
+			os << Card::m_rankMap.at( aCard.m_Rank ) << Card::m_suitMap.at( aCard.m_Suit );
 		else
 			os << "XX";
 
 		return os;
 	}
 
-	Card::Card( rank r, suit s, bool ifu ) : m_Rank( r ), m_Suit( s ), m_IsFaceUp( ifu )
+	Card::Card( rank r, suit s, bool ifu ) : m_Rank( r ), m_Suit( s ), m_isFaceUp( ifu )
 	{
 	}
 
@@ -24,19 +26,48 @@ namespace Blackjack
 	{
 		//if a cards is face down, its value is 0
 		int value = 0;
-		if ( m_IsFaceUp )
+		if ( m_isFaceUp )
 		{
 			//value is number showing on card
 			value = m_Rank;
-			//value is 10 for face cards
+			//value is 10 for face cards 
 			if ( value > 10 )
 				value = 10;
 		}
 		return value;
 	}
 
-	void Card::Flip()
+	void Card::toString( stringstream ss )
 	{
-		m_IsFaceUp = !( m_IsFaceUp );
+		if (FaceUp())
+		{
+		}
+		else
+		{
+			ss << "XX"
+		}
 	}
+	
+	map<Card::rank, string> Card::m_rankMap = map_list_of
+		( ACE,		"A" )
+		( TWO,		"2" )
+		( THREE,	"3" )
+		( FOUR,		"4" )
+		( FIVE,		"5" )
+		( SIX,		"6" )
+		( SEVEN,	"7" )
+		( EIGHT,	"8" )
+		( NINE,		"9" )
+		( TEN,		"10")
+		( JACK,		"J" )
+		( QUEEN,	"Q" )
+		( KING,		"K" )
+		;
+
+	map<Card::suit, string> Card::m_suitMap = map_list_of
+		( CLUBS,		"c" )
+		( DIAMONDS,		"d" )
+		( HEARTS,		"h" )
+		( SPADES,		"s" )
+		;
 }

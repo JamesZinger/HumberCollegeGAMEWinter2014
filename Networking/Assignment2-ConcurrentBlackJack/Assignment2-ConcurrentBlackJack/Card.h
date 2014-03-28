@@ -1,14 +1,15 @@
 #pragma once
 
 #include <iostream>
-#include <string>
+#include <sstream>
+#include <boost/interprocess/containers/map.hpp>
 
 using std::ostream;
-using std::string;
+using std::stringstream;
 
 namespace Blackjack
 {
-	
+
 	class Card
 	{
 	public:
@@ -28,12 +29,23 @@ namespace Blackjack
 		int GetValue() const;
 
 		//flips a card; if face up, becomes face down and vice versa
-		void Flip();
+		void Flip() { m_isFaceUp = !m_isFaceUp; }
+
+		void toString( std::stringstream ss );
+		
+		bool FaceUp() const { return m_isFaceUp; }
+
+	protected:
+
+		void FaceUp( bool val ) { m_isFaceUp = val; }
 
 	private:
 		rank m_Rank;
 		suit m_Suit;
-		bool m_IsFaceUp;
+		bool m_isFaceUp;
+		
+		static boost::interprocess::map<rank, std::string> m_rankMap;
+		static boost::interprocess::map<suit, std::string> m_suitMap;
 	};
 
 	//ostream& operator<<( ostream& os, const Card& aCard );

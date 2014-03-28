@@ -2,14 +2,15 @@
 
 #include "Card.h"
 
-#include <vector>
+#include <boost/interprocess/containers/vector.hpp>
 
-using std::vector;
 
 namespace Blackjack
 {
+	using boost::interprocess::vector;
 	class Hand
 	{
+		
 	public:
 		Hand();
 
