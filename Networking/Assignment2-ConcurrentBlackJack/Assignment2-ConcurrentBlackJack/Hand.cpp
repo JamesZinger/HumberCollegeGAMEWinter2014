@@ -2,6 +2,7 @@
 
 namespace Blackjack
 {
+	using boost::interprocess::vector;
 
 	Hand::Hand()
 	{
@@ -21,8 +22,7 @@ namespace Blackjack
 	void Hand::Clear()
 	{
 		//iterate through vector, freeing all memory on the heap
-		std::vector<Card*>::iterator iter = m_Cards.begin();
-		for ( iter = m_Cards.begin(); iter != m_Cards.end(); ++iter )
+		for ( auto iter = m_Cards.begin(); iter != m_Cards.end(); ++iter )
 		{
 			delete *iter;
 			*iter = 0;
@@ -43,13 +43,12 @@ namespace Blackjack
 
 		//add up card values, treat each Ace as 1
 		int total = 0;
-		std::vector<Card*>::const_iterator iter;
-		for ( iter = m_Cards.begin(); iter != m_Cards.end(); ++iter )
+		for ( auto iter = m_Cards.begin(); iter != m_Cards.end(); ++iter )
 			total += ( *iter )->GetValue();
 
 		//determine if hand contains an Ace
 		bool containsAce = false;
-		for ( iter = m_Cards.begin(); iter != m_Cards.end(); ++iter )
+		for ( auto iter = m_Cards.begin(); iter != m_Cards.end(); ++iter )
 			if ( ( *iter )->GetValue() == Card::ACE )
 				containsAce = true;
 

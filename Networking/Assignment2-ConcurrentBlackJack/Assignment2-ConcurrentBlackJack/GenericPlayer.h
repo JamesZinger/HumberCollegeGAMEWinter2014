@@ -6,7 +6,7 @@
 #include <iostream>
 
 using std::cout;
-using boost::interprocess::string;
+
 namespace Blackjack
 {
 	
@@ -28,13 +28,13 @@ namespace Blackjack
 		//announces that the generic player busts
 		void Bust() const;
 
-		const string& Name( ) { return m_Name; }
+		const boost::interprocess::string& Name( ) { return m_Name; }
 
 	protected:
-		void Name( string val ) { m_Name = val; };
+		void Name( boost::interprocess::string val ) { m_Name = val; };
 
 	private:
-		string m_Name;
+		boost::interprocess::string m_Name;
 
 	};
 

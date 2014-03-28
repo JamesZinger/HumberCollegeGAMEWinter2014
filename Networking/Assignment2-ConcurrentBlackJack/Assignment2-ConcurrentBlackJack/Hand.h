@@ -7,7 +7,7 @@
 
 namespace Blackjack
 {
-	using boost::interprocess::vector;
+	
 	class Hand
 	{
 		
@@ -26,7 +26,7 @@ namespace Blackjack
 		int GetTotal() const;
 
 	protected:
-		vector<Card*> m_Cards;
+		boost::interprocess::vector<Card*> m_Cards;
 	};
 
 }

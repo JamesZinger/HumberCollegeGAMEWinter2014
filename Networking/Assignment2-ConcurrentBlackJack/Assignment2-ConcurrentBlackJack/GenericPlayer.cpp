@@ -2,11 +2,13 @@
 
 namespace Blackjack
 {
+	using boost::interprocess::vector;
+
 	ostream& operator<<( ostream& os, const GenericPlayer& aGenericPlayer )
 	{
 		os << aGenericPlayer.m_Name << ":\t";
 
-		std::vector<Card*>::const_iterator pCard;
+		vector<Card*>::const_iterator pCard;
 		if ( !aGenericPlayer.m_Cards.empty() )
 		{
 			for ( pCard = aGenericPlayer.m_Cards.begin();

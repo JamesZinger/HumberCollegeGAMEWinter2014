@@ -22,14 +22,6 @@ namespace Blackjack
 	{
 	}
 
-	bool BlackjackPlayer::IsHitting() const
-	{
-		cout << m_Name << ", do you want a hit? (Y/N): ";
-		char response;
-		cin >> response;
-		return ( response == 'y' || response == 'Y' );
-	}
-
 	void BlackjackPlayer::Win() const
 	{
 		cout << m_Name << " wins.\n";

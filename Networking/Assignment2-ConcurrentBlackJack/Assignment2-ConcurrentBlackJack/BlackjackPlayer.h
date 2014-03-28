@@ -11,10 +11,11 @@
 #include "GenericPlayer.h"
 #include "MessageInput.h"
 
-#include <string>
-#include <iostream>
 
-using std::string;
+#include <iostream>
+#include <boost/interprocess/containers/vector.hpp>
+#include <boost/interprocess/containers/string.hpp>
+
 using std::cin;
 
 namespace Blackjack
@@ -27,7 +28,7 @@ namespace Blackjack
 		Shutdown
 	};
 
-	class BlackjackPlayer : public GenericPlayer , public Player
+	class BlackjackPlayer : public GenericPlayer, public Player
 	{
 
 	public:
@@ -51,22 +52,22 @@ namespace Blackjack
 
 	protected:
 
-		virtual void HandleMessage( string Message );
+		virtual void HandleMessage( boost::interprocess::string Message );
 		virtual void Init();
 
 		virtual void HandleCreateGameRequest	( MessageInput*	input );
 		virtual void HandleJoinGameRequest		( MessageInput*	input );
 		virtual void HandleDisconnectRequest	( MessageInput*	input );
 		virtual void HandleRefreshRequest		( MessageInput*	input );
-		virtual void HandleInvaildRequest		( string		error );
+		virtual void HandleInvaildRequest		( boost::interprocess::string error );
 
 		void State( Blackjack::PlayerState val ) { m_state = val; }
 
 	private:
 		PlayerState m_state;
 
-		MessageInput* ConstructMessageInput( std::vector<string> lines );
-		MessageInput* ConstructGameInput( std::vector<string> lines);
+		MessageInput* ConstructMessageInput		( boost::interprocess::vector< boost::interprocess::string> lines );
+		MessageInput* ConstructGameInput		( boost::interprocess::vector< boost::interprocess::string> lines );
 
 	};
 }

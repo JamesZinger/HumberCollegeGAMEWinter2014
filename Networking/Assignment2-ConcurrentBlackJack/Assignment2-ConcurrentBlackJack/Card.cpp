@@ -37,14 +37,15 @@ namespace Blackjack
 		return value;
 	}
 
-	void Card::toString( stringstream ss )
+	void Card::toString( stringstream& ss )
 	{
 		if (FaceUp())
 		{
+			ss << m_rankMap.at( m_Rank ) << m_suitMap.at( m_Suit );
 		}
 		else
 		{
-			ss << "XX"
+			ss << "XX";
 		}
 	}
 	

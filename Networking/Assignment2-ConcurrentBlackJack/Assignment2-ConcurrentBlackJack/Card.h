@@ -31,7 +31,7 @@ namespace Blackjack
 		//flips a card; if face up, becomes face down and vice versa
 		void Flip() { m_isFaceUp = !m_isFaceUp; }
 
-		void toString( std::stringstream ss );
+		void toString( std::stringstream& ss );
 		
 		bool FaceUp() const { return m_isFaceUp; }
 
