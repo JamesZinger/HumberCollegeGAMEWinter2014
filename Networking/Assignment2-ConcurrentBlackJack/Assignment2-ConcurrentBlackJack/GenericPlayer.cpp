@@ -6,7 +6,7 @@ namespace Blackjack
 	{
 		os << aGenericPlayer.m_Name << ":\t";
 
-		vector<Card*>::const_iterator pCard;
+		std::vector<Card*>::const_iterator pCard;
 		if ( !aGenericPlayer.m_Cards.empty() )
 		{
 			for ( pCard = aGenericPlayer.m_Cards.begin();

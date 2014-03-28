@@ -9,7 +9,7 @@
 #include "BlackjackProtocol.h"
 #include "BlackjackGame.h"
 #include <boost/algorithm/string.hpp>
-
+#include <boost/interprocess/containers/string.hpp>
 
 namespace Blackjack
 {
@@ -53,7 +53,7 @@ namespace Blackjack
 	void BlackjackPlayer::HandleMessage( string Message )
 	{
 
-		vector<string> lines;
+		std::vector<string> lines;
 		boost::split( lines, Message, boost::is_any_of( "\n" ) );
 
 		if ( lines.size() < 2 )
@@ -69,7 +69,7 @@ namespace Blackjack
 		}
 
 		{
-			vector<string> commandLine;
+			std::vector<string> commandLine;
 			boost::split( commandLine, lines[ 1 ], boost::is_any_of( "=" ) );
 
 			if ( commandLine.size() != 2 )
@@ -87,8 +87,8 @@ namespace Blackjack
 				return;
 			}
 
-			auto command = BlackjackProtocol::CommandMap()->find( commandLine[ 1 ] );
-			if ( command == BlackjackProtocol::CommandMap()->end() )
+			auto command = BlackjackProtocol::CommandMap().find( commandLine[ 1 ] );
+			if ( command == BlackjackProtocol::CommandMap().end() )
 			{
 				HandleInvaildRequest( "Invalid command" );
 				return;
@@ -166,7 +166,7 @@ namespace Blackjack
 		EnqueueMessage( out );
 	}
 
-	MessageInput* BlackjackPlayer::ConstructMessageInput( vector<string> lines )
+	MessageInput* BlackjackPlayer::ConstructMessageInput( std::vector<string> lines )
 	{
 
 		vector<string> extraLines;
@@ -182,7 +182,7 @@ namespace Blackjack
 
 	}
 
-	MessageInput* BlackjackPlayer::ConstructGameInput( vector<string> lines )
+	MessageInput* BlackjackPlayer::ConstructGameInput( std::vector<string> lines )
 	{
 		vector<string> extraLines;
 		for ( unsigned int i = 1; i < lines.size(); i++ )

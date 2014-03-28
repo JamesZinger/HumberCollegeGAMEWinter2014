@@ -10,16 +10,16 @@
 #include "TCPServer.h"
 #include "Router.h"
 
-#include <concurrent_vector.h>
 #include <concurrent_unordered_map.h>
+#include <boost/interprocess/containers/vector.hpp>
 #include <iostream>
 #include <string>
 
 using std::cout;
 using std::endl;
 using std::string;
+using boost::interprocess::vector;
 using Concurrency::concurrent_unordered_map;
-using Concurrency::concurrent_vector;
 
 class Game;
 class Player;
@@ -32,7 +32,7 @@ class TCPGameServer : public TCPServer
 public:
 	TCPGameServer( Protocol* proto, int port = 8282 ) : TCPServer( proto, port )
 	{
-		m_games = concurrent_vector<Game*>();
+		m_games = boost::interprocess::vector<Game*>();
 		m_players = concurrent_unordered_map<SOCKET, Player*>();
 	}
 
@@ -40,8 +40,8 @@ public:
 
 	virtual void Run();
 
-	concurrent_vector<Game*>*					Games()		{ return &m_games; }
-	concurrent_unordered_map<SOCKET, Player*>*	Players()	{ return &m_players; }
+	vector<Game*>			Games()		{ return m_games; }
+	concurrent_unordered_map<SOCKET, Player*>	Players()	{ return m_players; }
 
 	void			AddPlayer( SOCKET clientSocket, Player* player );
 
@@ -49,12 +49,12 @@ public:
 
 protected:
 
-	void Games		( concurrent_vector<Game*> val )					{ m_games = val; }
+	void Games		( vector<Game*> val )			{ m_games = val; }
 	void Players	( concurrent_unordered_map<SOCKET, Player*> val )	{ m_players = val; }
 
 
 private:
-	concurrent_vector<Game*>					m_games;
+	vector<Game*>								m_games;
 	concurrent_unordered_map<SOCKET, Player*>	m_players;
 
 };

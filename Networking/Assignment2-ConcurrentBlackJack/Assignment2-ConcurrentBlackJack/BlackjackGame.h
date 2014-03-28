@@ -13,16 +13,15 @@
 #include "BlackjackPlayer.h"
 #include "BlackjackProtocol.h"
 
-#include <concurrent_vector.h>
+#include <boost/interprocess/containers/vector.hpp>
 #include <iostream>
 #include <ctime>
 
-using std::vector;
 using std::cout;
 using std::endl;
 using std::ostream;
 using std::time;
-using Concurrency::concurrent_vector;
+using boost::interprocess::vector;
 
 namespace Blackjack
 {
@@ -30,26 +29,33 @@ namespace Blackjack
 	class BlackjackGame : public Game
 	{
 	public:
-		BlackjackGame(BlackjackPlayer* InitalPlayer);
+		BlackjackGame( BlackjackPlayer* InitalPlayer );
 
 		virtual ~BlackjackGame();
 
 		//plays the game of blackjack    
 		void Play();
 
-		concurrent_vector<BlackjackPlayer*>* Players()	{ return &m_players; }
+		void AddPlayer( BlackjackPlayer* player );
+		void RemovePlayer( BlackjackPlayer* player );
+
+		vector<BlackjackPlayer*> Players()	{ return m_players; }
+
+
 
 	protected:
 
-		virtual void GameThreadFunc(TCPGameServer* server);
+		virtual void GameThreadFunc( TCPGameServer* server );
 
-		void Players( concurrent_vector<BlackjackPlayer*> val ) { m_players = val; }
+		void Players( vector<BlackjackPlayer*> val ) { m_players = val; }
 
 	private:
 		Deck m_Deck;
 		House m_House;
 
-		concurrent_vector<BlackjackPlayer*> m_players;
-		
+		vector<BlackjackPlayer*> m_players;
+
+		bool isGameEmpty();
+
 	};
 }

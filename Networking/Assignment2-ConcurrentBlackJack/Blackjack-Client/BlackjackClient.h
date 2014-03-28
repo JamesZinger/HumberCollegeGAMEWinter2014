@@ -6,15 +6,15 @@
 #include <stdio.h>
 #include <vector>
 #include <concurrent_queue.h>
-#include <concurrent_unordered_map.h>
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
+#include <concurrent_unordered_map.h>
 
 using std::string;
 using Concurrency::concurrent_queue;
 using Concurrency::concurrent_unordered_map;
 using boost::thread;
-using std::vector;
+
 
 enum PlayerCommands
 {
@@ -65,8 +65,8 @@ public:
 	WSADATA		WsaData()		const { return m_wsaData; }
 	bool		ShuttingDown()	const { return m_isShuttingDown; }
 
-	static concurrent_unordered_map<PlayerCommands, string>*	CommandMap() { return &m_commandMap; }
-	static concurrent_unordered_map<string, PlayerState>*		StateMap() { return &m_stateMap; }
+	static concurrent_unordered_map<PlayerCommands, string>	CommandMap()	{ return m_commandMap; }
+	static concurrent_unordered_map<string, PlayerState>		StateMap()		{ return m_stateMap; }
 
 	static string BuildBlackJackRequest( PlayerCommands command, void* extraInfo );
 
@@ -82,11 +82,11 @@ protected:
 
 	void HandleMessage( string& message );
 	void Update();
-	void HandleGameMessage( vector<string> lines );
-	void HandleLobbyMessage( vector<string> lines );
+	void HandleGameMessage( std::vector<string> lines );
+	void HandleLobbyMessage( std::vector<string> lines );
 
-	static void StateMap( concurrent_unordered_map<string, PlayerState> val ) { m_stateMap = val; }
-	static void CommandMap( concurrent_unordered_map<PlayerCommands, string> val ) { m_commandMap = val; }
+	static void StateMap	( concurrent_unordered_map<string, PlayerState> val )	{ m_stateMap = val; }
+	static void CommandMap	( concurrent_unordered_map<PlayerCommands, string> val )	{ m_commandMap = val; }
 private:
 
 	string						m_name;

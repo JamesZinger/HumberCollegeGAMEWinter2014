@@ -21,7 +21,7 @@ namespace Blackjack
 	void Hand::Clear()
 	{
 		//iterate through vector, freeing all memory on the heap
-		vector<Card*>::iterator iter = m_Cards.begin();
+		std::vector<Card*>::iterator iter = m_Cards.begin();
 		for ( iter = m_Cards.begin(); iter != m_Cards.end(); ++iter )
 		{
 			delete *iter;
@@ -43,7 +43,7 @@ namespace Blackjack
 
 		//add up card values, treat each Ace as 1
 		int total = 0;
-		vector<Card*>::const_iterator iter;
+		std::vector<Card*>::const_iterator iter;
 		for ( iter = m_Cards.begin(); iter != m_Cards.end(); ++iter )
 			total += ( *iter )->GetValue();
 
