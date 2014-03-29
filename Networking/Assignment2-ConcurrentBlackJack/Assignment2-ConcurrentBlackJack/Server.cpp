@@ -29,7 +29,7 @@ Server::Server( Protocol* proto, const int port )
 	Debugging( false );
 	ListenPort( port );
 	ListenSocket( INVALID_SOCKET );
-
+	ActiveConnections(concurrent_unordered_map<SOCKET, connectionStamp>());
 }
 
 Server::~Server()

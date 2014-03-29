@@ -13,6 +13,7 @@
 using std::stringstream;
 using std::cout;
 using std::endl;
+using boost::interprocess::string;
 
 TCPServer::TCPServer(Protocol* proto, int port ) : Server( proto, port )
 {
@@ -30,7 +31,7 @@ TCPServer::TCPServer(Protocol* proto, int port ) : Server( proto, port )
 
 	ss << port;
 
-	std::string s = ss.str();
+	string s = string(ss.str().c_str());
 
 	int iResult = getaddrinfo( NULL, s.c_str(), &hints, &addrResult );
 
@@ -137,7 +138,7 @@ SOCKET TCPServer::AcceptConnection(sockaddr_in* addrPtr /* = nullptr */)
 	return client;
 }
 
-void TCPServer::SendMessageOverNetwork( SOCKET MessageSocket, std::string& Message )
+void TCPServer::SendMessageOverNetwork( SOCKET MessageSocket, boost::interprocess::string& Message )
 {
 	if (MessageSocket == INVALID_SOCKET)
 	{
@@ -160,11 +161,12 @@ void TCPServer::SendMessageOverNetwork( SOCKET MessageSocket, std::string& Messa
 	}
 }
 
-int TCPServer::RecieveMessage( SOCKET MessageSocket, char* Buffer, int BufferLength, std::string* out )
+int TCPServer::RecieveMessage( SOCKET MessageSocket, char* Buffer, int BufferLength, boost::interprocess::string* out )
 {
 	if ( out == nullptr )
-		return -2;
+		out = new boost::interprocess::string();
 
+	string s;
 	if (MessageSocket == INVALID_SOCKET)
 	{
 		cout << "Socket is not valid" << endl;
@@ -183,7 +185,7 @@ int TCPServer::RecieveMessage( SOCKET MessageSocket, char* Buffer, int BufferLen
 		return -1;
 	}
 
-	*out = std::string(Buffer);
+	out->assign(Buffer);
 
 	return 1;	
 }

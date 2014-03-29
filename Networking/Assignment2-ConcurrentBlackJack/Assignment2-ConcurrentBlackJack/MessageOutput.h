@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <string>
+#include <boost/interprocess/containers/string.hpp>
 
 class MessageOutput
 {
@@ -16,11 +16,11 @@ public:
 	MessageOutput();
 	virtual ~MessageOutput();
 
-	std::string Message() { return m_message; }
-	void Message( std::string val ) { m_message = val; }
+	boost::interprocess::string& Message() { return m_message; }
+	void Message( boost::interprocess::string val ) { m_message = val; }
 
 private:
-	std::string m_message;
+	boost::interprocess::string m_message;
 	
 	
 };

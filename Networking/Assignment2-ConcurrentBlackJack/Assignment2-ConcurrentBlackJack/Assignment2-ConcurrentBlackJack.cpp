@@ -6,8 +6,6 @@
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
 #include <iostream>
-#include <vector>
-
 #include "TCPGameServer.h"
 #include "BlackjackProtocol.h"
 #include "BlackjackGame.h"
@@ -15,11 +13,17 @@
 using std::cout;
 using std::endl;
 
-int main(int argc, char* argv[])
+void CreateServer( Protocol* proto, int port )
+{
+	TCPGameServer::m_instance = new TCPGameServer( proto, port );
+}
+
+int main( int argc, char* argv[] )
 {
 	Blackjack::BlackjackProtocol* proto = new Blackjack::BlackjackProtocol();
-	TCPGameServer* server = new TCPGameServer( proto, 8282 );
-	
+	CreateServer(proto);
+	TCPGameServer* server = TCPGameServer::Instance();
+
 	server->Debugging( true );
 
 	server->Run();
@@ -28,6 +32,3 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-
-
-

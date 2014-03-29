@@ -3,10 +3,10 @@
 
 using boost::interprocess::map;
 using boost::assign::map_list_of;
+using boost::interprocess::string;
 
 namespace Blackjack
 {
-	using std::string;
 	ostream& operator<<( ostream& os, const Card& aCard )
 	{
 		

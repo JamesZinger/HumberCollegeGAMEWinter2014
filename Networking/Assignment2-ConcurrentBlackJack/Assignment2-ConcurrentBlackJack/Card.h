@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <boost/interprocess/containers/map.hpp>
+#include <boost/interprocess/containers/string.hpp>
 
 using std::ostream;
 using std::stringstream;
@@ -44,10 +45,10 @@ namespace Blackjack
 		suit m_Suit;
 		bool m_isFaceUp;
 		
-		static boost::interprocess::map<rank, std::string> m_rankMap;
-		static boost::interprocess::map<suit, std::string> m_suitMap;
+		static boost::interprocess::map<rank, boost::interprocess::string> m_rankMap;
+		static boost::interprocess::map<suit, boost::interprocess::string> m_suitMap;
 	};
 
-	//ostream& operator<<( ostream& os, const Card& aCard );
+	ostream& operator<<( ostream& os, const Card& aCard );
 
 }

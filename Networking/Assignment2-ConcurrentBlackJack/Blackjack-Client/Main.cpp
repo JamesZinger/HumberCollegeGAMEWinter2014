@@ -2,9 +2,11 @@
 
 #include <iostream>
 #include <limits>
+
 using std::cin;
 using std::cout;
 using std::endl;
+using boost::interprocess::string;
 
 int main(int argc, char** argv)
 {

@@ -11,7 +11,6 @@ namespace Blackjack
 {
 	class BlackjackGame;
 
-	using std::string;
 	using std::stringstream;
 	using Concurrency::concurrent_unordered_map;
 
@@ -32,8 +31,8 @@ namespace Blackjack
 		ListConnections
 	};
 
-	static const string SERVER_HEADER = string( "BlackJackServer Protocol 1.0" );
-	static const string CLIENT_HEADER = string( "BlackJackClient Protocol 1.0" );
+	static const boost::interprocess::string SERVER_HEADER = boost::interprocess::string( "BlackJackServer Protocol 1.0" );
+	static const boost::interprocess::string CLIENT_HEADER = boost::interprocess::string( "BlackJackClient Protocol 1.0" );
 
 	class BlackjackProtocol :
 		public Protocol
@@ -42,38 +41,38 @@ namespace Blackjack
 		BlackjackProtocol();
 		~BlackjackProtocol();
 
-		virtual void HandleRequest( const SOCKET client, string& recieveString, const Server* server );
-		static string BuildServerResponse( BlackjackPlayer* PlayerContext, TCPGameServer* server );
+		virtual void HandleRequest( const SOCKET client, boost::interprocess::string& recieveString, const Server* server );
+		static boost::interprocess::string BuildServerResponse( BlackjackPlayer* PlayerContext, TCPGameServer* server );
 
 #pragma region Getters
 
-		static concurrent_unordered_map<string, PlayerCommands>		CommandMap()		{ return m_commandMap; }
-		static concurrent_unordered_map<string, AdminCommands>		AdminCommandMap()	{ return m_adminCommandMap; }
-		static concurrent_unordered_map<PlayerState, string>		ClientStateMap()		{ return m_clientStateMap; }
+		static concurrent_unordered_map<std::string, PlayerCommands>&	CommandMap()		{ return m_commandMap; }
+		static concurrent_unordered_map<std::string, AdminCommands>&	AdminCommandMap()	{ return m_adminCommandMap; }
+		static concurrent_unordered_map<PlayerState, std::string>&		ClientStateMap()	{ return m_clientStateMap; }
 
 
 #pragma endregion
 
 	protected:
 
-		void HandleHttpRequest( SOCKET client, string request, TCPGameServer* server, stringstream& ss );
-		void HandleGameRequest( SOCKET client, string request, TCPGameServer* server );
+		void HandleHttpRequest( SOCKET client, boost::interprocess::string request, TCPGameServer* server, stringstream& ss );
+		void HandleGameRequest( SOCKET client, boost::interprocess::string request, TCPGameServer* server );
 
 #pragma region Setters
 
-		static void CommandMap( concurrent_unordered_map<string, PlayerCommands> val )		{ m_commandMap = val; }
-		static void AdminCommandMap( concurrent_unordered_map<string, AdminCommands> val )	{ m_adminCommandMap = val; }
-		static void ClientStateMap( concurrent_unordered_map<PlayerState, string> val )		{ m_clientStateMap = val; }
+		static void CommandMap( concurrent_unordered_map<std::string, PlayerCommands> val )			{ m_commandMap = val; }
+		static void AdminCommandMap( concurrent_unordered_map<std::string, AdminCommands> val )		{ m_adminCommandMap = val; }
+		static void ClientStateMap( concurrent_unordered_map<PlayerState, std::string> val )		{ m_clientStateMap = val; }
 
 #pragma endregion
 
 	private:
 
-		const char DetermineRequestContext( const string& Message );
+		const char DetermineRequestContext( const boost::interprocess::string& Message );
 
-		static concurrent_unordered_map<string, PlayerCommands>		m_commandMap;
-		static concurrent_unordered_map<string, AdminCommands>		m_adminCommandMap;
-		static concurrent_unordered_map<PlayerState, string>			m_clientStateMap;
+		static concurrent_unordered_map<std::string, PlayerCommands>	m_commandMap;
+		static concurrent_unordered_map<std::string, AdminCommands>		m_adminCommandMap;
+		static concurrent_unordered_map<PlayerState, std::string>		m_clientStateMap;
 	};
 
 }

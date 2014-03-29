@@ -5,8 +5,16 @@
 #include <boost/date_time.hpp>
 #include <iostream>
 
+#include "BlackjackGame.h"
+#include "BlackjackPlayer.h"
+
+using std::endl;
+using std::cout;
+
 void TCPGameServer::Run()
 {
+	Blackjack::BlackjackPlayer* Player = new Blackjack::BlackjackPlayer();
+	Blackjack::BlackjackGame* Game = new Blackjack::BlackjackGame(Player);
 	while ( true )
 	{
 		connectionStamp stamp;
@@ -41,3 +49,10 @@ void TCPGameServer::AddPlayer( SOCKET sock, Player* player )
 	std::pair<SOCKET, Player*> PlayerSock( sock, player );
 	Players().insert( PlayerSock );
 }
+
+TCPGameServer* TCPGameServer::Instance()
+{
+	return m_instance;
+}
+
+TCPGameServer* TCPGameServer::m_instance = nullptr;

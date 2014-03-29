@@ -7,15 +7,14 @@
 
 #pragma once
 
-#include <string>
-#include <WinSock2.h>
 
-using std::string;
+#include <WinSock2.h>
+#include <boost/interprocess/containers/string.hpp>
 
 class Server;
 
 class Protocol
 {
 public:
-	virtual void HandleRequest( const SOCKET client, string& recieveString, const Server* server ) = 0;
+	virtual void HandleRequest( const SOCKET client, boost::interprocess::string& recieveString, const Server* server ) = 0;
 };

@@ -6,13 +6,14 @@
 ///////////////////////////////////////////////////////////
 
 #include "BlackjackGame.h"
+#include "TCPGameServer.h"
 #include <boost/thread.hpp>
 
 namespace Blackjack
 {
-	BlackjackGame::BlackjackGame( BlackjackPlayer* player )
+	BlackjackGame::BlackjackGame( BlackjackPlayer* player, int maxPlayers)
 	{
-		srand( time( 0 ) );    //seed the random number generator
+		srand( time( NULL ) );    //seed the random number generator
 		m_Deck.Populate();
 		m_Deck.Shuffle();
 		
@@ -23,7 +24,9 @@ namespace Blackjack
 
 		AddPlayer( player );
 
-	
+		MaxPlayers(maxPlayers);
+
+		TCPGameServer::Instance()->Games().push_back(this);
 	}
 
 	BlackjackGame::~BlackjackGame()
@@ -54,7 +57,7 @@ namespace Blackjack
 		//cout << m_House << endl;
 
 		//deal additional cards to players
-		for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
+		for ( auto pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
 			m_Deck.AdditionalCards( **pPlayer );
 
 		//reveal house's first card
@@ -67,14 +70,14 @@ namespace Blackjack
 		if ( m_House.IsBusted() )
 		{
 			//everyone still playing wins
-			for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
+			for ( auto pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
 				if ( !( ( *pPlayer )->IsBusted() ) )
 					( *pPlayer )->Win();
 		}
 		else
 		{
 			//compare each player still playing to house
-			for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
+			for ( auto pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
 				if ( !( ( *pPlayer )->IsBusted() ) )
 				{
 					if ( ( *pPlayer )->GetTotal() > m_House.GetTotal() )
@@ -87,7 +90,7 @@ namespace Blackjack
 		}
 
 		//remove everyone's cards
-		for ( pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
+		for ( auto pPlayer = m_players.begin(); pPlayer != m_players.end(); ++pPlayer )
 			( *pPlayer )->Clear();
 		m_House.Clear();
 	}
@@ -102,11 +105,16 @@ namespace Blackjack
 
 	}
 
-	void BlackjackGame::AddPlayer( BlackjackPlayer* player )
+	bool BlackjackGame::AddPlayer( BlackjackPlayer* player )
 	{
-		Players().push_back( player );
+		if (Players().size() < MaxPlayers())
+		{
+			Players().push_back( player );
+			Deck().Deal( *player );
 
-		Deck().Deal( *player );
+			return true;
+		}
+		return false;	
 	}
 
 	void BlackjackGame::RemovePlayer( BlackjackPlayer* player )

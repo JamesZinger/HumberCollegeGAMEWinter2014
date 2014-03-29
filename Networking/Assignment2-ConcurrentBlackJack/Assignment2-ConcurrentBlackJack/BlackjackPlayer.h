@@ -14,7 +14,6 @@
 
 #include <iostream>
 #include <boost/interprocess/containers/vector.hpp>
-#include <boost/interprocess/containers/string.hpp>
 
 using std::cin;
 
@@ -66,8 +65,9 @@ namespace Blackjack
 	private:
 		PlayerState m_state;
 
-		MessageInput* ConstructMessageInput		( boost::interprocess::vector< boost::interprocess::string> lines );
-		MessageInput* ConstructGameInput		( boost::interprocess::vector< boost::interprocess::string> lines );
+		MessageInput* ConstructMessageInput		( boost::interprocess::vector< boost::interprocess::string > lines );
+		MessageInput* ConstructGameInput		( boost::interprocess::vector< boost::interprocess::string > lines );
+
 
 	};
 }

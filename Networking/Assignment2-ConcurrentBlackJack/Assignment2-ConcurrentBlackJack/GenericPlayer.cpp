@@ -6,7 +6,7 @@ namespace Blackjack
 
 	ostream& operator<<( ostream& os, const GenericPlayer& aGenericPlayer )
 	{
-		os << aGenericPlayer.m_Name << ":\t";
+		//os << aGenericPlayer.m_Name << ":\t";
 
 		vector<Card*>::const_iterator pCard;
 		if ( !aGenericPlayer.m_Cards.empty() )
@@ -41,6 +41,7 @@ namespace Blackjack
 
 	void GenericPlayer::Bust() const
 	{
-		cout << m_Name << " busts.\n";
+		//cout << m_Name << " busts.\n";
 	}
+
 }

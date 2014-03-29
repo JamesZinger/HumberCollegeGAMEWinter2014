@@ -8,9 +8,9 @@
 #pragma once 
 
 #include <WinSock2.h>
-#include <string>
 #include <boost/date_time.hpp>
 #include <concurrent_unordered_map.h>
+#include <boost/interprocess/containers/string.hpp>
 
 class Protocol;
 
@@ -52,36 +52,37 @@ public:
 	virtual ~Server();
 
 	virtual void	Run						() = 0;
-	virtual void	SendMessageOverNetwork	( SOCKET MessageSocket, std::string& Message ) = 0;
-	virtual int		RecieveMessage			( SOCKET MessageSocket, char* Buffer, int BufferLength, std::string* out ) = 0;
+	virtual void	SendMessageOverNetwork	( SOCKET MessageSocket, boost::interprocess::string& Message ) = 0;
+	virtual int		RecieveMessage			( SOCKET MessageSocket, char* Buffer, int BufferLength, boost::interprocess::string* out ) = 0;
 
-	unsigned short					ListenPort()		const	{ return m_listenPort; }
-	SOCKET							ListenSocket()		const	{ return m_listenSocket; }
-	bool							isConnected()		const	{ return ( m_listenSocket != INVALID_SOCKET ); }
-	boolean							Debugging()			const	{ return m_debugging; }
-	WSAData*						WsaData()			const	{ return m_wsaData; }
-	Protocol*						GetProtocol()		const	{ return m_protocol; }
-	concurrent_unordered_map<SOCKET, connectionStamp>	ActiveConnections()			{ return m_activeConnections; }
+	unsigned short		ListenPort()		const	{ return m_listenPort; }
+	SOCKET				ListenSocket()		const	{ return m_listenSocket; }
+	bool				isConnected()		const	{ return ( m_listenSocket != INVALID_SOCKET ); }
+	boolean				Debugging()			const	{ return m_debugging; }
+	WSAData*			WsaData()			const	{ return m_wsaData; }
+	Protocol*			GetProtocol()		const	{ return m_protocol; }
+	
+	concurrent_unordered_map<SOCKET, connectionStamp>&	ActiveConnections()			{ return m_activeConnections; }
 
-	void Debugging( boolean val ) { m_debugging = val; }
-
+	void				Debugging( boolean val ) { m_debugging = val; }
 
 protected:
 
-	void ListenPort			( unsigned short val )					{ m_listenPort = val; }
-	void ListenSocket		( SOCKET val )							{ m_listenSocket = val; }
-	void WsaData			( WSAData* val )						{ m_wsaData = val; }
-	void SetProtocol		( Protocol* val )						{ m_protocol = val; }
+	void ListenPort			( unsigned short val )		{ m_listenPort = val; }
+	void ListenSocket		( SOCKET val )				{ m_listenSocket = val; }
+	void WsaData			( WSAData* val )			{ m_wsaData = val; }
+	void SetProtocol		( Protocol* val )			{ m_protocol = val; }
+
 	void ActiveConnections	( concurrent_unordered_map<SOCKET, connectionStamp> val )	{ m_activeConnections = val; }
 
 private:
-	boolean							m_debugging;
-	unsigned short					m_listenPort;
-	SOCKET							m_listenSocket;
-	WSAData*						m_wsaData;
-	Protocol*						m_protocol;
+	boolean				m_debugging;
+	unsigned short		m_listenPort;
+	SOCKET				m_listenSocket;
+	WSAData*			m_wsaData;
+	Protocol*			m_protocol;
+
 	concurrent_unordered_map<SOCKET, connectionStamp>	m_activeConnections;
-	
-	
 
 };
+

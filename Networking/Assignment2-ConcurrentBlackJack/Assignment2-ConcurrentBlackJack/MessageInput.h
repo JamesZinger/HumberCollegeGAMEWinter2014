@@ -1,7 +1,8 @@
 #pragma once
-#include <string>
 
-#include "Player.h"
+#include <boost/interprocess/containers/string.hpp>
+
+class Player;
 
 class MessageInput
 {
@@ -10,7 +11,7 @@ public:
 	MessageInput();
 	virtual ~MessageInput();
 
-	std::string m_message;
+	boost::interprocess::string m_message;
 	Player *m_player;
 	
 };

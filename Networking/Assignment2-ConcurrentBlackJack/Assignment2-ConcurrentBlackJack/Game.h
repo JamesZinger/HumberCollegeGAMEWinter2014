@@ -25,7 +25,7 @@ public:
 #pragma region Getters
 
 	unsigned long									ThreadID()		const	{ return m_threadID; }
-	Concurrency::concurrent_queue<MessageInput*>*	InputQueue()			{ return &m_inputQueue; }
+	Concurrency::concurrent_queue<MessageInput*>&	InputQueue()			{ return m_inputQueue; }
 	TCPGameServer*									GameServer()	const	{ return m_gameServer; }
 
 #pragma endregion

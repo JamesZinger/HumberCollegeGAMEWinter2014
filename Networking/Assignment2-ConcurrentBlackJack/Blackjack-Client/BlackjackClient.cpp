@@ -7,13 +7,14 @@
 #include <boost\algorithm\string.hpp>
 #include <boost\foreach.hpp>
 
+using std::cin;
 using std::cout;
 using std::endl;
 using std::stringstream;
 using boost::split;
 using boost::trim;
 using boost::is_any_of;
-
+using boost::interprocess::string;
 
 
 BlackjackClient::BlackjackClient( string name, string hostname, int port, int bufferLength ) : m_bufferLength( bufferLength )
@@ -48,7 +49,7 @@ BlackjackClient::BlackjackClient( string name, string hostname, int port, int bu
 	string s;
 	ss << port;
 
-	s = ss.str();
+	s = ss.str().c_str();
 
 	iResult = getaddrinfo( hostname.c_str(), s.c_str(), &hints, &result );
 	if ( iResult != 0 )
@@ -80,7 +81,6 @@ BlackjackClient::BlackjackClient( string name, string hostname, int port, int bu
 			{
 				break;
 			}
-			cout << "Failed to connect, Trying other possible connections, Error code: " << WSAGetLastError() << endl;
 			closesocket( m_clientSocket );
 			ClientSocket( INVALID_SOCKET );
 			continue;
@@ -116,8 +116,8 @@ bool BlackjackClient::SendData( string& message, int* sentLength /*= NULL */ )
 		cout << "Cannot send, No client is attached" << endl;
 		return false;
 	}
-
-	int i = send( ClientSocket(), message.c_str(), message.length(), 0 );
+	const char* msg = message.c_str();
+	int i = send( ClientSocket(), msg, message.length(), 0 );
 
 	if ( sentLength != nullptr )
 		*sentLength = i;
@@ -193,22 +193,18 @@ void BlackjackClient::Run()
 		string s = BuildBlackJackRequest( Connect, &Name() );
 
 		m_outputQueue.push( new string( s ) );
+
+		boost::posix_time::milliseconds time( 200 );
+		boost::this_thread::sleep( time );
+
+		s = BuildBlackJackRequest( Refresh );
+		m_outputQueue.push( new string( s ) );
 	}
 	// Game loop
 	while ( !ShuttingDown() )
 	{
-		if ( !m_inputQueue.empty() )
-		{
-			string* msg = nullptr;
-			if ( m_inputQueue.try_pop( msg ) )
-			{
-				HandleMessage( *msg );
-				delete msg;
-
-			}
-		}
-
 		Update();
+
 	}
 }
 
@@ -226,6 +222,7 @@ void BlackjackClient::NetworkThreadFunc()
 					SendShutdown();
 
 				else
+
 					SendData( *msg );
 
 				delete msg;
@@ -239,7 +236,11 @@ void BlackjackClient::NetworkThreadFunc()
 			if ( retCode == 1 )
 			{
 				string* msg2 = new string( msg.c_str() );
-				m_inputQueue.push( msg2 );
+				const char* msg3 = msg2->c_str();
+				
+				HandleMessage( *msg2 );
+				delete msg2;
+
 			}
 			else if ( retCode == 0 )
 			{
@@ -251,6 +252,11 @@ void BlackjackClient::NetworkThreadFunc()
 				break;
 			}
 
+		}
+
+		if (ShuttingDown())
+		{
+			break;
 		}
 	}
 }
@@ -272,41 +278,100 @@ void BlackjackClient::HandleMessage( string& message )
 		return;
 
 
-	std::vector<string> clientStateLine;
+	std::vector<std::string> clientStateLine;
 	split( clientStateLine, lines[ 1 ], boost::is_any_of( "=" ) );
 
 	if ( clientStateLine.size() < 2 )
 		return;
 
-	BOOST_FOREACH( string s, clientStateLine )
+	for (unsigned int i = 0; i < clientStateLine.size(); i++)
 	{
-		trim( s );
+		trim(clientStateLine[i]);
 	}
-
-	PlayerState state = StateMap().at( clientStateLine[ 1 ] );
+	
+	PlayerState state;
+	try
+	{
+		std::string s = std::string(clientStateLine[1].c_str());
+		state = StateMap().at( s );
+	}
+	catch ( const std::out_of_range& oor )
+	{
+		std::cerr << "Out of Range error: " << oor.what() << '\n';
+		std::cerr << "Tried to lookup: " << clientStateLine[1] << endl ;
+	}
 
 	switch ( state )
 	{
-		case Game:
-			HandleGameMessage( lines );
-			break;
-		case Lobby:
-			HandleLobbyMessage( lines );
-			break;
-		case Shutdown:
-			ShuttingDown( true );
-			break;
-		default:
-			break;
+	case Game:
+		HandleGameMessage( lines );
+		break;
+	case Lobby:
+		HandleLobbyMessage( lines );
+		break;
+	case Shutdown:
+		ShuttingDown( true );
+		exit(0);
+		break;
+	default:
+		break;
 	}
 }
 
 void BlackjackClient::Update()
 {
+	boost::posix_time::milliseconds time( 200 );
+	boost::this_thread::sleep( time );
 
+	string input;
+	cout << "Please Enter a command: ";
+	cin >> input;
+
+	std::vector<string> contexts;
+	split(contexts, input, is_any_of("_"));
+
+	if (contexts.size() == 0)
+	{
+		return;
+	}
+	PlayerCommands command;
+	try
+	{
+		command = m_inputMap.at( std::string( contexts[ 0 ].c_str() ) );
+	}
+	catch ( const std::out_of_range& oor )
+	{
+		cout << "Invalid Command, Please enter one of the following:" << endl;
+		for (auto it = m_inputMap.begin(); it != m_inputMap.end(); ++it)
+		{
+			cout << it->first << endl;
+		}
+		return;
+	}
+	string output;
+	if (command == JoinGame)
+	{
+		if (contexts.size() != 2)
+		{
+			cout << "Please enter a game number to join with the join command with Join_#" << endl;
+			return;
+		}
+		output = BuildBlackJackRequest( command, &contexts[ 1 ] );
+	}
+	else
+		output = BuildBlackJackRequest( command );
+
+	m_outputQueue.push( new string( output ) );
+
+	if (command == Disconnect)
+	{
+		ShuttingDown( true );
+		delete this;
+		exit( 0 );
+	}
 }
 
-string BlackjackClient::BuildBlackJackRequest( PlayerCommands command, void* extraInfo )
+string BlackjackClient::BuildBlackJackRequest( PlayerCommands command, string* extraInfo )
 {
 	stringstream stringBuilder;
 	stringBuilder << CLIENT_HEADER << endl;
@@ -317,7 +382,7 @@ string BlackjackClient::BuildBlackJackRequest( PlayerCommands command, void* ext
 			stringBuilder << "Name = " << *( (string*)extraInfo ) << endl;
 			break;
 		case JoinGame:
-			stringBuilder << "RoomNumber = " << *( (int*)extraInfo ) << endl;
+			stringBuilder << "RoomNumber = " << *( (string*)extraInfo ) << endl;
 			break;
 		default:
 			break;
@@ -325,7 +390,7 @@ string BlackjackClient::BuildBlackJackRequest( PlayerCommands command, void* ext
 
 	stringBuilder << endl;
 
-	return stringBuilder.str();
+	return string(stringBuilder.str().c_str());
 }
 
 void BlackjackClient::HandleLobbyMessage( std::vector<string> lines )
@@ -355,7 +420,7 @@ void BlackjackClient::HandleLobbyMessage( std::vector<string> lines )
 
 	//Check if the number of lines is representative of the number of games
 
-	if ( lines.size() < ( 3 + ( NumberGames * 2 ) ) )
+	if ( lines.size() < (unsigned)( 3 + ( NumberGames * 2 ) ) )
 	{
 		return;
 	}
@@ -450,7 +515,7 @@ void BlackjackClient::HandleGameMessage( std::vector<string> lines )
 		NumberPlayers = atoi( line[ 1 ].c_str() );
 	}
 
-	if ( lines.size() < 4 + ( NumberPlayers * 3 ) )
+	if ( lines.size() < (unsigned int)(4 + ( NumberPlayers * 3 )) )
 	{
 		return;
 	}
@@ -533,19 +598,29 @@ void BlackjackClient::HandleGameMessage( std::vector<string> lines )
 	cout << endl;
 }
 
-concurrent_unordered_map<PlayerCommands, string> BlackjackClient::m_commandMap = boost::assign::map_list_of
-( PlayerCommands::Connect, string( "Connect" ) )
-( PlayerCommands::Hit, string( "Hit" ) )
-( PlayerCommands::JoinGame, string( "JoinGame" ) )
-( PlayerCommands::LeaveGame, string( "LeaveGame" ) )
-( PlayerCommands::Refresh, string( "Refresh" ) )
-( PlayerCommands::Stay, string( "Stay" ) )
-( PlayerCommands::CreateGame, string( "CreateGame" ) )
-( PlayerCommands::Disconnect, string( "Disconnect" ) )
-;
+concurrent_unordered_map<PlayerCommands, std::string> BlackjackClient::m_commandMap = boost::assign::map_list_of
+	( PlayerCommands::Connect,		std::string( "Connect" )		)
+	( PlayerCommands::Hit,			std::string( "Hit" )			)
+	( PlayerCommands::JoinGame,		std::string( "JoinGame" )		)
+	( PlayerCommands::LeaveGame,	std::string( "LeaveGame" )		)
+	( PlayerCommands::Refresh,		std::string( "Refresh" )		)
+	( PlayerCommands::Stay,			std::string( "Stay" )			)
+	( PlayerCommands::CreateGame,	std::string( "CreateGame" )		)
+	( PlayerCommands::Disconnect,	std::string( "Disconnect" )		)
+	;
 
-concurrent_unordered_map<string, PlayerState> BlackjackClient::m_stateMap = boost::assign::map_list_of
-( string( "Game" ), PlayerState::Game )
-( string( "Lobby" ), PlayerState::Lobby )
-( string( "Shutdown" ), PlayerState::Shutdown )
-;
+concurrent_unordered_map<std::string, PlayerState> BlackjackClient::m_stateMap = boost::assign::map_list_of
+	( std::string( "Game" ),		PlayerState::Game		)
+	( std::string( "Lobby" ),		PlayerState::Lobby		)
+	( std::string( "Shutdown" ),	PlayerState::Shutdown	)
+	;
+
+concurrent_unordered_map<std::string, PlayerCommands> BlackjackClient::m_inputMap = boost::assign::map_list_of
+	( std::string( "Create" ),		PlayerCommands::CreateGame	)
+	( std::string( "Disconnect" ),	PlayerCommands::Disconnect	)
+	( std::string( "Hit" ),			PlayerCommands::Hit			)
+	( std::string( "Join" ),		PlayerCommands::JoinGame	)
+	( std::string( "Leave" ),		PlayerCommands::LeaveGame	)
+	( std::string( "Refresh" ),		PlayerCommands::Refresh		)
+	( std::string( "Stay" ),		PlayerCommands::Stay		)
+	;

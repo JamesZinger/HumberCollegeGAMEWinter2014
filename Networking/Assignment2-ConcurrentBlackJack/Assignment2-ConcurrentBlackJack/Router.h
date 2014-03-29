@@ -8,13 +8,11 @@
 #pragma once
 
 #include <WinSock2.h>
-#include <string>
 
 #include "Protocol.h"
 
 class TCPGameServer;
 
-using std::string;
 
 class Router
 {

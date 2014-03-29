@@ -29,26 +29,27 @@ namespace Blackjack
 	class BlackjackGame : public Game
 	{
 	public:
-		BlackjackGame( BlackjackPlayer* InitalPlayer );
+		BlackjackGame( BlackjackPlayer* InitalPlayer, int maxPlayers = 2);
 
 		virtual ~BlackjackGame();
 
 		//plays the game of blackjack    
 		void Play();
 
-		void AddPlayer( BlackjackPlayer* player );
+		bool AddPlayer( BlackjackPlayer* player );
 		void RemovePlayer( BlackjackPlayer* player );
+		int MaxPlayers() const { return m_maxPlayers; }
 
-		vector<BlackjackPlayer*> Players()	{ return m_players; }
+		vector<BlackjackPlayer*>& Players()	{ return m_players; }
 
-
+		
 
 	protected:
 
 		virtual void GameThreadFunc( TCPGameServer* server );
 
 		void Players( vector<BlackjackPlayer*> val ) { m_players = val; }
-
+		void MaxPlayers( int val ) { m_maxPlayers = val; }
 	private:
 		Deck m_Deck;
 		House m_House;
@@ -57,5 +58,7 @@ namespace Blackjack
 
 		bool isGameEmpty();
 
+		int m_maxPlayers;
+		
 	};
 }

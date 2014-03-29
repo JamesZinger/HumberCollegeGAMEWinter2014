@@ -15,6 +15,7 @@
 using std::cout;
 using std::endl;
 using std::stringstream;
+using boost::interprocess::string;
 
 Router::Router()
 {
@@ -42,7 +43,7 @@ void Router::RoutingThreadFunc( SOCKET Request, TCPGameServer* server )
 	u_long iMode = 1;
 	ioctlsocket( Request, FIONBIO, &iMode );
 	
-	std::string* recievedMessage = new std::string();
+	string* recievedMessage = new string();
 	int returnCode = 0;
 	do 
 	{

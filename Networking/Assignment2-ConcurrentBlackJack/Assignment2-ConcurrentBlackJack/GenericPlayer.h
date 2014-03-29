@@ -28,14 +28,6 @@ namespace Blackjack
 		//announces that the generic player busts
 		void Bust() const;
 
-		const boost::interprocess::string& Name( ) { return m_Name; }
-
-	protected:
-		void Name( boost::interprocess::string val ) { m_Name = val; };
-
-	private:
-		boost::interprocess::string m_Name;
-
 	};
 
 }

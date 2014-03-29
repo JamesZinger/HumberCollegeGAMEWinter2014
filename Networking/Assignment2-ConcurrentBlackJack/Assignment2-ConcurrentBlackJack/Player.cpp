@@ -10,7 +10,10 @@
 
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
+#include <sstream>
 
+using boost::interprocess::string;
+using std::stringstream;
 
 Player::Player( int BufferLength /*= 1024*/ ) : m_inputBufferLength( BufferLength )
 {
@@ -20,6 +23,7 @@ Player::Player( int BufferLength /*= 1024*/ ) : m_inputBufferLength( BufferLengt
 	Socket( INVALID_SOCKET );
 	ThreadID( -1 );
 	Name( NULL );
+	ShuttingDown( false );
 }
 
 
@@ -89,9 +93,11 @@ void Player::SendNetworkMessage()
 		return;
 	}
 
-	std::string msg = message->Message();
+	string msg = message->Message();
 
 	int MessageLength;
+
+	
 
 	SendMessageOverSocket( msg, &MessageLength );
 
@@ -113,6 +119,8 @@ void Player::PlayerThreadFunc( const string name, SOCKET Client )
 
 	Socket( Client );
 
+	
+
 	while ( true )
 	{
 		SendNetworkMessage();
@@ -127,7 +135,7 @@ void Player::PlayerThreadFunc( const string name, SOCKET Client )
 				break;
 		};
 
-		if ( Socket() == INVALID_SOCKET )
+		if ( Socket() == INVALID_SOCKET || Socket() == NULL || m_shuttingDown)
 		{
 			break;
 		}
@@ -136,7 +144,7 @@ void Player::PlayerThreadFunc( const string name, SOCKET Client )
 	delete this;
 }
 
-bool Player::SendMessageOverSocket( std::string& Message, int* SendLength )
+bool Player::SendMessageOverSocket( string& Message, int* SendLength )
 {
 	if ( Socket() == INVALID_SOCKET )
 	{
@@ -158,6 +166,6 @@ bool Player::SendMessageOverSocket( std::string& Message, int* SendLength )
 
 void Player::EnqueueMessage( MessageOutput* Message )
 {
-	MessageOutput* msg = &( *Message );
+	MessageOutput* msg = Message;
 	m_messageQueue.push( msg );
 }
